@@ -2,6 +2,247 @@
   "schema": "litetwin.rollout-pairs.v2",
   "pairs": [
     {
+      "task": "bimanual_lift_tray",
+      "episode": 11,
+      "seed": 2750700011,
+      "variation": 0,
+      "disturbance": "coordination_delay",
+      "capture_profile": "control",
+      "open_loop_outcome": "failure",
+      "litetwin_outcome": "success",
+      "highlight": {
+        "jump": 7.25,
+        "cues": [
+          {
+            "start": 0,
+            "en": [
+              "Watch the cube in the middle.",
+              "Same tray, cube and starting pose."
+            ],
+            "zh-Hans": [
+              "看托盘中央的方块。",
+              "同一托盘、方块和初始位置。"
+            ],
+            "zh-Hant": [
+              "看托盤中央的方塊。",
+              "相同的托盤、方塊與起始位置。"
+            ]
+          },
+          {
+            "start": 5.75,
+            "en": [
+              "The grippers approach opposite ends.",
+              "Watch the two ends before the lift."
+            ],
+            "zh-Hans": [
+              "两只夹爪靠近托盘两端。",
+              "留意托盘起升前，两端的位置。"
+            ],
+            "zh-Hant": [
+              "兩隻夾爪靠近托盤兩端。",
+              "留意托盤升起前兩端的位置。"
+            ]
+          },
+          {
+            "start": 7.75,
+            "en": [
+              "One end rises. The tray tilts.",
+              "The tray stays level between the arms."
+            ],
+            "zh-Hans": [
+              "一端先抬起，托盘开始倾斜。",
+              "托盘在两臂之间保持水平。"
+            ],
+            "zh-Hant": [
+              "一端先抬起，托盤開始傾斜。",
+              "托盤在兩臂之間保持水平。"
+            ]
+          },
+          {
+            "start": 9.08,
+            "en": [
+              "The tray tips back onto the table.",
+              "Both ends rise with the cube aboard."
+            ],
+            "zh-Hans": [
+              "托盘翻倒在桌上。",
+              "两端一起升起，方块仍在托盘上。"
+            ],
+            "zh-Hant": [
+              "托盤翻倒在桌上。",
+              "兩端一起升起，方塊仍在托盤上。"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "task": "open_drawer_delay",
+      "task_family": "open_drawer",
+      "episode": 8,
+      "seed": 2750100008,
+      "variation": 2,
+      "disturbance": "actuation_delay",
+      "open_loop_outcome": "failure",
+      "litetwin_outcome": "success",
+      "capture_profile": "control",
+      "highlight": {
+        "jump": 5.75,
+        "cues": [
+          {
+            "start": 0,
+            "en": [
+              "Watch the top drawer.",
+              "Same drawer and actuation delay."
+            ],
+            "zh-Hans": [
+              "观察最上层抽屉。",
+              "同一抽屉，同样的动作延迟。"
+            ],
+            "zh-Hant": [
+              "觀察最上層抽屜。",
+              "相同的抽屜與動作延遲。"
+            ]
+          },
+          {
+            "start": 4.25,
+            "en": [
+              "The gripper is beside the cabinet.",
+              "The gripper is beside the cabinet."
+            ],
+            "zh-Hans": [
+              "夹爪到达柜体侧面。",
+              "夹爪到达柜体侧面。"
+            ],
+            "zh-Hant": [
+              "夾爪到達櫃體側面。",
+              "夾爪到達櫃體側面。"
+            ]
+          },
+          {
+            "start": 6.0,
+            "en": [
+              "The arm moves away empty.",
+              "The gripper stays at the drawer front."
+            ],
+            "zh-Hans": [
+              "机械臂空手移开。",
+              "夹爪仍贴着抽屉前端。"
+            ],
+            "zh-Hant": [
+              "機械臂空手移開。",
+              "夾爪仍貼著抽屜前端。"
+            ]
+          },
+          {
+            "start": 7.42,
+            "en": [
+              "The drawer stays shut.",
+              "The top drawer slides open."
+            ],
+            "zh-Hans": [
+              "抽屉仍然关着。",
+              "最上层抽屉被拉开。"
+            ],
+            "zh-Hant": [
+              "抽屜仍然關著。",
+              "最上層抽屜被拉開。"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "task": "close_jar",
+      "episode": 1,
+      "seed": 2750000001,
+      "variation": 1,
+      "disturbance": "missed_interaction",
+      "capture_profile": "control",
+      "open_loop_outcome": "failure",
+      "litetwin_outcome": "success",
+      "highlight": {
+        "jump": 6.5,
+        "cues": [
+          {
+            "start": 0,
+            "en": [
+              "Follow the gray lid on the right.",
+              "Same lid, same missed pickup."
+            ],
+            "zh-Hans": [
+              "留意桌面右侧的灰色罐盖。",
+              "同一个罐盖，首次抓取同样落空。"
+            ],
+            "zh-Hant": [
+              "留意桌面右側的灰色罐蓋。",
+              "同一個罐蓋，首次抓取同樣落空。"
+            ]
+          },
+          {
+            "start": 5.17,
+            "en": [
+              "The first pickup misses the lid.",
+              "The first pickup misses here too."
+            ],
+            "zh-Hans": [
+              "第一次抓取未能带起罐盖。",
+              "这边第一次也没有抓起罐盖。"
+            ],
+            "zh-Hant": [
+              "第一次抓取未能帶起罐蓋。",
+              "這邊第一次也沒有抓起罐蓋。"
+            ]
+          },
+          {
+            "start": 7.5,
+            "en": [
+              "Empty gripper moves toward the jar.",
+              "The gripper stays with the lid."
+            ],
+            "zh-Hans": [
+              "空夹爪移向罐口，盖子留在原地。",
+              "夹爪留在盖子处，重新抓取。"
+            ],
+            "zh-Hant": [
+              "空夾爪移向罐口，蓋子留在原地。",
+              "夾爪留在蓋子處，重新抓取。"
+            ]
+          },
+          {
+            "start": 10.83,
+            "en": [
+              "The lid is still on the table.",
+              "The gray lid travels in the gripper."
+            ],
+            "zh-Hans": [
+              "盖子仍在桌面右侧。",
+              "灰色罐盖跟着夹爪一起移动。"
+            ],
+            "zh-Hant": [
+              "蓋子仍在桌面右側。",
+              "灰色罐蓋跟著夾爪一起移動。"
+            ]
+          },
+          {
+            "start": 15.25,
+            "en": [
+              "The run ended without the lid.",
+              "The lid is lowered onto the red jar."
+            ],
+            "zh-Hans": [
+              "这次执行已结束，盖子仍在桌上。",
+              "夹爪把罐盖放到红罐上。"
+            ],
+            "zh-Hant": [
+              "這次執行已結束，蓋子仍在桌上。",
+              "夾爪把罐蓋放到紅罐上。"
+            ]
+          }
+        ]
+      }
+    },
+    {
       "task": "open_drawer",
       "episode": 2,
       "disturbance": "relation_loss",
@@ -35,16 +276,6 @@
       "seed": 2750400006,
       "variation": 6,
       "disturbance": "relation_loss",
-      "capture_profile": "control",
-      "open_loop_outcome": "failure",
-      "litetwin_outcome": "success"
-    },
-    {
-      "task": "close_jar",
-      "episode": 1,
-      "seed": 2750000001,
-      "variation": 1,
-      "disturbance": "missed_interaction",
       "capture_profile": "control",
       "open_loop_outcome": "failure",
       "litetwin_outcome": "success"
@@ -88,16 +319,6 @@
       "capture_profile": "control",
       "open_loop_outcome": "failure",
       "litetwin_outcome": "failure"
-    },
-    {
-      "task": "bimanual_lift_tray",
-      "episode": 11,
-      "seed": 2750700011,
-      "variation": 0,
-      "disturbance": "coordination_delay",
-      "capture_profile": "control",
-      "open_loop_outcome": "failure",
-      "litetwin_outcome": "success"
     },
     {
       "task": "bimanual_put_bottle_in_fridge",

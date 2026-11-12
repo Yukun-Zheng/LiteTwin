@@ -6,13 +6,23 @@
 
 [**觀看配對示範 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant) · [執行打開抽屜範例](#run-open-drawer) · [檢視策略實作](code/litetwin/policy/feedback/)
 
-[![同一抽屜任務的兩段正面影片。左側為運動策略，右側加入 LiteTwin。](docs/figures/open-drawer.zh-Hant.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer)
+[![雙臂抬托盤的正面並排影片，觀察托盤中央的方塊。](docs/figures/tray-comparison.zh-Hant.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray)
 
-*相同場景、相同的接觸中斷。左側未完成拉動，右側夾爪重新接觸把手後將抽屜拉開。*
+*留意托盤中央的方塊。約第 8 秒，左側托盤開始傾倒；右側兩端隨後一起升起，方塊仍留在托盤上。*
 
-## 瀏覽 12 組示範
+## 三組值得對照看的動作
 
-點選下方任一任務，並排比較兩次執行。每組使用相同的初始場景、隨機種子及擾動。雙按鈕範例中兩種策略都完成了任務，單臂清掃範例中兩種策略都未完成。這裡展示的是選定回合。打開抽屜的任務另附程式碼、輸入軌跡及檢查點，可從頭重跑。
+留意物體有沒有跟著夾爪移動。每組的起始場景、隨機種子與擾動都相同。兩側影片從頭同步播放，註解會隨動作變化。
+
+| 任務 | 觀察時段 | 運動策略 | 運動策略 + LiteTwin | 影片 |
+| --- | --- | --- | --- | --- |
+| [雙臂抬托盤](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray) | 8–10 秒 | 一端先抬起，托盤翻倒在桌上。 | 兩端一起抬起，方塊隨托盤升高。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.zh-Hant.mp4) |
+| [打開抽屜](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer_delay) | 6–8 秒 | 機械臂空手移開，最上層抽屜仍關著。 | 同一時段內，夾爪已把最上層抽屜拉開。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.zh-Hant.mp4) |
+| [蓋上罐蓋](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar) | 7–16 秒 | 空夾爪移到罐口，灰色蓋子還在桌上。 | 首次抓取落空後重新抓住蓋子，將它放到紅罐上。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.zh-Hant.mp4) |
+
+<details><summary>展開全部 12 項任務、13 組配對影片</summary>
+
+示範庫也保留了雙方都完成及雙方都未完成的回合。打開抽屜有兩組影片，擾動不同。下方可重新執行的範例對應接觸中斷的那一組。
 
 <table>
   <tr>
@@ -37,7 +47,9 @@
   </tr>
 </table>
 
-所有 [24 段 MP4](docs/media/) 都可單獨開啟。播放器會標示每組影片的取樣與播放方式。在複製的倉庫根目錄執行 `python -m http.server 8000 --directory docs`，然後開啟 `http://localhost:8000` 即可在本機瀏覽。
+播放器內可單獨開啟全部 [26 段原視角影片](docs/media/)。在倉庫根目錄執行 `python -m http.server 8000 --directory docs`，然後開啟 `http://localhost:8000`。
+
+</details>
 
 <a id="run-open-drawer"></a>
 

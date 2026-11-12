@@ -6,13 +6,23 @@
 
 [**Watch the paired rollouts →**](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Run Open Drawer](#run-open-drawer) · [Explore the policy](code/litetwin/policy/feedback/)
 
-[![Open Drawer. Two front-camera recordings start together. The motion policy runs on the left and the same policy with LiteTwin runs on the right.](docs/figures/open-drawer.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer)
+[![Two arms lift a tray. Follow the cube in the paired front views.](docs/figures/tray-comparison.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray)
 
-*Open Drawer, front view. Both controllers start with the same drawer and encounter the same loss of contact. The left rollout ends with the task incomplete. On the right, the gripper re-establishes contact and finishes the pull.*
+*Follow the cube. Around 8 seconds, the left tray tips. On the right, both ends rise together with the cube still on board.*
 
-## Explore 12 paired demos
+## Three comparisons to watch
 
-Choose a task to play two recordings side by side. Each pair shares the scene initialization, seed and disturbance. Both policies finish the two-button episode, while both leave the single-arm sweeping task incomplete. The gallery shows selected episodes. Open Drawer includes the code, trajectories and checkpoint to run a fresh simulation.
+Watch the object as well as the gripper. Each row pairs the same initial scene, random seed and disturbance. The notes follow the action in two continuous, time-aligned recordings.
+
+| Task | When to look | Motion policy | Motion policy + LiteTwin | Video |
+| --- | --- | --- | --- | --- |
+| [Lift a loaded tray](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray) | 8–10 s | One end rises first and the tray tips back onto the table. | The tray stays level and the cube rises with it. | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.en.mp4) |
+| [Open a drawer](https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer_delay) | 6–8 s | The arm moves away. The top drawer stays shut. | The gripper pulls the top drawer open in the same time window. | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.en.mp4) |
+| [Put the lid on a jar](https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar) | 7–16 s | The empty gripper reaches the jar. The gray lid stays on the table. | After the missed pickup, the gripper takes the lid to the red jar. | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.en.mp4) |
+
+<details><summary>Explore all 12 tasks and 13 recorded pairs</summary>
+
+The gallery also includes episodes where both controllers finish or both fall short. Open Drawer has two recordings with different disturbances. The runnable example below uses the contact-loss episode.
 
 <table>
   <tr>
@@ -37,7 +47,9 @@ Choose a task to play two recordings side by side. Each pair shares the scene in
   </tr>
 </table>
 
-All [24 MP4s](docs/media/) open individually. The viewer labels the capture format for each pair. To serve it from a clone, run `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
+Open any of the [26 individual recordings](docs/media/) from the player. To run the gallery locally, use `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
+
+</details>
 
 ## Run Open Drawer
 

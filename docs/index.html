@@ -25,36 +25,42 @@
   </header>
   <main>
     <section class="intro">
-      <h1 data-text="headline">When a grasp slips or an action arrives late</h1>
+      <h1 data-text="headline">Did the object reach its goal?</h1>
       <p data-text="intro">Compare two runs of the same motion policy. Both start from the same scene and encounter the same disturbance. The right-hand run adds LiteTwin task-state feedback.</p>
     </section>
+    <nav id="featured" data-label="featured" aria-label="Featured comparisons">
+      <span data-text="featured">Featured comparisons</span><div id="featured-links"></div>
+    </nav>
     <section class="viewer" id="viewer" aria-labelledby="task-name">
       <div class="switcher">
         <label for="task-select" data-text="choose">Choose a task</label>
-        <select id="task-select" disabled><option>Open Drawer</option></select>
+        <select id="task-select" disabled><option>Lift Tray Together</option></select>
         <span id="position"></span>
         <button id="previous" type="button" data-label="previous" aria-label="Previous task" disabled>←</button>
         <button id="next" type="button" data-label="next" aria-label="Next task" disabled>→</button>
       </div>
-      <div class="viewer-heading"><div><h2 id="task-name">Open Drawer</h2><p id="scene"></p></div><span class="meta" id="episode"></span></div>
+      <div class="viewer-heading"><div><h2 id="task-name">Lift Tray Together</h2><p id="scene"></p></div><span class="meta" id="episode"></span></div>
       <div id="screens">
         <article>
           <div class="camera-title"><h3 data-text="motion">Motion policy</h3><span class="outcome" id="baseline-outcome"></span></div>
-          <video id="baseline" preload="auto" muted playsinline data-label="baseView" aria-label="Motion policy, front and overhead views"></video>
-          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/open_drawer/open_loop.mp4">Open MP4 ↗</a></div>
+          <div class="frame-window"><video id="baseline" preload="auto" muted playsinline data-label="baseView" aria-label="Motion policy, front and overhead views"></video></div>
+          <p class="frame-note" hidden></p>
+          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/bimanual_lift_tray/open_loop.mp4">Open MP4 ↗</a></div>
         </article>
         <article>
           <div class="camera-title"><h3><span class="plain" data-text="motion">Motion policy</span> <span>+ LiteTwin</span></h3><span class="outcome" id="feedback-outcome"></span></div>
-          <video id="feedback" preload="auto" muted playsinline data-label="feedbackView" aria-label="Motion policy with LiteTwin, front and overhead views"></video>
-          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/open_drawer/litetwin.mp4">Open MP4 ↗</a></div>
+          <div class="frame-window"><video id="feedback" preload="auto" muted playsinline data-label="feedbackView" aria-label="Motion policy with LiteTwin, front and overhead views"></video></div>
+          <p class="frame-note" hidden></p>
+          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/bimanual_lift_tray/litetwin.mp4">Open MP4 ↗</a></div>
         </article>
       </div>
       <div class="transport"><button type="button" id="play" disabled>Play pair</button><input id="seek" type="range" min="0" max="1" value="0" step="0.05" data-label="seek" aria-label="Seek both recordings" disabled><output id="clock">0:00 / –:––</output></div>
+      <div class="feature-actions" hidden><button type="button" id="jump" disabled></button><a id="annotated" data-text="annotated">Open annotated MP4 ↗</a></div>
       <p class="note" id="capture"></p>
       <noscript><p>Enable JavaScript for paired playback, or open the MP4 files above. 请启用 JavaScript 以播放对照录像，或单独打开 MP4。請啟用 JavaScript 以播放對照影片，或單獨開啟 MP4。</p></noscript>
     </section>
     <section class="library" aria-labelledby="library-title">
-      <div class="library-heading"><h2 id="library-title" data-text="explore">Explore the tasks</h2><span data-text="count">12 recorded pairs</span></div>
+      <div class="library-heading"><h2 id="library-title" data-text="explore">Explore the tasks</h2><span data-text="count">12 tasks · 13 recorded pairs</span></div>
       <div id="tasks"></div>
     </section>
     <section class="trace" aria-labelledby="trace-title">

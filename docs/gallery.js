@@ -9,6 +9,9 @@ const picker = document.querySelector("#task-select");
 const languagePicker = document.querySelector("#language");
 const objectURLs = new Map();
 const cards = new Map();
+const featuredLinks = new Map();
+const notes = Array.from(document.querySelectorAll(".frame-note"));
+const jump = document.querySelector("#jump");
 let pairs = [];
 let current;
 let playing = false;
@@ -46,6 +49,14 @@ function refreshPlayer() {
   if (videos.every(v => v.ended)) playing = false;
   playButton.disabled = !loaded;
   seek.disabled = !loaded;
+  jump.disabled = !loaded;
+  if (current?.highlight) {
+    const cues = current.highlight.cues;
+    const cue = [...cues].reverse().find(item => item.start <= position) || cues[0];
+    notes.forEach((note, i) => {
+      note.textContent = loaded ? cue[language][i] : "";
+    });
+  }
   playButton.textContent = playing ? t.pause : total && position >= total - 0.025 ? t.replay : t.play;
   seek.max = total || 1;
   seek.value = position;
@@ -66,7 +77,18 @@ function refreshTask() {
   document.querySelector("#episode").textContent = t.episode + " " + current.episode + " · " + t[current.disturbance];
   document.querySelector("#baseline-outcome").textContent = t[current.open_loop_outcome];
   document.querySelector("#feedback-outcome").textContent = t[current.litetwin_outcome];
-  document.querySelector("#capture").textContent = t[current.capture_profile];
+  const highlight = current.highlight;
+  document.querySelector("#viewer").classList.toggle("featured-view", Boolean(highlight));
+  document.querySelector(".feature-actions").hidden = !highlight;
+  notes.forEach(note => { note.hidden = !highlight; });
+  document.querySelector("#capture").textContent = highlight ? t.featuredCapture : t[current.capture_profile];
+  videos[0].setAttribute("aria-label", highlight ? t.frontBase : t.baseView);
+  videos[1].setAttribute("aria-label", highlight ? t.frontFeedback : t.feedbackView);
+  featuredLinks.forEach((link, task) => link.setAttribute("aria-current", String(task === current.task)));
+  if (highlight) {
+    jump.textContent = t.jump + " " + formatTime(highlight.jump);
+    document.querySelector("#annotated").href = "highlights/" + current.task + "." + language + ".mp4";
+  }
   document.querySelector("#position").textContent = (index + 1) + " / " + pairs.length;
   picker.value = current.task;
   cards.forEach((card, task) => card.setAttribute("aria-pressed", String(task === current.task)));
@@ -89,6 +111,7 @@ function refreshLanguage() {
   pairs.forEach((pair, i) => {
     const name = t.tasks[pair.task].name;
     picker.options[i].text = name;
+    if (featuredLinks.has(pair.task)) featuredLinks.get(pair.task).textContent = name;
     const card = cards.get(pair.task);
     card.querySelector("strong").textContent = name;
     card.querySelector(".task-fault").textContent = t[pair.disturbance];
@@ -129,12 +152,14 @@ playButton.addEventListener("click", () => {
   if (videos.every(v => v.currentTime >= v.duration - 0.025)) videos.forEach(v => { v.currentTime = 0; });
   playPair();
 });
-seek.addEventListener("input", () => {
-  const position = Number(seek.value);
-  const resume = playing;
+function seekPair(position, resume) {
   pausePair();
   videos.forEach(v => { v.currentTime = Math.min(position, v.duration); });
   if (resume) playPair();
+}
+seek.addEventListener("input", () => seekPair(Number(seek.value), playing));
+jump.addEventListener("click", () => {
+  if (current?.highlight) seekPair(current.highlight.jump, true);
 });
 videos.forEach(v => {
   ["loadeddata", "canplay", "durationchange", "pause", "play", "ended", "seeking", "seeked", "timeupdate", "emptied"].forEach(event => v.addEventListener(event, refreshPlayer));
@@ -199,7 +224,13 @@ fetch("media/pairs.json").then(response => {
   pairs = data.pairs;
   picker.replaceChildren();
   const grid = document.querySelector("#tasks");
-  for (const {task} of pairs) {
+  for (const {task, highlight} of pairs) {
+    if (highlight) {
+      const link = document.createElement("a");
+      link.href = "#" + task;
+      document.querySelector("#featured-links").append(link);
+      featuredLinks.set(task, link);
+    }
     picker.add(new Option("", task));
     const card = document.createElement("button");
     card.type = "button";

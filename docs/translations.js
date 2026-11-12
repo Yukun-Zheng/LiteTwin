@@ -3,8 +3,8 @@ const translations = {
     "title": "LiteTwin · Robot manipulation demos",
     "home": "LiteTwin home",
     "language": "Language",
-    "headline": "When a grasp slips or an action arrives late",
-    "intro": "Compare two runs of the same motion policy. Both start from the same scene and encounter the same disturbance. The right-hand run adds LiteTwin task-state feedback.",
+    "headline": "Did the object reach its goal?",
+    "intro": "Follow the object through the same disturbance. On the left is the motion policy alone. On the right, LiteTwin also tracks whether the physical task is advancing.",
     "choose": "Choose a task",
     "previous": "Previous task",
     "next": "Next task",
@@ -31,7 +31,7 @@ const translations = {
     "physics": "Front and overhead views · physics-step capture at 2× speed. The shorter recording holds its final frame.",
     "control": "Front and overhead views · control-step replay at 12 fps. The shorter recording holds its final frame.",
     "explore": "Explore the tasks",
-    "count": "12 recorded pairs",
+    "count": "12 tasks · 13 recorded pairs",
     "traceTitle": "Inside the Open Drawer run",
     "traceBody": "In a fresh run of the packaged demo, contact breaks at cycle 72. Recovery starts at 78 and the controller returns to supported progress at 121. RLBench reports completion after 135 cycles.",
     "traceLink": "Open full trace ↗",
@@ -81,7 +81,7 @@ const translations = {
       },
       "bimanual_lift_tray": {
         "name": "Lift Tray Together",
-        "description": "A coordination delay puts the arms out of step. Compare the two ends of the tray as it lifts."
+        "description": "Lift the tray and the cube together while one arm is delayed. Watch the two handles as the lift begins."
       },
       "bimanual_put_bottle_in_fridge": {
         "name": "Put Bottle in Fridge",
@@ -90,15 +90,25 @@ const translations = {
       "bimanual_sweep_to_dustpan": {
         "name": "Sweep with Two Arms",
         "description": "An early interaction is missed. Watch the brush and dustpan meet as the two arms coordinate."
+      },
+      "open_drawer_delay": {
+        "name": "Open Drawer · Delayed Action",
+        "description": "Watch the top drawer as the grippers pull away from the cabinet."
       }
-    }
+    },
+    "featured": "Featured comparisons",
+    "annotated": "Open annotated MP4 ↗",
+    "jump": "Watch from",
+    "featuredCapture": "Front camera · same playback clock, full runs at 12 fps. Each original MP4 also includes the overhead view.",
+    "frontBase": "Motion policy, front view",
+    "frontFeedback": "Motion policy with LiteTwin, front view"
   },
   "zh-Hans": {
     "title": "LiteTwin · 机器人操作演示",
     "home": "LiteTwin 首页",
     "language": "语言",
-    "headline": "当抓取松脱，或动作慢了一拍",
-    "intro": "对照观看同一运动策略的两次执行。每组从相同场景开始，遇到相同扰动；右侧加入了 LiteTwin 的任务状态反馈。",
+    "headline": "物体到位了吗？",
+    "intro": "同样的扰动，看物体最后到了哪里。左侧是原运动策略，右侧加入 LiteTwin，用任务状态反馈判断动作是否真正推动了任务。",
     "choose": "选择任务",
     "previous": "上一个任务",
     "next": "下一个任务",
@@ -125,7 +135,7 @@ const translations = {
     "physics": "正面与俯视双视角 · 按物理仿真步采样，以 2 倍速播放。较短的录像结束后停在最后一帧。",
     "control": "正面与俯视双视角 · 按控制步记录，以每秒 12 帧回放。较短的录像结束后停在最后一帧。",
     "explore": "浏览全部任务",
-    "count": "12 组配对录像",
+    "count": "12 个任务 · 13 组配对录像",
     "traceTitle": "开抽屉时，控制器做了什么？",
     "traceBody": "在仓库示例的一次复跑中，第 72 个控制周期发生接触丢失，第 78 个周期开始恢复，第 121 个周期回到模型支持的进度位置。135 个周期后，RLBench 判定任务完成。",
     "traceLink": "查看完整时间线 ↗",
@@ -175,7 +185,7 @@ const translations = {
       },
       "bimanual_lift_tray": {
         "name": "双臂抬托盘",
-        "description": "双臂的动作因延迟而错开。观察抬起时托盘两端如何移动。"
+        "description": "一条机械臂出现延迟。任务要求把托盘和方块一起抬起，留意起升时两个把手的高度。"
       },
       "bimanual_put_bottle_in_fridge": {
         "name": "把瓶子放进冰箱",
@@ -184,15 +194,25 @@ const translations = {
       "bimanual_sweep_to_dustpan": {
         "name": "双臂配合清扫",
         "description": "清扫初期的一次交互未能建立。观察两臂如何让刷子与簸箕对齐。"
+      },
+      "open_drawer_delay": {
+        "name": "打开抽屉 · 动作延迟",
+        "description": "观察夹爪移开时，最上层抽屉有没有跟着移动。"
       }
-    }
+    },
+    "featured": "精选对照",
+    "annotated": "打开带注释的对照视频 ↗",
+    "jump": "从这里看",
+    "featuredCapture": "正面视角 · 两侧使用同一时间轴，完整回放为每秒 12 帧。单独打开原始 MP4 还可看俯视画面。",
+    "frontBase": "运动策略，正面视角",
+    "frontFeedback": "加入 LiteTwin 的运动策略，正面视角"
   },
   "zh-Hant": {
     "title": "LiteTwin · 機器人操作示範",
     "home": "LiteTwin 首頁",
     "language": "語言",
-    "headline": "當夾爪鬆脫，或動作慢了一拍",
-    "intro": "比較同一運動策略的兩次執行。每組都從相同場景開始，遇到相同擾動。右側加入 LiteTwin 的任務狀態回饋。",
+    "headline": "物體到位了嗎？",
+    "intro": "相同的擾動，看物體最後到了哪裡。左側是原運動策略，右側加入 LiteTwin，以任務狀態回饋判斷動作是否真正推進了任務。",
     "choose": "選擇任務",
     "previous": "上一個任務",
     "next": "下一個任務",
@@ -219,7 +239,7 @@ const translations = {
     "physics": "正面與俯視雙視角 · 按物理模擬步取樣，以 2 倍速播放。較短的影片結束後停在最後一格。",
     "control": "正面與俯視雙視角 · 按控制步記錄，以每秒 12 格重播。較短的影片結束後停在最後一格。",
     "explore": "瀏覽全部任務",
-    "count": "12 組配對影片",
+    "count": "12 個任務 · 13 組配對影片",
     "traceTitle": "打開抽屜時，控制器做了什麼？",
     "traceBody": "在倉庫範例的一次重跑中，第 72 個控制週期失去接觸，第 78 個週期開始恢復，第 121 個週期回到模型支持的進度位置。135 個週期後，RLBench 判定任務完成。",
     "traceLink": "檢視完整時間軸 ↗",
@@ -269,7 +289,7 @@ const translations = {
       },
       "bimanual_lift_tray": {
         "name": "雙臂抬托盤",
-        "description": "雙臂的動作因延遲而錯開。觀察抬起時托盤兩端如何移動。"
+        "description": "一隻機械臂出現延遲。任務要求把托盤與方塊一起抬起，留意升起時兩個把手的高度。"
       },
       "bimanual_put_bottle_in_fridge": {
         "name": "把瓶子放進冰箱",
@@ -278,7 +298,17 @@ const translations = {
       "bimanual_sweep_to_dustpan": {
         "name": "雙臂協作清掃",
         "description": "清掃初期的一次互動未能建立。觀察兩臂如何讓刷子與畚箕對齊。"
+      },
+      "open_drawer_delay": {
+        "name": "打開抽屜 · 動作延遲",
+        "description": "觀察夾爪移開時，最上層抽屜有沒有跟著移動。"
       }
-    }
+    },
+    "featured": "精選對照",
+    "annotated": "開啟附註解的對照影片 ↗",
+    "jump": "從這裡看",
+    "featuredCapture": "正面視角 · 兩側使用同一時間軸，完整播放為每秒 12 格。單獨開啟原始 MP4 亦可觀看俯視畫面。",
+    "frontBase": "運動策略，正面視角",
+    "frontFeedback": "加入 LiteTwin 的運動策略，正面視角"
   }
 };

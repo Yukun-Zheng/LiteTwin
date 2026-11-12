@@ -6,13 +6,23 @@
 
 [**观看配对演示 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans) · [运行开抽屉示例](#run-open-drawer) · [查看策略实现](code/litetwin/policy/feedback/)
 
-[![同一抽屉任务的两段正面录像。左侧为运动策略，右侧加入 LiteTwin。](docs/figures/open-drawer.zh-Hans.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#open_drawer)
+[![双臂抬托盘的正面并排录像，观察托盘中央的方块。](docs/figures/tray-comparison.zh-Hans.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#bimanual_lift_tray)
 
-*同一场景、同一次接触丢失。左侧拉动中断，右侧夹爪重新接触把手后把抽屉拉开。*
+*盯住托盘中央的方块。约第 8 秒，左侧托盘开始倾倒；右侧两端随后一起升起，方块稳稳留在托盘上。*
 
-## 浏览 12 组演示
+## 三组值得对照看的动作
 
-点击下方任一任务，并排比较两次执行。每组使用相同的初始场景、随机种子和扰动。双按钮示例中两种策略都完成了任务，单臂清扫示例中两种策略都未完成。这里展示的是选定回合。开抽屉任务另附代码、输入轨迹和检查点，可以从头复跑。
+把视线放在物体上，看它有没有跟着夹爪移动。每组的初始场景、随机种子和扰动都相同。两侧录像从头同步播放，注释会随动作变化。
+
+| 任务 | 观察时段 | 运动策略 | 运动策略 + LiteTwin | 录像 |
+| --- | --- | --- | --- | --- |
+| [双臂抬托盘](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#bimanual_lift_tray) | 8–10 秒 | 一端先抬起，托盘翻倒在桌上。 | 两端一起抬起，方块随托盘升高。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.zh-Hans.mp4) |
+| [打开抽屉](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#open_drawer_delay) | 6–8 秒 | 机械臂空手移开，最上层抽屉仍关着。 | 同一时段内，夹爪已把最上层抽屉拉开。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.zh-Hans.mp4) |
+| [盖上罐盖](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#close_jar) | 7–16 秒 | 空夹爪移到罐口，灰色盖子还在桌上。 | 首次抓取落空后重新抓住盖子，把它放到红罐上。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.zh-Hans.mp4) |
+
+<details><summary>展开全部 12 项任务、13 组配对录像</summary>
+
+演示库也保留了双方都完成、双方都未完成的回合。打开抽屉有两组录像，扰动不同。下方可复跑的示例对应接触丢失的那一组。
 
 <table>
   <tr>
@@ -37,7 +47,9 @@
   </tr>
 </table>
 
-所有 [24 段 MP4](docs/media/) 都可以单独打开。播放器会标明每组录像的采样与播放方式。在克隆的仓库根目录运行 `python -m http.server 8000 --directory docs`，然后打开 `http://localhost:8000` 即可在本机浏览。
+播放器内可单独打开全部 [26 段原视角录像](docs/media/)。在仓库根目录运行 `python -m http.server 8000 --directory docs`，然后打开 `http://localhost:8000`。
+
+</details>
 
 <a id="run-open-drawer"></a>
 
