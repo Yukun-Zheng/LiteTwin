@@ -4,31 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f4f4ef">
-  <title>LiteTwin · Robot manipulation rollouts</title>
+  <title>LiteTwin · Robot manipulation demos</title>
   <link rel="stylesheet" href="style.css">
+  <script defer src="translations.js"></script>
   <script defer src="gallery.js"></script>
 </head>
 <body>
-  <header><div class="bar"><a class="brand" href="./" aria-label="LiteTwin home"><span class="mark" aria-hidden="true"></span>LiteTwin</a><a href="https://github.com/Yukun-Zheng/LiteTwin">GitHub <span aria-hidden="true">↗</span></a></div></header>
-  <main>
-    <section class="intro"><h1>When a robot loses its grip.</h1><p>Watch the same motion policy handle a disturbance with and without LiteTwin. Both runs in each pair start from the same scene.</p></section>
-    <nav aria-label="Choose a rollout pair" id="tasks">
-      <button type="button" data-task="open_drawer" aria-pressed="true">Open Drawer</button>
-      <button type="button" data-task="insert_square_peg" aria-pressed="false">Insert Square Peg</button>
-      <button type="button" data-task="handover_item" aria-pressed="false">Handover Item</button>
-    </nav>
-    <section class="viewer" aria-labelledby="task-name">
-      <div class="viewer-heading"><div><h2 id="task-name">Open Drawer</h2><p id="scene">The gripper loses contact with the drawer during the pull.</p></div><span class="meta" id="episode"></span></div>
-      <div id="screens">
-        <article><div class="camera-title"><h3>Motion policy</h3><span class="outcome" id="baseline-outcome"></span></div><video id="baseline" preload="auto" muted playsinline aria-label="Motion policy, front and overhead views"></video><div class="caption"><span class="status" role="status">Loading…</span><a class="file" href="media/open_drawer/open_loop.mp4">Open MP4 ↗</a></div></article>
-        <article><div class="camera-title"><h3>Motion policy <span>+ LiteTwin</span></h3><span class="outcome" id="feedback-outcome"></span></div><video id="feedback" preload="auto" muted playsinline aria-label="Motion policy with LiteTwin, front and overhead views"></video><div class="caption"><span class="status" role="status">Loading…</span><a class="file" href="media/open_drawer/litetwin.mp4">Open MP4 ↗</a></div></article>
+  <header>
+    <div class="bar">
+      <a class="brand" href="./" data-label="home"><span class="mark" aria-hidden="true"></span>LiteTwin</a>
+      <div class="tools">
+        <select id="language" aria-label="Language" data-label="language">
+          <option value="en" lang="en">English</option>
+          <option value="zh-Hans" lang="zh-Hans">简体中文</option>
+          <option value="zh-Hant" lang="zh-Hant">繁體中文</option>
+        </select>
+        <a href="https://github.com/Yukun-Zheng/LiteTwin">GitHub ↗</a>
       </div>
-      <div class="transport"><button type="button" id="play" disabled>Play pair</button><input id="seek" type="range" min="0" max="1" value="0" step="0.05" aria-label="Seek both recordings" disabled><output id="clock">0:00 / –:––</output></div>
-      <p class="note">Front and overhead views · 2× recording speed. The shorter rollout holds its final frame.</p>
-      <noscript><p>Enable JavaScript for paired playback, or open the MP4 files above.</p></noscript>
+    </div>
+  </header>
+  <main>
+    <section class="intro">
+      <h1 data-text="headline">When a grasp slips or an action arrives late</h1>
+      <p data-text="intro">Compare two runs of the same motion policy. Both start from the same scene and encounter the same disturbance. The right-hand run adds LiteTwin task-state feedback.</p>
     </section>
-    <section class="trace" aria-labelledby="trace-title"><div><h2 id="trace-title">Inside the Open Drawer run</h2><p>In a fresh run of the packaged demo, contact breaks at cycle 72. The controller starts recovery at 78 and returns to supported progress at 121. RLBench reports completion after 135 cycles.</p><a href="figures/execution-timeline.svg">Open full trace ↗</a></div><a href="figures/execution-timeline.svg"><img src="figures/execution-timeline.svg" alt="Commanded task state, recovery mode and physical contact plotted against control cycle" loading="lazy"></a></section>
+    <section class="viewer" id="viewer" aria-labelledby="task-name">
+      <div class="switcher">
+        <label for="task-select" data-text="choose">Choose a task</label>
+        <select id="task-select" disabled><option>Open Drawer</option></select>
+        <span id="position"></span>
+        <button id="previous" type="button" data-label="previous" aria-label="Previous task" disabled>←</button>
+        <button id="next" type="button" data-label="next" aria-label="Next task" disabled>→</button>
+      </div>
+      <div class="viewer-heading"><div><h2 id="task-name">Open Drawer</h2><p id="scene"></p></div><span class="meta" id="episode"></span></div>
+      <div id="screens">
+        <article>
+          <div class="camera-title"><h3 data-text="motion">Motion policy</h3><span class="outcome" id="baseline-outcome"></span></div>
+          <video id="baseline" preload="auto" muted playsinline data-label="baseView" aria-label="Motion policy, front and overhead views"></video>
+          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/open_drawer/open_loop.mp4">Open MP4 ↗</a></div>
+        </article>
+        <article>
+          <div class="camera-title"><h3><span class="plain" data-text="motion">Motion policy</span> <span>+ LiteTwin</span></h3><span class="outcome" id="feedback-outcome"></span></div>
+          <video id="feedback" preload="auto" muted playsinline data-label="feedbackView" aria-label="Motion policy with LiteTwin, front and overhead views"></video>
+          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/open_drawer/litetwin.mp4">Open MP4 ↗</a></div>
+        </article>
+      </div>
+      <div class="transport"><button type="button" id="play" disabled>Play pair</button><input id="seek" type="range" min="0" max="1" value="0" step="0.05" data-label="seek" aria-label="Seek both recordings" disabled><output id="clock">0:00 / –:––</output></div>
+      <p class="note" id="capture"></p>
+      <noscript><p>Enable JavaScript for paired playback, or open the MP4 files above. 请启用 JavaScript 以播放对照录像，或单独打开 MP4。請啟用 JavaScript 以播放對照影片，或單獨開啟 MP4。</p></noscript>
+    </section>
+    <section class="library" aria-labelledby="library-title">
+      <div class="library-heading"><h2 id="library-title" data-text="explore">Explore the tasks</h2><span data-text="count">12 recorded pairs</span></div>
+      <div id="tasks"></div>
+    </section>
+    <section class="trace" aria-labelledby="trace-title">
+      <div><h2 id="trace-title" data-text="traceTitle">Inside the Open Drawer run</h2><p data-text="traceBody"></p><a class="trace-link" data-text="traceLink" href="figures/execution-timeline.svg">Open full trace ↗</a></div>
+      <a class="trace-link" href="figures/execution-timeline.svg"><img id="trace-image" src="figures/execution-timeline.svg" alt="Open Drawer trace" loading="lazy"></a>
+    </section>
   </main>
-  <footer><span>LiteTwin</span><a href="https://github.com/Yukun-Zheng/LiteTwin#run-open-drawer">Reproduce Open Drawer ↗</a></footer>
+  <footer><span>LiteTwin</span><a id="guide" data-text="reproduce" href="https://github.com/Yukun-Zheng/LiteTwin#run-open-drawer">Reproduce Open Drawer ↗</a></footer>
 </body>
 </html>

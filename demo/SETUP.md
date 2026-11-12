@@ -1,5 +1,7 @@
 # Running the Open Drawer simulation
 
+**English** · [简体中文](SETUP.zh-Hans.md) · [繁體中文](SETUP.zh-Hant.md)
+
 The simulator runs on x86-64 Linux and uses the Ubuntu 20.04 build of CoppeliaSim Edu 4.1. The Python 3.8 simulator process sends observations to the Python 3.10 policy process. Run the following commands from the repository root after completing the offline stage in the [main guide](../README.md#run-open-drawer).
 
 ## Install the simulator interfaces

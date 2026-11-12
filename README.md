@@ -1,24 +1,43 @@
 # LiteTwin
 
+**English** · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md)
+
 **Task-state feedback for robot manipulation.** A gripper can follow its planned path after the object has slipped away. LiteTwin tracks the physical relation between hand and object alongside task progress. When the two disagree, it can hold the motion reference, recover contact and resume from a state supported by the scene.
 
-[**Watch the paired rollouts →**](https://yukun-zheng.github.io/LiteTwin/) · [Run Open Drawer](#run-open-drawer) · [Explore the policy](code/litetwin/policy/feedback/)
+[**Watch the paired rollouts →**](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Run Open Drawer](#run-open-drawer) · [Explore the policy](code/litetwin/policy/feedback/)
 
-[![Open Drawer. Two front-camera recordings start together. The motion policy runs on the left and the same policy with LiteTwin runs on the right.](docs/figures/open-drawer.gif)](https://yukun-zheng.github.io/LiteTwin/#open_drawer)
+[![Open Drawer. Two front-camera recordings start together. The motion policy runs on the left and the same policy with LiteTwin runs on the right.](docs/figures/open-drawer.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer)
 
 *Open Drawer, front view. Both controllers start with the same drawer and encounter the same loss of contact. The left rollout ends with the task incomplete. On the right, the gripper re-establishes contact and finishes the pull.*
 
-## Three disturbances to watch
+## Explore 12 paired demos
 
-Each row links to a recorded pair with the same initialization, seed and disturbance. The viewer plays the front and overhead cameras together and lets you scrub both runs on a shared clock. These are three selected episodes. The runnable example below covers Open Drawer.
+Choose a task to play two recordings side by side. Each pair shares the scene initialization, seed and disturbance. Both policies finish the two-button episode, while both leave the single-arm sweeping task incomplete. The gallery shows selected episodes. Open Drawer includes the code, trajectories and checkpoint to run a fresh simulation.
 
-| Task | What to watch | Paired recordings |
-| --- | --- | --- |
-| Open Drawer | The drawer slips during the pull. Watch the gripper return while the task reference is held. | [Compare ↗](https://yukun-zheng.github.io/LiteTwin/#open_drawer) |
-| Insert Square Peg | The first grasp misses the peg. Watch whether the arm travels toward the socket with the peg in hand. | [Compare ↗](https://yukun-zheng.github.io/LiteTwin/#insert_square_peg) |
-| Handover Item | The grasp is disturbed during a two-arm transfer. Watch which hand holds the item as the arms separate. | [Compare ↗](https://yukun-zheng.github.io/LiteTwin/#handover_item) |
+<table>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="Open Drawer" width="260"><br>Open Drawer</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="Fit Ring onto Peg" width="260"><br>Fit Ring onto Peg</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="Handover Item" width="260"><br>Handover Item</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="Stack Cups" width="260"><br>Stack Cups</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="Close Jar" width="260"><br>Close Jar</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="Hang Three Cups" width="260"><br>Hang Three Cups</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="Remove Two Cups" width="260"><br>Remove Two Cups</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="Press Two Buttons" width="260"><br>Press Two Buttons</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="Sweep into Dustpan" width="260"><br>Sweep into Dustpan</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="Lift Tray Together" width="260"><br>Lift Tray Together</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="Put Bottle in Fridge" width="260"><br>Put Bottle in Fridge</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="Sweep with Two Arms" width="260"><br>Sweep with Two Arms</a></td>
+  </tr>
+</table>
 
-The [six MP4 files](docs/media/) also open individually. To serve the viewer from a clone, run `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
+All [24 MP4s](docs/media/) open individually. The viewer labels the capture format for each pair. To serve it from a clone, run `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
 
 ## Run Open Drawer
 

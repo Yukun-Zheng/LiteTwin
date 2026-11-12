@@ -1,0 +1,82 @@
+# LiteTwin
+
+[English](README.md) · [简体中文](README.zh-Hans.md) · **繁體中文**
+
+**用於機器人操作的任務狀態回饋。** 物體從夾爪中滑落時，機械臂仍可能沿原軌跡前進。LiteTwin 同時追蹤任務進度，以及夾爪與物體的接觸關係。兩者不一致時，控制器可以暫停推進，恢復接觸，再從當前場景支持的狀態繼續執行。
+
+[**觀看配對示範 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant) · [執行打開抽屜範例](#run-open-drawer) · [檢視策略實作](code/litetwin/policy/feedback/)
+
+[![同一抽屜任務的兩段正面影片。左側為運動策略，右側加入 LiteTwin。](docs/figures/open-drawer.zh-Hant.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer)
+
+*相同場景、相同的接觸中斷。左側未完成拉動，右側夾爪重新接觸把手後將抽屜拉開。*
+
+## 瀏覽 12 組示範
+
+點選下方任一任務，並排比較兩次執行。每組使用相同的初始場景、隨機種子及擾動。雙按鈕範例中兩種策略都完成了任務，單臂清掃範例中兩種策略都未完成。這裡展示的是選定回合。打開抽屜的任務另附程式碼、輸入軌跡及檢查點，可從頭重跑。
+
+<table>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="打開抽屜" width="260"><br>打開抽屜</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="方環套柱" width="260"><br>方環套柱</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="雙臂交接物體" width="260"><br>雙臂交接物體</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="堆疊杯子" width="260"><br>堆疊杯子</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="蓋上罐蓋" width="260"><br>蓋上罐蓋</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="掛起三個杯子" width="260"><br>掛起三個杯子</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="取下兩個杯子" width="260"><br>取下兩個杯子</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="按下兩個按鈕" width="260"><br>按下兩個按鈕</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="單臂清掃" width="260"><br>單臂清掃</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="雙臂抬托盤" width="260"><br>雙臂抬托盤</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="把瓶子放進冰箱" width="260"><br>把瓶子放進冰箱</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="雙臂協作清掃" width="260"><br>雙臂協作清掃</a></td>
+  </tr>
+</table>
+
+所有 [24 段 MP4](docs/media/) 都可單獨開啟。播放器會標示每組影片的取樣與播放方式。在複製的倉庫根目錄執行 `python -m http.server 8000 --directory docs`，然後開啟 `http://localhost:8000` 即可在本機瀏覽。
+
+<a id="run-open-drawer"></a>
+
+## 執行打開抽屜範例
+
+### 1. 以五條示範軌跡建立模型
+
+在倉庫根目錄安裝策略環境並執行離線階段。此階段使用隨附的低維軌跡及凍結的運動策略檢查點，可在 CPU 上執行，無須安裝模擬器。
+
+```bash
+conda env create -f demo/environment-policy.yml
+conda activate litetwin-policy
+python -m pip install -e ./code
+export LITETWIN_POLICY_PYTHON="$(python -c 'import sys; print(sys.executable)')"
+bash demo/run_offline.sh
+```
+
+五條軌跡長度不一，但共享三項依序執行的技能。模型得到 **101 個任務狀態**，三項技能分別有 **59、15、27** 個狀態，另有兩個帶條件的技能邊界及一個恢復錨點。可對照[軌跡分段圖](docs/figures/task-structure.zh-Hant.svg)、`outputs/offline/model_summary.json` 及 `outputs/models/litetwin/open_drawer/` 下的模型。
+
+### 2. 執行帶擾動的回合
+
+按照 [Linux 模擬器安裝說明](demo/SETUP.zh-Hant.md) 設定相依元件，然後執行：
+
+```bash
+bash demo/run_online.sh open_drawer
+```
+
+程式載入建立的模型，在指定種子的 RLBench 場景中引入接觸中斷，檢查擾動是否實際發生、任務是否完成，並在 `outputs/online/` 下儲存連續影片、JSON 結果、逐週期紀錄及時間軸。執行 `bash demo/run.sh open_drawer` 可依序執行兩個階段。重新建立會取代先前的模型與相關的線上輸出。
+
+### 閱讀控制時間軸
+
+![按控制週期排列的任務狀態參考、控制器模式與物理接觸](docs/figures/execution-timeline.zh-Hant.svg)
+
+在一次重跑中，第 **72** 個控制週期失去接觸，第 **78** 個週期開始恢復，第 **121** 個週期重新進入受支持的任務狀態，**135** 個週期後模擬器回報成功。上方曲線是指令給出的任務狀態參考，中間色帶是控制器模式，下方色帶是觀測到的物理接觸。水平線表示進度維持。橫軸以控制週期計，影片以播放時間計。[逐週期資料](docs/figures/open-drawer-trace.csv)
+
+## 程式碼結構
+
+[任務模型](code/litetwin/policy/feedback/model/) 從示範中擷取技能邊界、物體關係及場景限制。[推論](code/litetwin/policy/feedback/inference/) 更新進度與關係估計，[控制](code/litetwin/policy/feedback/control/) 決定維持、推進或跨越技能邊界，[恢復](code/litetwin/policy/feedback/recovery/) 負責驗證接觸、重新取得物體及選擇重新進入的狀態。[RLBench 介面](code/integrations/rlbench/rlbench_litetwin/) 連接觀測、擾動及模擬器動作。底層動作參考由凍結的 DynaMAC 運動策略提供。
+
+## 授權條款
+
+LiteTwin 原創程式碼採用 [MIT 授權條款](LICENSE)。外部模擬元件沿用各自的上游授權，詳見[第三方聲明與固定版本](code/integrations/rlbench/THIRD_PARTY.md)。
