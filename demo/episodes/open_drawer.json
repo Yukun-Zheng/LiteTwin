@@ -1,0 +1,14 @@
+{
+  "schema": "litetwin.demo-episode.v1",
+  "episode_id": "open_drawer/relation_loss/0002",
+  "task": "open_drawer",
+  "variation": 2,
+  "seed": 2750100002,
+  "horizon": 1000,
+  "disturbance": {
+    "kind": "relation_loss",
+    "trigger_fraction": 0.15,
+    "minimum_stable_cycles": 3,
+    "translation_m": [0.04, 0.0, 0.0]
+  }
+}

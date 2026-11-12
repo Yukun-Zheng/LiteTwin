@@ -1,0 +1,45 @@
+{
+  "schema": "litetwin.rollout-pairs.v1",
+  "capture": {
+    "cameras": [
+      "front",
+      "overhead"
+    ],
+    "resolution_per_camera": [
+      320,
+      240
+    ],
+    "source_fps": 10,
+    "playback_fps": 20,
+    "time_compression": 2.0,
+    "granularity": "physics_step",
+    "physics_stride": 2
+  },
+  "pairs": [
+    {
+      "task": "open_drawer",
+      "episode": 2,
+      "disturbance": "relation_loss",
+      "open_loop_outcome": "failure",
+      "litetwin_outcome": "success"
+    },
+    {
+      "task": "insert_square_peg",
+      "episode": 5,
+      "disturbance": "missed_interaction",
+      "front_camera_image_plane_shift_m": [
+        -0.1,
+        -0.08
+      ],
+      "open_loop_outcome": "failure",
+      "litetwin_outcome": "success"
+    },
+    {
+      "task": "handover_item",
+      "episode": 26,
+      "disturbance": "relation_loss",
+      "open_loop_outcome": "failure",
+      "litetwin_outcome": "success"
+    }
+  ]
+}

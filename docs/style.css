@@ -1,0 +1,71 @@
+:root {
+  color-scheme: light;
+  --paper: #f4f4ef;
+  --ink: #172b2f;
+  --accent: #006b59;
+  --quiet: #516361;
+  --line: #c7cfca;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); }
+header { border-bottom: 1px solid var(--line); }
+.bar, main, footer { width: min(calc(100% - 64px), 1180px); margin: auto; }
+.bar, footer, .viewer-heading, .camera-title, .caption, .transport { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.bar { min-height: 65px; font-size: 15px; }
+a { color: inherit; text-underline-offset: 4px; }
+.bar a, .file, footer a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+.brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 750; font-size: 23px; letter-spacing: -1px; }
+.mark { position: relative; width: 28px; height: 25px; }
+.mark::before, .mark::after { content: ""; position: absolute; width: 13px; height: 18px; border: 2px solid var(--accent); border-radius: 6px; transform: skew(-12deg); }
+.mark::before { left: 1px; top: 0; }
+.mark::after { right: 1px; bottom: 0; background: var(--paper); }
+.intro { margin: 46px 0 30px; }
+h1,h2,h3,p { margin: 0; }
+h1 { max-width: 1000px; font-size: clamp(40px, 5.25vw, 72px); letter-spacing: -.065em; line-height: 1.04; font-weight: 640; }
+.intro p, .trace p { max-width: 720px; font-size: 18px; line-height: 1.48; color: var(--quiet); margin: 13px 0 0; }
+button { cursor: pointer; font: inherit; }
+button:disabled { cursor: default; opacity: .55; }
+:focus-visible { outline: 3px solid #da8c09; outline-offset: 3px; }
+nav { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+nav button { border: 1px solid var(--line); border-radius: 30px; color: var(--ink); background: transparent; padding: 8px 18px; font-weight: 570; }
+nav button[aria-pressed=true] { background: var(--ink); color: white; border-color: var(--ink); }
+nav button[aria-pressed=false]:hover { background: #e1e9e1; }
+.viewer { background: #11282e; color: #f3f7f2; padding: clamp(16px, 2.2vw, 30px); border-radius: 17px; }
+.viewer-heading { align-items: flex-start; margin-bottom: 21px; }
+h2 { font-size: clamp(28px, 3.25vw, 42px); letter-spacing: -.05em; line-height: 1.12; }
+.viewer-heading p, .note { color: #bdcecb; line-height: 1.45; }
+.viewer-heading p { margin: 5px 0 0; }
+.meta, output, .outcome { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.meta { font-size: 12px; color: #bdd3cd; padding-top: 8px; white-space: nowrap; }
+#screens { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+article { min-width: 0; }
+.camera-title { margin: 0 0 8px; }
+h3 { font-size: clamp(15px, 1.45vw, 20px); font-weight: 570; letter-spacing: -.025em; }
+h3 span, .trace a { color: #a3ebd3; }
+.outcome { font-size: 11px; color: #d5e2df; }
+video { width: 100%; display: block; background: #203a3f; aspect-ratio: 8 / 3; border-radius: 5px; }
+.caption { font-size: 12px; color: #c1d0ce; margin: 7px 0 0; }
+.transport { border-top: 1px solid #3c5357; margin-top: 20px; padding-top: 15px; }
+#play { min-width: 98px; border: 0; border-radius: 7px; padding: 10px 13px; background: #a3ebd3; color: #112b2c; font-weight: 640; }
+#seek { flex: 1; min-width: 20px; accent-color: #a3ebd3; }
+output { white-space: nowrap; font-size: 13px; }
+.note { font-size: 12px; margin: 10px 0 0; }
+.trace { margin: 55px 0; padding-top: 26px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 2fr 3fr; gap: 42px; align-items: center; }
+.trace h2 { font-size: clamp(28px, 3.1vw, 42px); }
+.trace p { font-size: 16px; margin-bottom: 16px; }
+.trace a { color: var(--accent); }
+.trace img { display: block; width: 100%; border-radius: 8px; background: white; border: 1px solid #e0e5df; }
+footer { padding: 21px 0 30px; border-top: 1px solid var(--line); color: var(--quiet); font-size: 14px; }
+@media (max-width: 720px) {
+  .bar, main, footer { width: calc(100% - 32px); }
+  .bar { min-height: 52px; }
+  .intro { margin: 28px 0 22px; }
+  .intro p { font-size: 16px; }
+  #screens, .trace { grid-template-columns: 1fr; }
+  .viewer-heading { display: block; }
+  .meta { display: block; }
+  nav button { padding: 8px 11px; font-size: 13px; }
+  .trace { gap: 20px; margin: 32px 0; }
+}

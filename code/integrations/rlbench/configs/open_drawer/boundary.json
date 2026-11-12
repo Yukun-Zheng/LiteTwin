@@ -1,0 +1,18 @@
+{
+  "default_relation_probability": 0.7,
+  "minimum_tracking_reliability": 0.25,
+  "minimum_scene_reliability": 0.25,
+  "minimum_information_weight": 0.1,
+  "calibrations": {
+    "single:0->1": {
+      "local_score_threshold": 0.754787895016777,
+      "confirmation_cycles": 1,
+      "relation_thresholds": {}
+    },
+    "single:1->2": {
+      "local_score_threshold": 0.5913069585989315,
+      "confirmation_cycles": 1,
+      "relation_thresholds": {}
+    }
+  }
+}

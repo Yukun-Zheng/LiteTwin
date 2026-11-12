@@ -1,0 +1,28 @@
+{
+  "schema": "rlbench-tapas-segmentation-v2",
+  "implementation": "tapas_velocity_gripper_union",
+  "reference_commit": "52e35214b9baa7b190b87196c36b9e98f4006149",
+  "min_len": 1,
+  "distance_based": false,
+  "gripper_based": true,
+  "velocity_based": true,
+  "distance_threshold": 0.06,
+  "repeat_first_step": 0,
+  "repeat_final_step": 0,
+  "fix_frames": true,
+  "min_end_distance": 10,
+  "velocity_threshold": 0.005,
+  "gripper_threshold": 0.2,
+  "max_idx_distance": 4,
+  "gripper_min_end_distance": null,
+  "candidate_merge_fraction": 0.0,
+  "boundary_selection": "all",
+  "expected_boundary_count": null,
+  "task_profiles": {
+    "open_drawer": {
+      "candidate_merge_fraction": 0.05,
+      "boundary_selection": "temporal_consensus",
+      "expected_boundary_count": 2
+    }
+  }
+}

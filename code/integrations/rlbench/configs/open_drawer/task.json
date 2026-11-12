@@ -1,0 +1,36 @@
+{
+  "schema": "rlbench-dynamac-task-specs-v3",
+  "source": {
+    "repository": "https://github.com/vonHartz/RLBench",
+    "branch": "tapas",
+    "commit": "a51b4e609dc5c3e1a8c06046bd87a9da24723da4",
+    "status": "COMPACT_TASK_STATE"
+  },
+  "tasks": {
+    "open_drawer": {
+      "module": "integrations.rlbench.tasks.open_drawer",
+      "class_name": "LiteTwinOpenDrawer",
+      "bimanual": false,
+      "source_expression": "LiteTwinOpenDrawer.get_low_dim_state",
+      "segmentation_coordination": "single",
+      "pose_chunks": [
+        {
+          "name": "drawer_panel",
+          "role": "articulated_object",
+          "action_reference": false
+        },
+        {
+          "name": "drawer_support",
+          "role": "environment_reference"
+        }
+      ],
+      "configuration_chunks": [
+        {
+          "entity": "drawer_panel",
+          "name": "joint_position",
+          "size": 1
+        }
+      ]
+    }
+  }
+}

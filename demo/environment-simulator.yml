@@ -1,0 +1,14 @@
+name: litetwin-simulator
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - numpy=1.24
+  - cffi=1.14.2
+  - pillow=9.5
+  - wheel
+  - setuptools
+  - pip
+  - pip:
+      - pyquaternion==0.9.9
+      - natsort==8.4.0

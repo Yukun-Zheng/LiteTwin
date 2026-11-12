@@ -1,0 +1,13 @@
+{
+  "schema": "litetwin.quick-demo.v1",
+  "default": "open_drawer",
+  "demos": {
+    "open_drawer": {
+      "episode": "demo/episodes/open_drawer.json",
+      "demonstration_count": 5,
+      "expected_success": true,
+      "reference_video": "docs/media/open_drawer/litetwin.mp4",
+      "bimanual": false
+    }
+  }
+}
