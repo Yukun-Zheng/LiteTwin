@@ -2,9 +2,9 @@
 
 [English](README.md) · **简体中文** · [繁體中文](README.zh-Hant.md)
 
-**面向机器人操作的任务状态反馈。** 物体从夹爪里滑落时，机械臂仍可能沿原轨迹前进。LiteTwin 同时跟踪任务进度与夹爪和物体的接触关系。两者不一致时，控制器可以暂停推进，恢复接触，再从当前场景支持的状态继续执行。
+[**进入 LiteTwin 交互演示网站 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans) · [运行开抽屉示例](#run-open-drawer) · [查看策略实现](code/litetwin/policy/feedback/)
 
-[**观看配对演示 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans) · [运行开抽屉示例](#run-open-drawer) · [查看策略实现](code/litetwin/policy/feedback/)
+**面向机器人操作的任务状态反馈。** 物体从夹爪里滑落时，机械臂仍可能沿原轨迹前进。LiteTwin 同时跟踪任务进度与夹爪和物体的接触关系。两者不一致时，控制器可以暂停推进，恢复接触，再从当前场景支持的状态继续执行。
 
 [![双臂抬托盘的正面并排录像，观察托盘中央的方块。](docs/figures/tray-comparison.zh-Hans.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#bimanual_lift_tray)
 

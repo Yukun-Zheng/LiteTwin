@@ -2,9 +2,9 @@
 
 **English** · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md)
 
-**Task-state feedback for robot manipulation.** A gripper can follow its planned path after the object has slipped away. LiteTwin tracks the physical relation between hand and object alongside task progress. When the two disagree, it can hold the motion reference, recover contact and resume from a state supported by the scene.
+[**Open the interactive demo site →**](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Run Open Drawer](#run-open-drawer) · [Explore the policy](code/litetwin/policy/feedback/)
 
-[**Watch the paired rollouts →**](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Run Open Drawer](#run-open-drawer) · [Explore the policy](code/litetwin/policy/feedback/)
+**Task-state feedback for robot manipulation.** A gripper can follow its planned path after the object has slipped away. LiteTwin tracks the physical relation between hand and object alongside task progress. When the two disagree, it can hold the motion reference, recover contact and resume from a state supported by the scene.
 
 [![Two arms lift a tray. Follow the cube in the paired front views.](docs/figures/tray-comparison.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray)
 

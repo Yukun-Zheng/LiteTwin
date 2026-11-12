@@ -1,73 +1,503 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f4f4ef">
-  <title>LiteTwin · Robot manipulation demos</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="translations.js"></script>
-  <script defer src="gallery.js"></script>
-</head>
-<body>
-  <header>
-    <div class="bar">
-      <a class="brand" href="./" data-label="home"><span class="mark" aria-hidden="true"></span>LiteTwin</a>
-      <div class="tools">
-        <select id="language" aria-label="Language" data-label="language">
-          <option value="en" lang="en">English</option>
-          <option value="zh-Hans" lang="zh-Hans">简体中文</option>
-          <option value="zh-Hant" lang="zh-Hant">繁體中文</option>
-        </select>
-        <a href="https://github.com/Yukun-Zheng/LiteTwin">GitHub ↗</a>
-      </div>
-    </div>
-  </header>
-  <main>
-    <section class="intro">
-      <h1 data-text="headline">Did the object reach its goal?</h1>
-      <p data-text="intro">Compare two runs of the same motion policy. Both start from the same scene and encounter the same disturbance. The right-hand run adds LiteTwin task-state feedback.</p>
-    </section>
-    <nav id="featured" data-label="featured" aria-label="Featured comparisons">
-      <span data-text="featured">Featured comparisons</span><div id="featured-links"></div>
-    </nav>
-    <section class="viewer" id="viewer" aria-labelledby="task-name">
-      <div class="switcher">
-        <label for="task-select" data-text="choose">Choose a task</label>
-        <select id="task-select" disabled><option>Lift Tray Together</option></select>
-        <span id="position"></span>
-        <button id="previous" type="button" data-label="previous" aria-label="Previous task" disabled>←</button>
-        <button id="next" type="button" data-label="next" aria-label="Next task" disabled>→</button>
-      </div>
-      <div class="viewer-heading"><div><h2 id="task-name">Lift Tray Together</h2><p id="scene"></p></div><span class="meta" id="episode"></span></div>
-      <div id="screens">
-        <article>
-          <div class="camera-title"><h3 data-text="motion">Motion policy</h3><span class="outcome" id="baseline-outcome"></span></div>
-          <div class="frame-window"><video id="baseline" preload="auto" muted playsinline data-label="baseView" aria-label="Motion policy, front and overhead views"></video></div>
-          <p class="frame-note" hidden></p>
-          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/bimanual_lift_tray/open_loop.mp4">Open MP4 ↗</a></div>
-        </article>
-        <article>
-          <div class="camera-title"><h3><span class="plain" data-text="motion">Motion policy</span> <span>+ LiteTwin</span></h3><span class="outcome" id="feedback-outcome"></span></div>
-          <div class="frame-window"><video id="feedback" preload="auto" muted playsinline data-label="feedbackView" aria-label="Motion policy with LiteTwin, front and overhead views"></video></div>
-          <p class="frame-note" hidden></p>
-          <div class="caption"><span class="status" role="status">Loading…</span><a class="file" data-text="file" href="media/bimanual_lift_tray/litetwin.mp4">Open MP4 ↗</a></div>
-        </article>
-      </div>
-      <div class="transport"><button type="button" id="play" disabled>Play pair</button><input id="seek" type="range" min="0" max="1" value="0" step="0.05" data-label="seek" aria-label="Seek both recordings" disabled><output id="clock">0:00 / –:––</output></div>
-      <div class="feature-actions" hidden><button type="button" id="jump" disabled></button><a id="annotated" data-text="annotated">Open annotated MP4 ↗</a></div>
-      <p class="note" id="capture"></p>
-      <noscript><p>Enable JavaScript for paired playback, or open the MP4 files above. 请启用 JavaScript 以播放对照录像，或单独打开 MP4。請啟用 JavaScript 以播放對照影片，或單獨開啟 MP4。</p></noscript>
-    </section>
-    <section class="library" aria-labelledby="library-title">
-      <div class="library-heading"><h2 id="library-title" data-text="explore">Explore the tasks</h2><span data-text="count">12 tasks · 13 recorded pairs</span></div>
-      <div id="tasks"></div>
-    </section>
-    <section class="trace" aria-labelledby="trace-title">
-      <div><h2 id="trace-title" data-text="traceTitle">Inside the Open Drawer run</h2><p data-text="traceBody"></p><a class="trace-link" data-text="traceLink" href="figures/execution-timeline.svg">Open full trace ↗</a></div>
-      <a class="trace-link" href="figures/execution-timeline.svg"><img id="trace-image" src="figures/execution-timeline.svg" alt="Open Drawer trace" loading="lazy"></a>
-    </section>
-  </main>
-  <footer><span>LiteTwin</span><a id="guide" data-text="reproduce" href="https://github.com/Yukun-Zheng/LiteTwin#run-open-drawer">Reproduce Open Drawer ↗</a></footer>
-</body>
-</html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101719" />
+    <meta
+      name="description"
+      content="Explore LiteTwin task-state feedback through synchronized robot manipulation recordings, annotated comparisons and a reproducible simulation."
+    />
+    <title>LiteTwin · Robot manipulation demos</title>
+    <link rel="icon" href="figures/litetwin-mark.png" />
+    <link rel="stylesheet" href="style.css?v=studio1" />
+    <script defer src="translations.js?v=studio1"></script
+    ><script defer src="gallery.js?v=studio1"></script>
+  </head>
+  <body id="top">
+    <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <symbol id="i-play" viewBox="0 0 24 24">
+          <path d="m8 5 11 7-11 7z" fill="currentColor" stroke="none" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h15m-6-6 6 6-6 6" />
+        </symbol>
+        <symbol id="i-up-right" viewBox="0 0 24 24">
+          <path d="M6 18 18 6M7 6h11v11" />
+        </symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24">
+          <path d="m7 10 5 5 5-5" />
+        </symbol>
+        <symbol id="i-back" viewBox="0 0 24 24">
+          <path d="m14 6-6 6 6 6" />
+        </symbol>
+        <symbol id="i-next" viewBox="0 0 24 24">
+          <path d="m10 6 6 6-6 6" />
+        </symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <ellipse cx="12" cy="12" rx="4" ry="9" />
+          <path d="M3 12h18" />
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M18 6 6 18" />
+        </symbol>
+        <symbol id="i-git" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            stroke="none"
+            d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.06c-3.09.67-3.74-1.31-3.74-1.31-.51-1.28-1.24-1.62-1.24-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.7 1.15 1.7 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.47-.28-5.07-1.24-5.07-5.5 0-1.21.43-2.2 1.15-2.97-.12-.28-.5-1.41.11-2.94 0 0 .94-.3 3.05 1.14a10.62 10.62 0 0 1 5.55 0c2.12-1.44 3.05-1.14 3.05-1.14.62 1.53.23 2.66.12 2.94.72.77 1.14 1.76 1.14 2.97 0 4.27-2.61 5.21-5.09 5.49.4.35.75 1.02.75 2.06v3.05c0 .3.2.65.77.54A11.11 11.11 0 0 0 12 .9Z"
+          />
+        </symbol>
+        <symbol id="i-expand" viewBox="0 0 24 24">
+          <path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5" />
+        </symbol>
+        <symbol id="i-view" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="M12 5v14" />
+        </symbol>
+        <symbol id="i-jump" viewBox="0 0 24 24">
+          <path
+            d="m4 6 7 6-7 6zm8 0 7 6-7 6z"
+            fill="currentColor"
+            stroke="none"
+          />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m16 16 5 5" />
+        </symbol>
+        <symbol id="i-list" viewBox="0 0 24 24">
+          <path d="M8 6h13M8 12h13M8 18h13" />
+          <path d="M3 6h.1M3 12h.1M3 18h.1" />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24">
+          <path
+            d="M7 5h3v14H7zm7 0h3v14h-3z"
+            stroke="none"
+            fill="currentColor"
+          />
+        </symbol>
+        <symbol id="i-redo" viewBox="0 0 24 24">
+          <path d="M4 10a8 8 0 1 1 1 8M4 4v6h6" />
+        </symbol>
+        <symbol id="i-code" viewBox="0 0 24 24">
+          <path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16" />
+        </symbol>
+      </defs>
+    </svg>
+    <a class="skip" href="#comparisons" data-text="skip">Skip to demos</a>
+    <header class="site-header">
+      <div class="wrap bar"
+        ><a class="brand" href="#top" data-label="home"
+          ><span class="brand-glyph" aria-hidden="true"><i></i><i></i></span
+          ><span>LiteTwin</span></a
+        >
+        <nav class="desktop-nav" data-label="navigation" aria-label="Navigation"
+          ><a href="#comparisons" data-section="comparisons"
+            ><span data-text="navDemo">Demos</span></a
+          ><a href="#library" data-section="library"
+            ><span data-text="navLibrary">Task library</span></a
+          ><a href="#method" data-section="method"
+            ><span data-text="navMethod">How it works</span></a
+          ></nav
+        >
+        <div class="header-tools"
+          ><label class="language"
+            ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-globe" /></svg
+            ><select id="language" data-label="language" aria-label="Language"
+              ><option value="en" lang="en">English</option
+              ><option value="zh-Hans" lang="zh-Hans">简体中文</option
+              ><option value="zh-Hant" lang="zh-Hant">繁體中文</option></select
+            ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-chevron" /></svg
+          ></label>
+          <a
+            class="github"
+            href="https://github.com/Yukun-Zheng/LiteTwin"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub"
+            ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-git" /></svg
+            ><span>GitHub</span
+            ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-up-right" /></svg
+          ></a>
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            type="button"
+            aria-controls="mobile-nav"
+            aria-expanded="false"
+            data-label="menuOpen"
+            ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-menu" /></svg></button></div
+      ></div>
+      <nav
+        id="mobile-nav"
+        class="mobile-nav wrap"
+        hidden
+        data-label="navigation"
+        ><a href="#comparisons" data-section="comparisons"
+          ><span data-text="navDemo">Demos</span></a
+        ><a href="#library" data-section="library"
+          ><span data-text="navLibrary">Task library</span></a
+        ><a href="#method" data-section="method"
+          ><span data-text="navMethod">How it works</span></a
+        ></nav
+      >
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <figure class="hero-art" aria-labelledby="study-name">
+            <div class="study-head"
+              ><span class="study-id"
+                ><i></i
+                ><span data-text="heroCapture">Simulation replay</span></span
+              ><span class="study-clock"
+                ><svg class="icon" aria-hidden="true">
+                  <use href="#i-clock" /></svg
+                ><span id="study-time">00:09.50</span></span
+              ></div
+            >
+            <figcaption
+              ><strong id="study-name" data-text="studyName"
+                >Lifting the loaded tray</strong
+              ><span data-text="studyCamera">Front camera</span></figcaption
+            >
+            <div class="study-frames"
+              ><div
+                ><span data-text="motion">Motion policy</span
+                ><img
+                  id="study-left"
+                  src="figures/tray-sequence/open_loop-2.jpg"
+                  width="320"
+                  height="240"
+                  alt="" /></div
+              ><div
+                ><span>+ LiteTwin</span
+                ><img
+                  id="study-right"
+                  src="figures/tray-sequence/litetwin-2.jpg"
+                  width="320"
+                  height="240"
+                  alt="" /></div
+            ></div>
+            <div id="study-steps" role="group" data-label="studyStep"
+              ><button type="button" data-stage="0" aria-pressed="false"
+                ><i></i><span data-text="stageApproach">Approach</span></button
+              ><button type="button" data-stage="1" aria-pressed="false"
+                ><i></i><span data-text="stageLift">Lift</span></button
+              ><button type="button" data-stage="2" aria-pressed="true"
+                ><i></i><span data-text="stageResult">Result</span></button
+              ></div
+            >
+            <p id="study-note" aria-live="polite"></p>
+          </figure>
+          <div class="hero-copy"
+            ><p class="eyebrow hero-kicker"
+              ><i></i><span data-text="heroKicker">Robot manipulation</span></p
+            >
+            <h1 id="hero-title"
+              ><span data-text="headline">The arm moved.</span>
+              <em data-text="heroSecond">Did the object?</em></h1
+            >
+            <p class="hero-intro" data-text="intro"
+              >LiteTwin tracks the relation between the gripper and the object.
+              When contact breaks, it helps the motion policy recover and
+              continue the task.</p
+            >
+            <div class="hero-actions"
+              ><a id="watch" class="btn primary" href="#bimanual_lift_tray"
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-play" /></svg
+                ><span data-text="watch">Watch the comparison</span></a
+              ><a class="hero-secondary" href="#library"
+                ><span data-text="browse">Browse tasks</span
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-arrow" /></svg></a
+            ></div> </div
+        ></div>
+      </section>
+      <section
+        id="comparisons"
+        class="section compare wrap"
+        aria-labelledby="comparisons-title"
+      >
+        <div class="section-heading"
+          ><div
+            ><p class="eyebrow"
+              ><i></i><span data-text="compareKicker">Paired rollouts</span></p
+            ><h2 id="comparisons-title" data-text="compareTitle"
+              >Comparison studio</h2
+            ></div
+          ><p class="section-lede" data-text="compareIntro"
+            >Same scene, seed and disturbance. Choose a recording to see how the
+            two runs diverge.</p
+          ></div
+        >
+        <nav
+          id="featured-links"
+          data-label="featured"
+          aria-label="Featured comparisons"
+        ></nav>
+        <div
+          id="viewer"
+          class="viewer"
+          role="region"
+          aria-labelledby="task-name"
+          tabindex="-1"
+        >
+          <div class="viewer-heading"
+            ><div
+              ><p id="episode" class="episode"></p
+              ><h3 id="task-name">Lift Tray Together</h3><p id="scene"></p
+            ></div>
+            <div class="viewer-tools"
+              ><label class="pick-task"
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-list" /></svg
+                ><select id="task-select" disabled data-label="choose"
+                  ><option>Lift Tray Together</option></select
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-chevron" /></svg
+              ></label>
+              <div class="stepper"
+                ><button
+                  id="previous"
+                  type="button"
+                  data-label="previous"
+                  disabled
+                  ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <use href="#i-back" /></svg></button
+                ><span id="position">1 / 13</span
+                ><button id="next" type="button" data-label="next" disabled
+                  ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <use href="#i-next" /></svg></button
+              ></div> </div
+          ></div>
+          <div class="deck"
+            ><div id="screens"
+              ><article class="screen baseline"
+                ><div class="camera-title"
+                  ><h4><i></i><span data-text="motion">Motion policy</span></h4
+                  ><span class="outcome" id="baseline-outcome"></span
+                ></div>
+                <div class="frame-window"
+                  ><video
+                    id="baseline"
+                    preload="auto"
+                    muted
+                    playsinline
+                    data-label="baseView"
+                  ></video
+                ></div>
+                <p class="frame-note" hidden></p>
+                <div class="caption"
+                  ><span class="status" role="status">Loading…</span
+                  ><a
+                    class="file"
+                    href="media/bimanual_lift_tray/open_loop.mp4"
+                    target="_blank"
+                    rel="noopener"
+                    ><span data-text="file">Open MP4</span
+                    ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <use href="#i-up-right" /></svg></a></div></article
+              ><article class="screen feedback"
+                ><div class="camera-title"
+                  ><h4
+                    ><i></i><span data-text="motion">Motion policy</span>
+                    <b>+ LiteTwin</b></h4
+                  ><span class="outcome" id="feedback-outcome"></span
+                ></div>
+                <div class="frame-window"
+                  ><video
+                    id="feedback"
+                    preload="auto"
+                    muted
+                    playsinline
+                    data-label="feedbackView"
+                  ></video
+                ></div>
+                <p class="frame-note" hidden></p>
+                <div class="caption"
+                  ><span class="status" role="status">Loading…</span
+                  ><a
+                    class="file"
+                    href="media/bimanual_lift_tray/litetwin.mp4"
+                    target="_blank"
+                    rel="noopener"
+                    ><span data-text="file">Open MP4</span
+                    ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                      <use href="#i-up-right" /></svg></a></div></article
+            ></div>
+            <div class="transport"
+              ><button id="play" type="button" disabled
+                ><span id="play-icon"
+                  ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <use href="#i-play" /></svg></span
+                ><span id="play-label">Play pair</span></button
+              ><input
+                id="seek"
+                type="range"
+                min="0"
+                max="1"
+                value="0"
+                step="0.05"
+                data-label="seek"
+                disabled /><output id="clock">0:00 / –:––</output
+              ><button
+                id="fullscreen"
+                class="expand"
+                type="button"
+                data-label="expand"
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-expand" /></svg></button></div
+          ></div>
+          <div class="player-meta"
+            ><div class="feature-actions" hidden
+              ><button id="jump" type="button" disabled
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-jump" /></svg
+                ><span></span></button
+              ><a id="annotated" target="_blank" rel="noopener"
+                ><span data-text="annotated">Annotated MP4</span
+                ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <use href="#i-up-right" /></svg></a
+            ></div>
+            <button id="camera" type="button" disabled
+              ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                <use href="#i-view" /></svg
+              ><span></span></button
+          ></div>
+          <p id="capture" class="capture"></p>
+          <noscript
+            ><p
+              >Enable JavaScript for paired playback, or open the individual
+              MP4s above. 请启用 JavaScript 以观看配对演示。請啟用 JavaScript
+              以觀看配對示範。</p
+            ></noscript
+          >
+        </div>
+      </section>
+      <section
+        id="library"
+        class="library section"
+        aria-labelledby="library-title"
+        ><div class="wrap">
+          <div class="section-heading"
+            ><div
+              ><p class="eyebrow"><i></i>RLBench</p
+              ><h2 id="library-title" data-text="navLibrary"
+                >Task library</h2
+              ></div
+            ><p class="section-lede" data-text="libraryIntro"
+              >Browse 13 paired recordings across 12 tasks. Filter by the
+              disturbance each policy faced.</p
+            ></div
+          >
+          <div class="library-tools"
+            ><div id="filters" data-label="filter" role="group"></div
+            ><label class="search"
+              ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                <use href="#i-search" /></svg
+              ><input
+                type="search"
+                id="search"
+                data-label="search"
+                placeholder="Find a task" /></label
+          ></div>
+          <p id="result-count" class="result-count" role="status"></p
+          ><div id="tasks"></div>
+          <div class="empty" hidden
+            ><p data-text="noMatches">No matching recordings.</p
+            ><button id="clear" type="button" data-text="reset"
+              >Clear filters</button
+            ></div
+          >
+        </div></section
+      >
+      <section
+        id="method"
+        class="method section wrap"
+        aria-labelledby="trace-title"
+      >
+        <div class="method-copy"
+          ><p class="eyebrow"
+            ><i></i><span data-text="methodKicker">Controller trace</span></p
+          ><h2 id="trace-title" data-text="traceTitle"
+            >Inside the Open Drawer run</h2
+          ><p data-text="traceBody"></p>
+          <ol class="milestones">
+            <li
+              ><strong>72</strong
+              ><span data-text="traceLoss">Contact lost</span></li
+            ><li
+              ><strong>78</strong
+              ><span data-text="traceRecover">Recovery begins</span></li
+            ><li
+              ><strong>121</strong
+              ><span data-text="traceResume">Progress resumes</span></li
+            >
+          </ol>
+          <div class="method-links"
+            ><a
+              id="guide"
+              class="btn dark-btn"
+              href="https://github.com/Yukun-Zheng/LiteTwin#run-open-drawer"
+              ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                <use href="#i-code" /></svg
+              ><span data-text="reproduce">Reproduce Open Drawer</span></a
+            ><a
+              class="trace-link text-link"
+              target="_blank"
+              rel="noopener"
+              href="figures/execution-timeline.svg"
+              ><span data-text="traceLink">Open full trace</span
+              ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                <use href="#i-up-right" /></svg></a></div
+        ></div>
+        <a
+          class="trace-link trace-figure"
+          href="figures/execution-timeline.svg"
+          target="_blank"
+          rel="noopener"
+          ><img
+            id="trace-image"
+            width="1160"
+            height="560"
+            src="figures/execution-timeline.svg"
+            alt="Open Drawer trace"
+            loading="lazy"
+        /></a> </section
+    ></main>
+    <footer
+      ><div class="wrap foot"
+        ><a href="#top" class="brand" data-label="home"
+          ><span class="brand-glyph" aria-hidden="true"><i></i><i></i></span
+          ><span>LiteTwin</span></a
+        ><div
+          ><a href="#top"><span data-text="top">Back to top</span> ↑</a
+          ><a
+            href="https://github.com/Yukun-Zheng/LiteTwin"
+            target="_blank"
+            rel="noopener"
+            ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-git" />
+            </svg>
+            GitHub
+            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+              <use href="#i-up-right" /></svg></a></div></div
+    ></footer> </body
+></html>
