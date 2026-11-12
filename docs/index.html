@@ -10,9 +10,9 @@
     />
     <title>LiteTwin · Robot manipulation demos</title>
     <link rel="icon" href="figures/litetwin-mark.png" />
-    <link rel="stylesheet" href="style.css?v=studio1" />
-    <script defer src="translations.js?v=studio1"></script
-    ><script defer src="gallery.js?v=studio1"></script>
+    <link rel="stylesheet" href="style.css?v=project2" />
+    <script defer src="translations.js?v=project2"></script
+    ><script defer src="gallery.js?v=project2"></script>
   </head>
   <body id="top">
     <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -103,11 +103,13 @@
         >
         <nav class="desktop-nav" data-label="navigation" aria-label="Navigation"
           ><a href="#comparisons" data-section="comparisons"
-            ><span data-text="navDemo">Demos</span></a
+            ><span data-text="navDemo">Comparisons</span></a
+          ><a href="#method" data-section="method"
+            ><span data-text="navMethod">Method</span></a
+          ><a href="#quickstart" data-section="quickstart"
+            ><span data-text="quickTitle">Quick start</span></a
           ><a href="#library" data-section="library"
             ><span data-text="navLibrary">Task library</span></a
-          ><a href="#method" data-section="method"
-            ><span data-text="navMethod">How it works</span></a
           ></nav
         >
         <div class="header-tools"
@@ -149,11 +151,13 @@
         hidden
         data-label="navigation"
         ><a href="#comparisons" data-section="comparisons"
-          ><span data-text="navDemo">Demos</span></a
+          ><span data-text="navDemo">Comparisons</span></a
+        ><a href="#method" data-section="method"
+          ><span data-text="navMethod">Method</span></a
+        ><a href="#quickstart" data-section="quickstart"
+          ><span data-text="quickTitle">Quick start</span></a
         ><a href="#library" data-section="library"
           ><span data-text="navLibrary">Task library</span></a
-        ><a href="#method" data-section="method"
-          ><span data-text="navMethod">How it works</span></a
         ></nav
       >
     </header>
@@ -207,11 +211,13 @@
           </figure>
           <div class="hero-copy"
             ><p class="eyebrow hero-kicker"
-              ><i></i><span data-text="heroKicker">Robot manipulation</span></p
+              ><i></i><span data-text="heroKicker">RLBench</span></p
             >
             <h1 id="hero-title"
-              ><span data-text="headline">The arm moved.</span>
-              <em data-text="heroSecond">Did the object?</em></h1
+              ><span data-text="headline">LiteTwin</span>
+              <em data-text="heroSecond"
+                >Task-state feedback for robot manipulation</em
+              ></h1
             >
             <p class="hero-intro" data-text="intro"
               >LiteTwin tracks the relation between the gripper and the object.
@@ -223,8 +229,8 @@
                 ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                   <use href="#i-play" /></svg
                 ><span data-text="watch">Watch the comparison</span></a
-              ><a class="hero-secondary" href="#library"
-                ><span data-text="browse">Browse tasks</span
+              ><a class="hero-secondary" href="#quickstart"
+                ><span data-text="quickTitle">Quick start</span
                 ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                   <use href="#i-arrow" /></svg></a
             ></div> </div
@@ -392,43 +398,6 @@
         </div>
       </section>
       <section
-        id="library"
-        class="library section"
-        aria-labelledby="library-title"
-        ><div class="wrap">
-          <div class="section-heading"
-            ><div
-              ><p class="eyebrow"><i></i>RLBench</p
-              ><h2 id="library-title" data-text="navLibrary"
-                >Task library</h2
-              ></div
-            ><p class="section-lede" data-text="libraryIntro"
-              >Browse 13 paired recordings across 12 tasks. Filter by the
-              disturbance each policy faced.</p
-            ></div
-          >
-          <div class="library-tools"
-            ><div id="filters" data-label="filter" role="group"></div
-            ><label class="search"
-              ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                <use href="#i-search" /></svg
-              ><input
-                type="search"
-                id="search"
-                data-label="search"
-                placeholder="Find a task" /></label
-          ></div>
-          <p id="result-count" class="result-count" role="status"></p
-          ><div id="tasks"></div>
-          <div class="empty" hidden
-            ><p data-text="noMatches">No matching recordings.</p
-            ><button id="clear" type="button" data-text="reset"
-              >Clear filters</button
-            ></div
-          >
-        </div></section
-      >
-      <section
         id="method"
         class="method section wrap"
         aria-labelledby="trace-title"
@@ -466,8 +435,12 @@
               href="figures/execution-timeline.svg"
               ><span data-text="traceLink">Open full trace</span
               ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                <use href="#i-up-right" /></svg></a></div
-        ></div>
+                <use href="#i-up-right" /></svg></a
+            ><a class="text-link" href="figures/open-drawer-trace.csv" download
+              ><span data-text="cycleCSV">Cycle data (CSV)</span></a
+            ></div
+          ></div
+        >
         <a
           class="trace-link trace-figure"
           href="figures/execution-timeline.svg"
@@ -480,8 +453,229 @@
             src="figures/execution-timeline.svg"
             alt="Open Drawer trace"
             loading="lazy"
-        /></a> </section
-    ></main>
+        /></a>
+        <details id="model-evidence">
+          <summary
+            ><span data-text="modelSource">How was the task model built?</span
+            ><span class="disclose-symbol" aria-hidden="true"></span
+          ></summary>
+          <div class="model-evidence-body">
+            <div
+              ><p data-text="modelEvidence"
+                >Five demonstrations have different lengths but share three
+                ordered skills. Aligning the skill boundaries yields 59, 15 and
+                27 states, giving the controller 101 task states to track.</p
+              >
+              <a
+                class="text-link"
+                href="https://github.com/Yukun-Zheng/LiteTwin/blob/main/demo/build_models.py"
+                ><span data-text="modelCode">Model construction code</span>
+                ↗</a
+              ></div
+            >
+            <a
+              id="model-plot-link"
+              href="figures/task-structure.svg"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                id="model-plot"
+                src="figures/task-structure.svg"
+                loading="lazy"
+                alt="Skill boundaries across five Open Drawer demonstrations"
+              /> </a
+          ></div>
+        </details>
+      </section>
+      <section
+        id="quickstart"
+        class="quickstart section"
+        aria-labelledby="quick-heading"
+        ><div class="wrap">
+          <div class="section-heading"
+            ><h2 id="quick-heading" data-text="quickTitle">Quick start</h2
+            ><p class="section-lede" data-text="quickIntro"
+              >Explore the recordings locally, build a task model or reproduce
+              the Open Drawer rollout.</p
+            ></div
+          >
+          <div class="guide-sheet"
+            ><div
+              class="guide-tabs"
+              role="tablist"
+              aria-labelledby="quick-heading"
+              ><button
+                type="button"
+                role="tab"
+                id="tab-gallery"
+                aria-controls="panel-gallery"
+                aria-selected="true"
+                tabindex="0"
+                ><span data-text="quickGallery">Serve the gallery</span></button
+              ><button
+                type="button"
+                role="tab"
+                id="tab-offline"
+                aria-controls="panel-offline"
+                aria-selected="false"
+                tabindex="-1"
+                ><span data-text="quickOffline">Build the model</span></button
+              ><button
+                type="button"
+                role="tab"
+                id="tab-online"
+                aria-controls="panel-online"
+                aria-selected="false"
+                tabindex="-1"
+                ><span data-text="quickOnline">Run the simulation</span></button
+              ></div
+            ><div
+              role="tabpanel"
+              id="panel-gallery"
+              aria-labelledby="tab-gallery"
+            >
+              <div class="instruction-copy"
+                ><p class="instruction-requirement"
+                  ><span data-text="galleryReq"
+                    >Requires Git and Python 3.</span
+                  ></p
+                ><p
+                  ><span data-text="galleryResult"
+                    >Open http://localhost:8000 to browse all 13 paired
+                    recordings.</span
+                  ></p
+                ><a
+                  class="text-link guide-more"
+                  href="https://github.com/Yukun-Zheng/LiteTwin/tree/main/docs/media"
+                  ><span data-text="quickFiles">Gallery files</span> ↗</a
+                ></div
+              >
+              <div class="command-box"
+                ><div class="command-bar"
+                  ><span>Shell</span
+                  ><button type="button" class="copy-commands"
+                    ><span data-text="copyCommands">Copy commands</span></button
+                  ></div
+                >><pre><code>git clone https://github.com/Yukun-Zheng/LiteTwin.git
+cd LiteTwin
+python3 -m http.server 8000 --directory docs</code></pre>
+              </div></div
+            ><div
+              role="tabpanel"
+              id="panel-offline"
+              aria-labelledby="tab-offline"
+              hidden
+            >
+              <div class="instruction-copy"
+                ><p class="instruction-requirement"
+                  ><span data-text="offlineReq"
+                    >Requires Git and Conda. The bundled five trajectories and
+                    motion checkpoint run on CPU. Start from a fresh
+                    checkout.</span
+                  ></p
+                ><p
+                  ><span data-text="offlineResult"
+                    >Inspect outputs/offline/model_summary.json for the fitted
+                    model with 101 states across three skills. Rebuilding
+                    replaces the earlier demo outputs.</span
+                  ></p
+                ><a
+                  class="text-link guide-more"
+                  href="https://github.com/Yukun-Zheng/LiteTwin#run-open-drawer"
+                  ><span data-text="quickModel">Model and input guide</span>
+                  ↗</a
+                ></div
+              >
+              <div class="command-box"
+                ><div class="command-bar"
+                  ><span>Shell</span
+                  ><button type="button" class="copy-commands"
+                    ><span data-text="copyCommands">Copy commands</span></button
+                  ></div
+                >><pre><code>git clone https://github.com/Yukun-Zheng/LiteTwin.git
+cd LiteTwin
+conda env create -f demo/environment-policy.yml
+conda activate litetwin-policy
+python -m pip install -e ./code
+export LITETWIN_POLICY_PYTHON=&quot;$(python -c &#x27;import sys; print(sys.executable)&#x27;)&quot;
+bash demo/run_offline.sh</code></pre>
+              </div></div
+            ><div
+              role="tabpanel"
+              id="panel-online"
+              aria-labelledby="tab-online"
+              hidden
+            >
+              <div class="instruction-copy"
+                ><p class="instruction-requirement"
+                  ><span data-text="onlineReq"
+                    >Build the model first, then complete the x86-64 Linux
+                    setup. Run from the repository root in the configured
+                    shell.</span
+                  ></p
+                ><p
+                  ><span data-text="onlineResult"
+                    >Inspect outputs/online/ for the episode outcome, MP4 and
+                    cycle-by-cycle trace.</span
+                  ></p
+                ><a
+                  class="text-link guide-more"
+                  href="https://github.com/Yukun-Zheng/LiteTwin/blob/main/demo/SETUP.md"
+                  ><span data-text="quickSetup">Linux simulator setup</span>
+                  ↗</a
+                ></div
+              >
+              <div class="command-box"
+                ><div class="command-bar"
+                  ><span>Shell</span
+                  ><button type="button" class="copy-commands"
+                    ><span data-text="copyCommands">Copy commands</span></button
+                  ></div
+                >><pre><code>bash demo/run_online.sh open_drawer</code></pre>
+              </div></div
+            ></div
+          >
+        </div></section
+      >
+      <section
+        id="library"
+        class="library section"
+        aria-labelledby="library-title"
+        ><div class="wrap">
+          <div class="section-heading"
+            ><div
+              ><p class="eyebrow"><i></i>RLBench</p
+              ><h2 id="library-title" data-text="navLibrary"
+                >Task library</h2
+              ></div
+            ><p class="section-lede" data-text="libraryIntro"
+              >Browse 13 paired recordings across 12 tasks. Filter by the
+              disturbance each policy faced.</p
+            ></div
+          >
+          <div class="library-tools"
+            ><div id="filters" data-label="filter" role="group"></div
+            ><label class="search"
+              ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                <use href="#i-search" /></svg
+              ><input
+                type="search"
+                id="search"
+                data-label="search"
+                placeholder="Find a task" /></label
+          ></div>
+          <p id="result-count" class="result-count" role="status"></p
+          ><div id="tasks"></div>
+          <div class="empty" hidden
+            ><p data-text="noMatches">No matching recordings.</p
+            ><button id="clear" type="button" data-text="reset"
+              >Clear filters</button
+            ></div
+          >
+        </div></section
+      >
+    </main>
     <footer
       ><div class="wrap foot"
         ><a href="#top" class="brand" data-label="home"

@@ -2,54 +2,37 @@
 
 [English](README.md) · [简体中文](README.zh-Hans.md) · **繁體中文**
 
-[**進入 LiteTwin 互動示範網站 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant) · [執行打開抽屜範例](#run-open-drawer) · [檢視策略實作](code/litetwin/policy/feedback/)
+**用於機器人操作的任務狀態回饋**
 
-**用於機器人操作的任務狀態回饋。** 物體從夾爪中滑落時，機械臂仍可能沿原軌跡前進。LiteTwin 同時追蹤任務進度，以及夾爪與物體的接觸關係。兩者不一致時，控制器可以暫停推進，恢復接觸，再從當前場景支持的狀態繼續執行。
+LiteTwin 在凍結的運動策略上追蹤任務進度，以及夾爪與物體的接觸關係。當機械臂沿軌跡前進、物體卻留在原地時，控制器可以暫停推進，恢復接觸，再繼續執行任務。
 
-[![雙臂抬托盤的正面並排影片，觀察托盤中央的方塊。](docs/figures/tray-comparison.zh-Hant.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray)
+[互動示範](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant) · [快速開始](#quickstart) · [策略 API](code/litetwin/policy/feedback/README.md) · [MIT 授權條款](LICENSE)
 
-*留意托盤中央的方塊。約第 8 秒，左側托盤開始傾倒；右側兩端隨後一起升起，方塊仍留在托盤上。*
+[![三組相同條件下的模擬對照。上排為運動策略，下排為同一策略加入 LiteTwin。](docs/figures/rollout-comparison.zh-Hant.jpg)](docs/figures/rollout-comparison.zh-Hant.jpg)
 
-## 三組值得對照看的動作
+上排為原運動策略，下排為同一策略加入 LiteTwin。每一欄的上下兩幅畫面取自相同起始場景、隨機種子與擾動下的同一播放時刻。較短的影片結束後保留最後一格。這裡展示的是選定回合。
 
-留意物體有沒有跟著夾爪移動。每組的起始場景、隨機種子與擾動都相同。兩側影片從頭同步播放，註解會隨動作變化。
+| 配對回放 | 觀察重點 |
+| --- | --- |
+| [雙臂抬托盤](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray) | 第 8–10 秒，觀察方塊是否隨托盤一起升起。 [附註解 MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.zh-Hant.mp4) |
+| [打開抽屜](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer_delay) | 第 6–8 秒，觀察最上層抽屜是否隨夾爪移動。 [附註解 MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.zh-Hant.mp4) |
+| [蓋上罐蓋](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar) | 第 7–16 秒，跟著灰色罐蓋看首次抓取落空之後的動作。 [附註解 MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.zh-Hant.mp4) |
 
-| 任務 | 觀察時段 | 運動策略 | 運動策略 + LiteTwin | 影片 |
-| --- | --- | --- | --- | --- |
-| [雙臂抬托盤](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray) | 8–10 秒 | 一端先抬起，托盤翻倒在桌上。 | 兩端一起抬起，方塊隨托盤升高。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.zh-Hant.mp4) |
-| [打開抽屜](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer_delay) | 6–8 秒 | 機械臂空手移開，最上層抽屜仍關著。 | 同一時段內，夾爪已把最上層抽屜拉開。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.zh-Hant.mp4) |
-| [蓋上罐蓋](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar) | 7–16 秒 | 空夾爪移到罐口，灰色蓋子還在桌上。 | 首次抓取落空後重新抓住蓋子，將它放到紅罐上。 | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.zh-Hant.mp4) |
+[托盤對照動圖](docs/figures/tray-comparison.zh-Hant.gif) · [任務庫](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#library)
 
-<details><summary>展開全部 12 項任務、13 組配對影片</summary>
+<a id="quickstart"></a>
 
-示範庫也保留了雙方都完成及雙方都未完成的回合。打開抽屜有兩組影片，擾動不同。下方可重新執行的範例對應接觸中斷的那一組。
+## 快速開始
 
-<table>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="打開抽屜" width="260"><br>打開抽屜</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="方環套柱" width="260"><br>方環套柱</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="雙臂交接物體" width="260"><br>雙臂交接物體</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="堆疊杯子" width="260"><br>堆疊杯子</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="蓋上罐蓋" width="260"><br>蓋上罐蓋</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="掛起三個杯子" width="260"><br>掛起三個杯子</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="取下兩個杯子" width="260"><br>取下兩個杯子</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="按下兩個按鈕" width="260"><br>按下兩個按鈕</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="單臂清掃" width="260"><br>單臂清掃</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="雙臂抬托盤" width="260"><br>雙臂抬托盤</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="把瓶子放進冰箱" width="260"><br>把瓶子放進冰箱</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="雙臂協作清掃" width="260"><br>雙臂協作清掃</a></td>
-  </tr>
-</table>
+本機安裝 Git 與 Python 3 後，即可瀏覽全部 13 組配對影片。
 
-播放器內可單獨開啟全部 [26 段原視角影片](docs/media/)。在倉庫根目錄執行 `python -m http.server 8000 --directory docs`，然後開啟 `http://localhost:8000`。
+```bash
+git clone https://github.com/Yukun-Zheng/LiteTwin.git
+cd LiteTwin
+python3 -m http.server 8000 --directory docs
+```
 
-</details>
+開啟 `http://localhost:8000`。如要從示範軌跡建立模型，並在 RLBench 中執行新的開抽屜回合，請繼續閱讀下方步驟。本次釋出隨附的可重現任務為打開抽屜。
 
 <a id="run-open-drawer"></a>
 
@@ -84,6 +67,39 @@ bash demo/run_online.sh open_drawer
 ![按控制週期排列的任務狀態參考、控制器模式與物理接觸](docs/figures/execution-timeline.zh-Hant.svg)
 
 在一次重跑中，第 **72** 個控制週期失去接觸，第 **78** 個週期開始恢復，第 **121** 個週期重新進入受支持的任務狀態，**135** 個週期後模擬器回報成功。上方曲線是指令給出的任務狀態參考，中間色帶是控制器模式，下方色帶是觀測到的物理接觸。水平線表示進度維持。橫軸以控制週期計，影片以播放時間計。[逐週期資料](docs/figures/open-drawer-trace.csv)
+
+## 任務庫
+
+<details><summary>展開全部 12 項任務、13 組配對影片</summary>
+
+示範庫也保留了雙方都完成及雙方都未完成的回合。打開抽屜有兩組影片，擾動不同。下方可重新執行的範例對應接觸中斷的那一組。
+
+<table>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="打開抽屜" width="260"><br>打開抽屜</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="方環套柱" width="260"><br>方環套柱</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="雙臂交接物體" width="260"><br>雙臂交接物體</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="堆疊杯子" width="260"><br>堆疊杯子</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="蓋上罐蓋" width="260"><br>蓋上罐蓋</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="掛起三個杯子" width="260"><br>掛起三個杯子</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="取下兩個杯子" width="260"><br>取下兩個杯子</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="按下兩個按鈕" width="260"><br>按下兩個按鈕</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="單臂清掃" width="260"><br>單臂清掃</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="雙臂抬托盤" width="260"><br>雙臂抬托盤</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="把瓶子放進冰箱" width="260"><br>把瓶子放進冰箱</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="雙臂協作清掃" width="260"><br>雙臂協作清掃</a></td>
+  </tr>
+</table>
+
+播放器內可單獨開啟全部 [26 段原視角影片](docs/media/)。在倉庫根目錄執行 `python -m http.server 8000 --directory docs`，然後開啟 `http://localhost:8000`。
+
+</details>
 
 ## 程式碼結構
 

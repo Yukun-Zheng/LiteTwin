@@ -1540,3 +1540,207 @@ h1 {
   color: var(--quiet);
   margin-top: 3px;
 }
+.hero #hero-title > span {
+  display: block;
+  font-size: clamp(67px, 6.8vw, 98px);
+  line-height: 1.03;
+  letter-spacing: -0.07em;
+}
+.hero #hero-title > em {
+  display: block;
+  max-width: 520px;
+  white-space: normal;
+  margin-top: 12px;
+  font-size: clamp(23px, 2.4vw, 34px);
+  letter-spacing: -0.035em;
+  line-height: 1.16;
+  color: #e2efda;
+  font-weight: 550;
+}
+:lang(zh) .hero #hero-title > em {
+  font-size: clamp(21px, 2.15vw, 32px);
+  line-height: 1.32;
+}
+.quickstart {
+  background: #f0f3ed;
+  border-block: 1px solid var(--line);
+  scroll-margin-top: 68px;
+}
+.guide-sheet {
+  border: 1px solid #cad4ca;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.guide-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+  background: #f9faf7;
+  flex-wrap: wrap;
+}
+.guide-tabs button {
+  min-height: 45px;
+  padding: 8px 14px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--quiet);
+  background: transparent;
+  font-size: 14px;
+}
+.guide-tabs button[aria-selected="true"] {
+  color: var(--green);
+  border-color: var(--green);
+  font-weight: 650;
+}
+.guide-sheet [role="tabpanel"] {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(20px, 4vw, 52px);
+  align-items: start;
+  padding: 24px;
+}
+.instruction-copy {
+  display: grid;
+  gap: 10px;
+  color: var(--quiet);
+  font-size: 14px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.instruction-requirement {
+  color: var(--ink);
+  font-weight: 550;
+}
+.command-box {
+  min-width: 0;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--night);
+  color: #eaf2e8;
+}
+.command-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px 7px 14px;
+  border-bottom: 1px solid #34443d;
+  color: #cadaca;
+  font: 12px var(--mono);
+}
+.copy-commands {
+  padding: 6px 10px;
+  border: 1px solid #536359;
+  color: #e6eee2;
+  background: #28382f;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.command-box pre {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  line-height: 1.65;
+  font: 13px/1.65 var(--mono);
+}
+#method {
+  border-top: 1px solid var(--line);
+}
+#library {
+  background: var(--paper);
+}
+@media (min-width: 761px) and (max-width: 1020px) {
+  .bar {
+    gap: 14px;
+  }
+  .desktop-nav {
+    gap: 13px;
+    font-size: 13px;
+  }
+  .header-tools {
+    gap: 7px;
+  }
+}
+@media (max-width: 760px) {
+  .hero #hero-title > span {
+    font-size: 59px;
+  }
+  .hero #hero-title > em {
+    margin-top: 5px;
+    font-size: 23px;
+  }
+  :lang(zh) .hero #hero-title > em {
+    font-size: 22px;
+  }
+  .guide-sheet [role="tabpanel"] {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    gap: 15px;
+  }
+  .guide-tabs {
+    padding: 0 5px;
+  }
+  .guide-tabs button {
+    font-size: 13px;
+    padding-inline: 9px;
+  }
+  .command-box pre {
+    font-size: 12px;
+  }
+}
+#model-evidence {
+  grid-column: 1/-1;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-top: 8px;
+}
+#model-evidence summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  padding: 15px 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+}
+#model-evidence summary::-webkit-details-marker {
+  display: none;
+}
+.disclose-symbol::before {
+  content: "+";
+  font: 20px var(--mono);
+  color: var(--green);
+}
+#model-evidence[open] .disclose-symbol::before {
+  content: "−";
+}
+.model-evidence-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6%;
+  align-items: center;
+  padding: 4px 0 18px;
+}
+.model-evidence-body p {
+  color: var(--quiet);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.model-evidence-body img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  background: #fff;
+}
+@media (max-width: 760px) {
+  .model-evidence-body {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}

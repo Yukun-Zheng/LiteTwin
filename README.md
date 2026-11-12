@@ -2,54 +2,37 @@
 
 **English** · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md)
 
-[**Open the interactive demo site →**](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Run Open Drawer](#run-open-drawer) · [Explore the policy](code/litetwin/policy/feedback/)
+**Task-state feedback for robot manipulation**
 
-**Task-state feedback for robot manipulation.** A gripper can follow its planned path after the object has slipped away. LiteTwin tracks the physical relation between hand and object alongside task progress. When the two disagree, it can hold the motion reference, recover contact and resume from a state supported by the scene.
+LiteTwin adds task progress and gripper–object contact to a frozen motion policy. When the motion reference moves ahead but the object stays behind, the controller can pause, recover contact and resume the task.
 
-[![Two arms lift a tray. Follow the cube in the paired front views.](docs/figures/tray-comparison.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray)
+[Interactive demos](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Quick start](#quickstart) · [Policy API](code/litetwin/policy/feedback/README.md) · [MIT license](LICENSE)
 
-*Follow the cube. Around 8 seconds, the left tray tips. On the right, both ends rise together with the cube still on board.*
+[![Three matched simulation replays. The motion policy is shown above and the same policy with LiteTwin below.](docs/figures/rollout-comparison.jpg)](docs/figures/rollout-comparison.jpg)
 
-## Three comparisons to watch
+The top row shows the motion policy. The bottom row shows the same policy with LiteTwin. Each column shows the same scene, seed, disturbance and playback time for both controllers. The shorter recording holds its final frame. These are selected episodes.
 
-Watch the object as well as the gripper. Each row pairs the same initial scene, random seed and disturbance. The notes follow the action in two continuous, time-aligned recordings.
+| Replay | What to watch |
+| --- | --- |
+| [Lift a loaded tray](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray) | At 8–10 s, follow the cube as the arms lift. [Annotated MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.en.mp4) |
+| [Open a drawer](https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer_delay) | At 6–8 s, watch whether the top drawer follows the gripper. [Annotated MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.en.mp4) |
+| [Close a jar](https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar) | At 7–16 s, follow the gray lid after the missed pickup. [Annotated MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.en.mp4) |
 
-| Task | When to look | Motion policy | Motion policy + LiteTwin | Video |
-| --- | --- | --- | --- | --- |
-| [Lift a loaded tray](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray) | 8–10 s | One end rises first and the tray tips back onto the table. | The tray stays level and the cube rises with it. | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.en.mp4) |
-| [Open a drawer](https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer_delay) | 6–8 s | The arm moves away. The top drawer stays shut. | The gripper pulls the top drawer open in the same time window. | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.en.mp4) |
-| [Put the lid on a jar](https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar) | 7–16 s | The empty gripper reaches the jar. The gray lid stays on the table. | After the missed pickup, the gripper takes the lid to the red jar. | [MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.en.mp4) |
+[Animated tray comparison](docs/figures/tray-comparison.gif) · [Task gallery](https://yukun-zheng.github.io/LiteTwin/?lang=en#library)
 
-<details><summary>Explore all 12 tasks and 13 recorded pairs</summary>
+<a id="quickstart"></a>
 
-The gallery also includes episodes where both controllers finish or both fall short. Open Drawer has two recordings with different disturbances. The runnable example below uses the contact-loss episode.
+## Quick start
 
-<table>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="Open Drawer" width="260"><br>Open Drawer</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="Fit Ring onto Peg" width="260"><br>Fit Ring onto Peg</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="Handover Item" width="260"><br>Handover Item</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="Stack Cups" width="260"><br>Stack Cups</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="Close Jar" width="260"><br>Close Jar</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="Hang Three Cups" width="260"><br>Hang Three Cups</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="Remove Two Cups" width="260"><br>Remove Two Cups</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="Press Two Buttons" width="260"><br>Press Two Buttons</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="Sweep into Dustpan" width="260"><br>Sweep into Dustpan</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="Lift Tray Together" width="260"><br>Lift Tray Together</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="Put Bottle in Fridge" width="260"><br>Put Bottle in Fridge</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="Sweep with Two Arms" width="260"><br>Sweep with Two Arms</a></td>
-  </tr>
-</table>
+With Git and Python 3, serve all 13 recorded comparisons from a local checkout.
 
-Open any of the [26 individual recordings](docs/media/) from the player. To run the gallery locally, use `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
+```bash
+git clone https://github.com/Yukun-Zheng/LiteTwin.git
+cd LiteTwin
+python3 -m http.server 8000 --directory docs
+```
 
-</details>
+Open `http://localhost:8000`. To build a policy on CPU and run a new Open Drawer episode in RLBench, continue below. Open Drawer is the runnable task included in this release.
 
 ## Run Open Drawer
 
@@ -84,6 +67,39 @@ The launcher uses the saved model, starts a seeded RLBench scene, induces a loss
 This trace comes from a fresh run of the packaged demo. Contact loss occurred at cycle **72**, recovery began at **78**, and the controller re-entered at **121**. RLBench reported success after **135 cycles**. The [cycle data](docs/figures/open-drawer-trace.csv) accompany the plot.
 
 Read downward at the same control cycle. The line gives the **commanded task-state reference**, the middle strip gives the **controller mode**, and the lower strip records the **physical relation**. At re-entry the controller can deliberately return to an earlier supported state. The horizontal axis counts control cycles. The videos use elapsed playback time.
+
+## Task gallery
+
+<details><summary>Explore all 12 tasks and 13 recorded pairs</summary>
+
+The gallery also includes episodes where both controllers finish or both fall short. Open Drawer has two recordings with different disturbances. The runnable example below uses the contact-loss episode.
+
+<table>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="Open Drawer" width="260"><br>Open Drawer</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="Fit Ring onto Peg" width="260"><br>Fit Ring onto Peg</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="Handover Item" width="260"><br>Handover Item</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="Stack Cups" width="260"><br>Stack Cups</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="Close Jar" width="260"><br>Close Jar</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="Hang Three Cups" width="260"><br>Hang Three Cups</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="Remove Two Cups" width="260"><br>Remove Two Cups</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="Press Two Buttons" width="260"><br>Press Two Buttons</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="Sweep into Dustpan" width="260"><br>Sweep into Dustpan</a></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="Lift Tray Together" width="260"><br>Lift Tray Together</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="Put Bottle in Fridge" width="260"><br>Put Bottle in Fridge</a></td>
+    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="Sweep with Two Arms" width="260"><br>Sweep with Two Arms</a></td>
+  </tr>
+</table>
+
+Open any of the [26 individual recordings](docs/media/) from the player. To run the gallery locally, use `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
+
+</details>
 
 ## Implementation
 

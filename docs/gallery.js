@@ -137,7 +137,8 @@ function refreshPlayer() {
                   : v.currentTime
                     ? t.paused
                     : t.ready;
-    if (labels[index].textContent !== status) labels[index].textContent = status;
+    if (labels[index].textContent !== status)
+      labels[index].textContent = status;
   });
 }
 function refreshTask() {
@@ -254,10 +255,19 @@ function refreshLanguage() {
   const trace = document.querySelector("#trace-image");
   trace.src = image;
   trace.alt = t.traceAlt;
+  const modelPlot = "figures/task-structure" + suffix + ".svg";
+  document.querySelector("#model-plot-link").href = modelPlot;
+  document.querySelector("#model-plot").src = modelPlot;
+  document.querySelector("#model-plot").alt = t.modelAlt;
   const guide =
     language === "en" ? "" : "/blob/main/README." + language + ".md";
   document.querySelector("#guide").href =
     "https://github.com/Yukun-Zheng/LiteTwin" + guide + "#run-open-drawer";
+  const repository = "https://github.com/Yukun-Zheng/LiteTwin";
+  document.querySelector("#panel-offline .guide-more").href =
+    repository + guide + "#run-open-drawer";
+  document.querySelector("#panel-online .guide-more").href =
+    repository + "/blob/main/demo/SETUP" + suffix + ".md";
   pairs.forEach((pair, i) => {
     const name = t.tasks[pair.task].name;
     picker.options[i].text = name;
@@ -526,8 +536,56 @@ document.addEventListener("keydown", (event) => {
     if (viewer.classList.contains("expanded")) setExpandedFallback(false);
   }
 });
+const guideTabs = [...document.querySelectorAll(".guide-tabs button")];
+function selectGuide(tab) {
+  guideTabs.forEach((item) => {
+    const selected = item === tab;
+    item.setAttribute("aria-selected", String(selected));
+    item.tabIndex = selected ? 0 : -1;
+    document.getElementById(item.getAttribute("aria-controls")).hidden =
+      !selected;
+  });
+}
+guideTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => selectGuide(tab));
+  tab.addEventListener("keydown", (event) => {
+    const targets = {
+      ArrowLeft: (index + guideTabs.length - 1) % guideTabs.length,
+      ArrowRight: (index + 1) % guideTabs.length,
+      Home: 0,
+      End: guideTabs.length - 1,
+    };
+    if (!Object.hasOwn(targets, event.key)) return;
+    event.preventDefault();
+    const next = guideTabs[targets[event.key]];
+    selectGuide(next);
+    next.focus();
+  });
+});
+document.querySelectorAll(".copy-commands").forEach((button) => {
+  let reset;
+  button.addEventListener("click", async () => {
+    clearTimeout(reset);
+    const code = button.closest(".command-box").querySelector("code");
+    const label = button.querySelector("[data-text]");
+    try {
+      await navigator.clipboard.writeText(code.textContent);
+      label.textContent = t.copied;
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      label.textContent = t.manualCopy;
+    }
+    reset = setTimeout(() => {
+      label.textContent = t.copyCommands;
+    }, 2400);
+  });
+});
 const sections = [
-  ...document.querySelectorAll("#comparisons, #library, #method"),
+  ...document.querySelectorAll("#comparisons, #method, #quickstart, #library"),
 ];
 function updateNavigation() {
   const edge = document.querySelector(".site-header").offsetHeight + 40;
