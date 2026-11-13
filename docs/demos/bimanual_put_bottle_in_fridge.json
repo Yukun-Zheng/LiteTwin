@@ -1,0 +1,146 @@
+[
+  {
+    "task": "bimanual_put_bottle_in_fridge",
+    "episode": 7,
+    "language": "en",
+    "fps": 20.0,
+    "duration": 35.85,
+    "source": {
+      "open_loop": {
+        "path": "../recordings/bimanual_put_bottle_in_fridge/open_loop.mp4",
+        "sha256": "714becff13fdad42233c0d84cfbd5c3a14572b997889e7132d2023f0d0d7119c",
+        "frames": 624,
+        "outcome": "failure"
+      },
+      "litetwin": {
+        "path": "../recordings/bimanual_put_bottle_in_fridge/litetwin.mp4",
+        "sha256": "6f2ad4c79bc130ea80bdf9f40e980d0df36c31a9a693eee1d3ab4dadf62b5995",
+        "frames": 657,
+        "outcome": "success"
+      }
+    },
+    "presentation": {
+      "all_source_frames_in_order": true,
+      "side_alignment": "shared playback time",
+      "high_resolution_physics_capture": true,
+      "shorter_side": "terminal frame held",
+      "result_hold_seconds": 3,
+      "result_view": "crop of recorded terminal frame with alternate camera inset"
+    },
+    "files": {
+      "bimanual_put_bottle_in_fridge.en.mp4": "d55a723258d464403cdbdf3e5f98e067450209414c5406271588d3a1793bb808",
+      "bimanual_put_bottle_in_fridge.en.webp": "e539d70ba1c603d6e47a8923cc50e977beb6ff56c8e5b54804d2fde2af5ea9f7",
+      "bimanual_put_bottle_in_fridge.en.jpg": "c19ad81f51f9a109e93be393b7634f9a6d73224b29c6864edd5dbd578afd2e24"
+    },
+    "preview": {
+      "movie_sha256": "d55a723258d464403cdbdf3e5f98e067450209414c5406271588d3a1793bb808",
+      "preview_sha256": "e539d70ba1c603d6e47a8923cc50e977beb6ff56c8e5b54804d2fde2af5ea9f7",
+      "fps": 12,
+      "frames": 430,
+      "duration_ms": 35833,
+      "width": 840,
+      "height": 568
+    },
+    "recording_kind": "verified_high_resolution_capture",
+    "native_resolution_per_camera": [
+      640,
+      480
+    ]
+  },
+  {
+    "task": "bimanual_put_bottle_in_fridge",
+    "episode": 7,
+    "language": "zh-Hans",
+    "fps": 20.0,
+    "duration": 35.85,
+    "source": {
+      "open_loop": {
+        "path": "../recordings/bimanual_put_bottle_in_fridge/open_loop.mp4",
+        "sha256": "714becff13fdad42233c0d84cfbd5c3a14572b997889e7132d2023f0d0d7119c",
+        "frames": 624,
+        "outcome": "failure"
+      },
+      "litetwin": {
+        "path": "../recordings/bimanual_put_bottle_in_fridge/litetwin.mp4",
+        "sha256": "6f2ad4c79bc130ea80bdf9f40e980d0df36c31a9a693eee1d3ab4dadf62b5995",
+        "frames": 657,
+        "outcome": "success"
+      }
+    },
+    "presentation": {
+      "all_source_frames_in_order": true,
+      "side_alignment": "shared playback time",
+      "high_resolution_physics_capture": true,
+      "shorter_side": "terminal frame held",
+      "result_hold_seconds": 3,
+      "result_view": "crop of recorded terminal frame with alternate camera inset"
+    },
+    "files": {
+      "bimanual_put_bottle_in_fridge.zh-Hans.mp4": "9803ec44e58739bba9bcd69727a7bad4b0495045c50ade5dbc904f7bdf1cf6d4",
+      "bimanual_put_bottle_in_fridge.zh-Hans.webp": "c08968c25f93fda646a907d9ce8142c24b6ce0460486e288d80913eae6a979d1",
+      "bimanual_put_bottle_in_fridge.zh-Hans.jpg": "77ec7b5375b5d7422e9547e6ced6fcd5f039931aad9a60e4b434a8c7d5db9eb7"
+    },
+    "preview": {
+      "movie_sha256": "9803ec44e58739bba9bcd69727a7bad4b0495045c50ade5dbc904f7bdf1cf6d4",
+      "preview_sha256": "c08968c25f93fda646a907d9ce8142c24b6ce0460486e288d80913eae6a979d1",
+      "fps": 12,
+      "frames": 430,
+      "duration_ms": 35833,
+      "width": 840,
+      "height": 568
+    },
+    "recording_kind": "verified_high_resolution_capture",
+    "native_resolution_per_camera": [
+      640,
+      480
+    ]
+  },
+  {
+    "task": "bimanual_put_bottle_in_fridge",
+    "episode": 7,
+    "language": "zh-Hant",
+    "fps": 20.0,
+    "duration": 35.85,
+    "source": {
+      "open_loop": {
+        "path": "../recordings/bimanual_put_bottle_in_fridge/open_loop.mp4",
+        "sha256": "714becff13fdad42233c0d84cfbd5c3a14572b997889e7132d2023f0d0d7119c",
+        "frames": 624,
+        "outcome": "failure"
+      },
+      "litetwin": {
+        "path": "../recordings/bimanual_put_bottle_in_fridge/litetwin.mp4",
+        "sha256": "6f2ad4c79bc130ea80bdf9f40e980d0df36c31a9a693eee1d3ab4dadf62b5995",
+        "frames": 657,
+        "outcome": "success"
+      }
+    },
+    "presentation": {
+      "all_source_frames_in_order": true,
+      "side_alignment": "shared playback time",
+      "high_resolution_physics_capture": true,
+      "shorter_side": "terminal frame held",
+      "result_hold_seconds": 3,
+      "result_view": "crop of recorded terminal frame with alternate camera inset"
+    },
+    "files": {
+      "bimanual_put_bottle_in_fridge.zh-Hant.mp4": "bc82878a35692bf0f4806c4c5d615a0289bf70e67b24b38c9daca880afe60aad",
+      "bimanual_put_bottle_in_fridge.zh-Hant.webp": "bf87b602e9be81d4c186cdb02d69a96382b5b955ee122b82f7f6874cef14e6bd",
+      "bimanual_put_bottle_in_fridge.zh-Hant.jpg": "8258f5438c8ba315b474f31d3b0dec9bd2f44c0a4ec45c307c1a5ccc3288f3e3"
+    },
+    "preview": {
+      "movie_sha256": "bc82878a35692bf0f4806c4c5d615a0289bf70e67b24b38c9daca880afe60aad",
+      "preview_sha256": "bf87b602e9be81d4c186cdb02d69a96382b5b955ee122b82f7f6874cef14e6bd",
+      "fps": 12,
+      "frames": 430,
+      "duration_ms": 35833,
+      "width": 840,
+      "height": 568
+    },
+    "recording_kind": "verified_high_resolution_capture",
+    "native_resolution_per_camera": [
+      640,
+      480
+    ]
+  }
+]

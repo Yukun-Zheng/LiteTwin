@@ -619,7 +619,7 @@ def task_parameter_score_details(
         ]
         raise RuntimeError(
             f"Eq. (6) time steps {missing_times} have no candidates available under "
-            "Eq. (5); the paper does not define an empty-denominator fallback"
+            "Eq. (5); an empty-denominator fallback is undefined"
         )
 
     log_precision = -log_determinants
@@ -786,7 +786,7 @@ def _eq6_skill_selection(
     details["selected_by_eq6"] = selected_by_eq6.copy()
     details["empty_selection_policy"] = empty_selection
     details["empty_selection_policy_source_status"] = (
-        "PAPER_EQ6_STRICT_THRESHOLD_FAIL_CLOSED"
+        "REFERENCE_EQ6_STRICT_THRESHOLD_FAIL_CLOSED"
         if empty_selection == "error"
         else "LOCAL_INFERENCE"
     )
@@ -1213,9 +1213,9 @@ class DynaMACConfig:
         "dbscan",
     ] = "none"
     preliminary_analysis: Literal[
-        "paper_order_pooled",
+        "pooled",
         "precluster_all_real_frame_product_mode_conditioned",
-    ] = "paper_order_pooled"
+    ] = "pooled"
     maximum_modes: int = 8
     minimum_mode_size: int = 2
     clustering_length: int = 20
@@ -1375,7 +1375,7 @@ class DynaMACConfig:
         }:
             raise ValueError("Unknown modal_partition_method")
         if self.preliminary_analysis not in {
-            "paper_order_pooled",
+            "pooled",
             "precluster_all_real_frame_product_mode_conditioned",
         }:
             raise ValueError("Unknown preliminary_analysis")
@@ -2377,7 +2377,7 @@ def _modal_partition_audit(
     audit: dict[str, Any] = {
         "method": config.modal_partition_method,
         "partition_performed": config.modal_partition_method != "none",
-        "paper_workflow": "unimodal DiGaP; no modal partition for reported tasks",
+        "workflow": "unimodal DiGaP; no modal partition for these tasks",
         "automatic_fallback": False,
         "resampled_pose_product": trajectories.copy(),
         "global_euclidean_product": (
@@ -2590,7 +2590,7 @@ class DynaMAC:
             "audit_schema_version": 1,
             "model_schema_version": MODEL_SCHEMA_VERSION,
             "semantics_id": self.selection_semantics_id,
-            "paper_scope": "DynaMAC Algorithm 1 + MiDiGaP + TAPAS skill inputs",
+            "scope": "DynaMAC Algorithm 1 + MiDiGaP + TAPAS skill inputs",
             "policy_feedback": False,
             "frame_names": frame_names,
             "skill_sequence": skill_sequence,
@@ -2685,7 +2685,7 @@ class DynaMAC:
                 "kinematic_links": {},
             }
             link_diagnostics: dict[str, dict[str, Any]] = {}
-            if self.config.preliminary_analysis == "paper_order_pooled":
+            if self.config.preliminary_analysis == "pooled":
 
                 pooled_availability = {
                     name: np.ones(duration, dtype=bool) for name in candidate_frames
@@ -2751,7 +2751,7 @@ class DynaMAC:
                             if self.config.link_mask_scope == "skill_majority"
                             else None
                         ),
-                        "scope": "paper_order_pooled_preliminary_digap",
+                        "scope": "pooled_preliminary_digap",
                         "per_mode": [],
                     }
                     sign_covariance, logdet_covariance = np.linalg.slogdet(covariance)
@@ -2811,9 +2811,9 @@ class DynaMAC:
                             "METHOD_ABLATION_EQ5_DISABLED"
                             if not self.config.kinematic_analysis_enabled
                             else (
-                                "PAPER_EQ5_EXACT"
+                                "REFERENCE_EQ5_EXACT"
                                 if self.config.link_filter == "none"
-                                else "PAPER_ALLOWED_NUMERICS_INFERRED"
+                                else "ALLOWED_NUMERICS_INFERRED"
                             )
                         ),
                     }
@@ -2861,7 +2861,7 @@ class DynaMAC:
                     "eq6_covariance_scope_source_status": (
                         "CONFIGURED_EQ5_WEIGHTED_SUBSPACE"
                         if self.config.eq6_covariance_scope == "eq5_weighted_subspace"
-                        else "PAPER_EQ6_FULL_POSE"
+                        else "REFERENCE_EQ6_FULL_POSE"
                     ),
                     "eq5_availability": {
                         name: mask.copy() for name, mask in pooled_availability.items()
@@ -3155,7 +3155,7 @@ class DynaMAC:
                     "eq6_covariance_scope_source_status": (
                         "CONFIGURED_EQ5_WEIGHTED_SUBSPACE"
                         if self.config.eq6_covariance_scope == "eq5_weighted_subspace"
-                        else "PAPER_EQ6_FULL_POSE"
+                        else "REFERENCE_EQ6_FULL_POSE"
                     ),
                     "eq5_availability": {
                         name: mask.copy() for name, mask in eq5_availability.items()
@@ -3249,7 +3249,7 @@ class DynaMAC:
                 ]
                 raise RuntimeError(
                     f"skill {label} selected task parameters are all linked at "
-                    f"[mode, time] {missing_mode_times}; the DynaMAC paper does not "
+                    f"[mode, time] {missing_mode_times}; DynaMAC does not "
                     "define a no-expert fallback"
                 )
 

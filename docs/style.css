@@ -2,7 +2,7 @@
   --ink: #172222;
   --quiet: #53635f;
   --line: #d6dfd8;
-  --paper: #fbfcf9;
+  --page: #fbfcf9;
   --soft: #edf1e9;
   --night: #101719;
   --deck: #151e20;
@@ -13,7 +13,7 @@
     Inter, "Helvetica Neue", Arial, "PingFang SC", "PingFang TC",
     "Microsoft YaHei", sans-serif;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--page);
   font-synthesis: none;
 }
 *,
@@ -806,7 +806,7 @@ h3 {
   display: block;
   position: relative;
   overflow: hidden;
-  background: var(--paper);
+  background: var(--page);
   border: 1px solid #cfd8ce;
   border-radius: 9px;
   text-align: left;
@@ -1495,7 +1495,7 @@ h1 {
   border-top: 1px solid var(--line);
 }
 #library {
-  background: var(--paper);
+  background: var(--page);
 }
 @media (min-width: 761px) and (max-width: 1020px) {
   .bar {
@@ -1604,7 +1604,7 @@ h1 {
 }
 .film-caption {
   margin: 0 0 10px;
-  color: var(--paper);
+  color: var(--page);
   font-size: 17px;
 }
 #film-state {

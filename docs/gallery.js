@@ -25,7 +25,7 @@ const filterNames = [
   "environment_change",
 ];
 let filter = "all";
-let frontOnly = true;
+let frontOnly = false;
 let startWhenReady = null;
 const film = document.getElementById("overview-film");
 const filmChapters = [
@@ -180,7 +180,7 @@ function refreshTask() {
     jump.querySelector("span").textContent =
       t.jump + " " + formatTime(highlight.jump);
     document.querySelector("#annotated").href =
-      "highlights/" + current.task + "." + language + ".mp4";
+      "demos/" + current.task + "." + language + ".mp4";
   }
   document.querySelector("#position").textContent =
     index + 1 + " / " + pairs.length;
@@ -271,7 +271,7 @@ function refreshLanguage() {
   document.querySelector("#guide").href =
     "https://github.com/Yukun-Zheng/LiteTwin" + guide + "#run-open-drawer";
   const repository = "https://github.com/Yukun-Zheng/LiteTwin";
-  document.getElementById("film-guide").href = repository + guide + "#film";
+  document.getElementById("film-guide").href = repository + guide + "#demos";
   document.querySelector("#panel-offline .guide-more").href =
     repository + guide + "#run-open-drawer";
   document.querySelector("#panel-online .guide-more").href =
@@ -369,7 +369,7 @@ function showPair() {
   const pair = matched || current || pairs[0];
   if (!pair || current === pair) return;
   current = pair;
-  frontOnly = Boolean(pair.highlight);
+  frontOnly = false;
   if (startWhenReady && pair.task !== startWhenReady) startWhenReady = null;
   if (matched) film.pause();
   if (matched) viewer.scrollIntoView({ block: "start" });

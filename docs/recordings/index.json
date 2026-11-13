@@ -1,0 +1,593 @@
+{
+  "capture": "physics-step RGB, stride 2, 640×480 per camera, played at 2× speed",
+  "pairs": [
+    {
+      "task": "bimanual_lift_tray",
+      "episode": 11,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/bimanual_lift_tray/open_loop.mp4",
+          "source_capture_sha256": "df65dfda2f762591a0743d20d89f67b8c3156d33e173a53fad0f340f9fdd0c37",
+          "public_sha256": "836d03447a156eeeb6c85246cdc9f2899940a90e786f8b37ed0da90d51f25677",
+          "frames": 280,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "bimanual_lift_tray/11",
+          "seed": 2750700011,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/bimanual_lift_tray/litetwin.mp4",
+          "source_capture_sha256": "f307c38fd1ce59cab2b445345f8b65f104f65320478a66f0be4b0f91ff8069ad",
+          "public_sha256": "c88e332287089766ad86d266917b722a938133fd2dc5bb025d176b22518f7385",
+          "frames": 268,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "bimanual_lift_tray/11",
+          "seed": 2750700011,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "open_drawer_delay",
+      "episode": 8,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/open_drawer_delay/open_loop.mp4",
+          "source_capture_sha256": "d887c82e9e37ebac6c467b0ea50bd90573d9a12fde9f04b28ba80c56eea39aab",
+          "public_sha256": "2c2487aa5cc04855530cce0fd6f392fac820ee4b22a88677683f24c4f8575eff",
+          "frames": 507,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "open_drawer_delay/8",
+          "seed": 2750100008,
+          "variation": 2
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/open_drawer_delay/litetwin.mp4",
+          "source_capture_sha256": "dc600c2ee473c421db3d1f303e5037fd9aac5ef01f7b423ac530e30ee8fa9d57",
+          "public_sha256": "e154e0d6ab821353ac78bc4f312ca3e3ea918572eed59b37c3633e086f72042b",
+          "frames": 449,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "open_drawer_delay/8",
+          "seed": 2750100008,
+          "variation": 2
+        }
+      }
+    },
+    {
+      "task": "close_jar",
+      "episode": 1,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/close_jar/open_loop.mp4",
+          "source_capture_sha256": "8a1709d9f97e42ea8d0a6f8544ee2245582cd159b6daf13d5d1640c7e661aa9c",
+          "public_sha256": "0f141b028d7418216be2282946a0286b456ece07e3272bfb7b19a69808d1b110",
+          "frames": 346,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "close_jar/1",
+          "seed": 2750000001,
+          "variation": 1
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/close_jar/litetwin.mp4",
+          "source_capture_sha256": "0df11a5db751059426fbf2c8dddb77cdda21f4533678e4d482a44f4d1406f147",
+          "public_sha256": "9752aee3bfc10c481b4aa171ca90936588d0513cf083204ae696e024bacc76fe",
+          "frames": 460,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "close_jar/1",
+          "seed": 2750000001,
+          "variation": 1
+        }
+      }
+    },
+    {
+      "task": "open_drawer",
+      "episode": 2,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/open_drawer/open_loop.mp4",
+          "source_capture_sha256": "228021ca47d4a9dd0dbf02fdbbe096d242ca8182607e70deff1e72448b181bec",
+          "public_sha256": "bdcafc116a9f238ab2708fcb5439334d1a2546ce39b915baaf258a5ec3c4cbc7",
+          "frames": 198,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "open_drawer/2",
+          "seed": null,
+          "variation": null
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/open_drawer/litetwin.mp4",
+          "source_capture_sha256": "18948a5c57ebdc930a9cb471c9f7f045ce81daf3d433f556f10889137b390964",
+          "public_sha256": "d46d2b76bb31cff2487b32cecc54a119ac9ce4a80422af8cc44d46b469cd66c8",
+          "frames": 252,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "open_drawer/2",
+          "seed": null,
+          "variation": null
+        }
+      }
+    },
+    {
+      "task": "insert_square_peg",
+      "episode": 5,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/insert_square_peg/open_loop.mp4",
+          "source_capture_sha256": "62c09fb5351606439dbbf1e8e8eb0e17f32ba2296ff7486b53f94b66b3a18a77",
+          "public_sha256": "73684168c916620ba7ad5189a7dacf12cb1cad0c8da8127c096cfc5b399e9ce7",
+          "frames": 444,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "insert_square_peg/5",
+          "seed": null,
+          "variation": null
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/insert_square_peg/litetwin.mp4",
+          "source_capture_sha256": "b3e12ddce5666dc020f93b02d0ac637dd7ddaac8f0f4e2a54ff8b868eb250b8e",
+          "public_sha256": "d642febe82c2a79bf75ba23bf25f7964c7d10109e6b19caaca044f3eb12ae8ec",
+          "frames": 499,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "insert_square_peg/5",
+          "seed": null,
+          "variation": null
+        }
+      }
+    },
+    {
+      "task": "handover_item",
+      "episode": 26,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/handover_item/open_loop.mp4",
+          "source_capture_sha256": "293b113317bdb37914ec53fc0070d459f2cad27c9158530c1f1d29949ccd7997",
+          "public_sha256": "d8972e6594f209068806e41be43bd967db44af611833914a21930155f2a13b2b",
+          "frames": 537,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "handover_item/26",
+          "seed": null,
+          "variation": null
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/handover_item/litetwin.mp4",
+          "source_capture_sha256": "68d9dbde9894e9a6746ba1413ac53f2178b6da3e8bfb630a19f09d1e0490b4ee",
+          "public_sha256": "79062b562869379f17ac26ae198c8e60542e40993f4ab37d75bf153b7dfe68dc",
+          "frames": 612,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "handover_item/26",
+          "seed": null,
+          "variation": null
+        }
+      }
+    },
+    {
+      "task": "place_cups_3",
+      "episode": 28,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/place_cups_3/open_loop.mp4",
+          "source_capture_sha256": "ab0ded7dac62fc8654b49f5898090c175c25ffa4a3224a5468ad945a02931c8e",
+          "public_sha256": "52a96eee1ea420a23dbdbc92a621aff957120d2f2a5f4d8cd0d9ad939e67b91b",
+          "frames": 1740,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "place_cups_3/28",
+          "seed": 2750300028,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/place_cups_3/litetwin.mp4",
+          "source_capture_sha256": "56e8e88c305c1472e07211426539fb584a2d6f54b78b24ac40911baf0c94e253",
+          "public_sha256": "58b107ec021ea3346d2b0f8e6acded2f16ee45c5b8aa00932b8f8ea168cedafb",
+          "frames": 1634,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "place_cups_3/28",
+          "seed": 2750300028,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "remove_cups_2",
+      "episode": 67,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/remove_cups_2/open_loop.mp4",
+          "source_capture_sha256": "017006b326d6b91c16d8a0617b0467ffd8f2fc7ec5a3503211767bd77b59a7f0",
+          "public_sha256": "eb306db1785c0c8951f4badbc47575223d8db9a769cb7b179fa00bb9acc03665",
+          "frames": 1158,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "remove_cups_2/67",
+          "seed": 2764400067,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/remove_cups_2/litetwin.mp4",
+          "source_capture_sha256": "a31e65f2d31c0743ba1dc8e8ec636475796638f165acb4a96eb7ade8b050d989",
+          "public_sha256": "cd9c2b6a5e4091fff273604de4e125699d12a8543c2257da63e80587d83e4c99",
+          "frames": 820,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "remove_cups_2/67",
+          "seed": 2764400067,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "push_buttons_2",
+      "episode": 0,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/push_buttons_2/open_loop.mp4",
+          "source_capture_sha256": "858355c08e0c171cab6d4cce7f26fe757181d3a35800308771daad9684daf3a2",
+          "public_sha256": "162a2583a2254fd4dae219aa79d5ed3576b661a2dcf0534b62fc9e5cc4f3b920",
+          "frames": 189,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "push_buttons_2/0",
+          "seed": 2764600000,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "fresh_simulation",
+          "raw_file": "../recordings/push_buttons_2/litetwin.mp4",
+          "source_capture_sha256": "b26a4d73c2ae88f8a06827bd19fabff0f50398a43f69546c7d8c64a5cf2ff328",
+          "public_sha256": "43dee1002c3208f62cf6e0a9923af9d7f99c9c28f5a020a3d11ee70dc662b152",
+          "frames": 183,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "push_buttons_2/0",
+          "seed": 2764600000,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "sweep_to_dustpan",
+      "episode": 2,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/sweep_to_dustpan/open_loop.mp4",
+          "source_capture_sha256": "28d4454b49ea7a52bd9e8322df3c42ed1855208da361b8f1d78c765e22a149f4",
+          "public_sha256": "37577672562f98eebe73a077f816b37e24f9ff966bd2b66676f64e7093369d66",
+          "frames": 224,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "sweep_to_dustpan/2",
+          "seed": 2750500002,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/sweep_to_dustpan/litetwin.mp4",
+          "source_capture_sha256": "eb44d94fc8140da1838975d650db7894bf8e8b0617cec4d6622ec41d22013db7",
+          "public_sha256": "1576f80f1a457d33f1e6e9aa9242c0dfa36c8bb0718e96404600498b9d74ea1f",
+          "frames": 640,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "sweep_to_dustpan/2",
+          "seed": 2750500002,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "bimanual_put_bottle_in_fridge",
+      "episode": 7,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/bimanual_put_bottle_in_fridge/open_loop.mp4",
+          "source_capture_sha256": "535b00c06f02f02aa6ca5fa63faaa0f73fa32f86592f54061f6d8da494c7b76b",
+          "public_sha256": "714becff13fdad42233c0d84cfbd5c3a14572b997889e7132d2023f0d0d7119c",
+          "frames": 624,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "bimanual_put_bottle_in_fridge/7",
+          "seed": 2750900007,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/bimanual_put_bottle_in_fridge/litetwin.mp4",
+          "source_capture_sha256": "d5ee2dd852c08e10e67a74631c1090c603420811f698dcedb37f169a3b3bcc56",
+          "public_sha256": "6f2ad4c79bc130ea80bdf9f40e980d0df36c31a9a693eee1d3ab4dadf62b5995",
+          "frames": 657,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "bimanual_put_bottle_in_fridge/7",
+          "seed": 2750900007,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "bimanual_sweep_to_dustpan",
+      "episode": 1,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/bimanual_sweep_to_dustpan/open_loop.mp4",
+          "source_capture_sha256": "76f233b67d3d54722d4390d6ca0bfb410bd42aeee28cfeeb8990c1256cae409d",
+          "public_sha256": "13349181795087a7b9c77f3c6759ed6dc55519377dec44d173272f07d94a690c",
+          "frames": 286,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "bimanual_sweep_to_dustpan/1",
+          "seed": 2750800001,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/bimanual_sweep_to_dustpan/litetwin.mp4",
+          "source_capture_sha256": "5875caa3a30f59149cb9cd29c8d12551bcbffb8ebb0941ce8df9fe48ac89fafd",
+          "public_sha256": "e5677be6728df6242550dee6a2ad82f08d2dd2eeba4c93c2659b1df7bff93874",
+          "frames": 296,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "bimanual_sweep_to_dustpan/1",
+          "seed": 2750800001,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "sweep_to_dustpan_recovery",
+      "episode": 1,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/sweep_to_dustpan_recovery/open_loop.mp4",
+          "source_capture_sha256": "067c5b398a400f1f575e43cc54abb86f8c63d90dd18f530d0931379e5256c0d9",
+          "public_sha256": "be5298cdfa99932a1e32ff8788e2735941cd2c47d4154edb917247a45fc4fb92",
+          "frames": 198,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "sweep_to_dustpan_recovery/1",
+          "seed": 2750500001,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/sweep_to_dustpan_recovery/litetwin.mp4",
+          "source_capture_sha256": "bdc662a55d766e3382f03518df2c86932fabdb1d9dcec02e38d74732b3316ed8",
+          "public_sha256": "ca4479a74eb8e27f3e795d2c9440eec29563eacea61d9db0438f1266b4cdf033",
+          "frames": 234,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "sweep_to_dustpan_recovery/1",
+          "seed": 2750500001,
+          "variation": 0
+        }
+      }
+    },
+    {
+      "task": "push_buttons_3",
+      "episode": 0,
+      "views": {
+        "open_loop": {
+          "source_kind": "verified_replay",
+          "raw_file": "../recordings/push_buttons_3/open_loop.mp4",
+          "source_capture_sha256": "52f5006691c087a649de4f5abc5a3cd72f53996a04fd93882fbbf9a6aad4e459",
+          "public_sha256": "c0112844f19cf9fb9a4f7c4b776d4e6dd2042ce8c1c8866a6b4ec3f3a6c2efca",
+          "frames": 728,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "failure",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "push_buttons_3/0",
+          "seed": 2764700000,
+          "variation": 0
+        },
+        "litetwin": {
+          "source_kind": "fresh_simulation",
+          "raw_file": "../recordings/push_buttons_3/litetwin.mp4",
+          "source_capture_sha256": "be854c163fcaed7612b80051e05c8001a8524990175ab47e529945824037f1b4",
+          "public_sha256": "0c1d80a5abf4d796ebd4d88800c820df4e22893825456b4c29e3ebbf9f962522",
+          "frames": 216,
+          "fps": 20,
+          "resolution_per_camera": [
+            640,
+            480
+          ],
+          "outcome": "success",
+          "recorded_goal_verified": true,
+          "identity_and_disturbance_verified": true,
+          "episode_id": "push_buttons_3/0",
+          "seed": 2764700000,
+          "variation": 0
+        }
+      }
+    }
+  ]
+}

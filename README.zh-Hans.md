@@ -1,46 +1,155 @@
-# LiteTwin
+<p align="center"><a href="README.md">English</a> &nbsp; · &nbsp; <b>简体中文</b> &nbsp; · &nbsp; <a href="README.zh-Hant.md">繁體中文</a></p>
 
-[English](README.md) · **简体中文** · [繁體中文](README.zh-Hant.md)
+<p align="center"><img src="docs/figures/masthead.zh-Hans.jpg" alt="LiteTwin — 面向机器人操作的任务状态反馈" width="100%"></p>
 
-**面向机器人操作的任务状态反馈**
+<p align="center"><a href="#demos">观看演示</a> &nbsp; · &nbsp; <a href="#how-it-works">工作原理</a> &nbsp; · &nbsp; <a href="#quickstart">快速开始</a> &nbsp; · &nbsp; <a href="#code">代码</a> &nbsp; · &nbsp; <a href="#license">许可证</a></p>
 
-LiteTwin 在冻结的运动策略上跟踪任务进度和夹爪与物体的接触关系。当机械臂沿轨迹前进、物体却留在原地时，控制器可以暂停推进，恢复接触，再继续执行任务。
+LiteTwin 在冻结的运动策略上跟踪任务进度及夹爪与物体的接触关系。接触丢失时，它可以保持运动参考、恢复交互，再从受支持的任务状态继续执行。
 
-[交互演示](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans) · [快速开始](#quickstart) · [策略 API](code/litetwin/policy/feedback/README.md) · [MIT 许可证](LICENSE)
+<a id="demos"></a>
 
-<a id="film"></a>
+## 让物体真正到达任务目标
 
-## 项目短片 · 40 秒
+以下为精选 RLBench 仿真回合。每组两侧使用相同的初始场景和扰动，结果标注以当前回合的仿真器任务条件为准。
 
-[![这段预览节选自三组 RLBench 仿真录像。完整短片中，两侧经历相同的扰动，依次观察托盘、抽屉和罐盖。](docs/film/zh-Hans.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#film)
+### 双臂抬托盘
 
-这段预览节选自三组 RLBench 仿真录像。完整短片中，两侧经历相同的扰动，依次观察托盘、抽屉和罐盖。
+保持方块在托盘内，双臂共同抬起。
 
-[**播放完整短片 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#film) · [单独打开 MP4](https://yukun-zheng.github.io/LiteTwin/film/zh-Hans.mp4)
+![双臂抬托盘](docs/demos/bimanual_lift_tray.zh-Hans.webp)
 
-| 章节 | 观察要点 |
-| --- | --- |
-| [0:00 · 抬托盘](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#film-tray) | 一条机械臂先抬起，观察方块是否随托盘升高。 |
-| [0:12 · 开抽屉](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#film-drawer) | 夹爪移开时，最上层抽屉有没有跟着移动？ |
-| [0:22 · 盖罐盖](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#film-jar) | 首次抓取落空后，跟着灰盖看它是否到达红色罐口。 |
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/bimanual_lift_tray.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/bimanual_lift_tray/) &nbsp; · &nbsp; [JSON](docs/demos/bimanual_lift_tray.json)
 
-点击时间码进入网站的对应章节，再点「查看本章完整双侧回放」即可检查原录像和俯视机位。较短的一侧结束后停在最后一帧。
+### 打开抽屉 · 动作延迟
 
-[并排查看三组结果图](docs/figures/rollout-comparison.zh-Hans.jpg) · [任务库](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#library)
+动作延迟后，仍将最上层抽屉拉开。
+
+![打开抽屉 · 动作延迟](docs/demos/open_drawer_delay.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/open_drawer_delay.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/open_drawer_delay/) &nbsp; · &nbsp; [JSON](docs/demos/open_drawer_delay.json)
+
+### 抓回罐盖并送至罐口
+
+首次抓取落空后，将灰盖送到红色罐口。
+
+![盖上罐盖](docs/demos/close_jar.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/close_jar.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/close_jar/) &nbsp; · &nbsp; [JSON](docs/demos/close_jar.json)
+
+每段动图保留完整记录动作，结尾用三秒展示记录终帧的物体局部。较短的一侧停在其最后一帧。完整 MP4 保留原始录像帧率。
+
+## 更多多阶段任务
+
+### 挂起三个杯子
+
+将三个杯子依次挂到杯架上。
+
+![挂起三个杯子](docs/demos/place_cups_3.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/place_cups_3.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/place_cups_3/) &nbsp; · &nbsp; [JSON](docs/demos/place_cups_3.json)
+
+### 依次按下三个按钮
+
+克服动作延迟，依次按下三个按钮。
+
+![依次按下三个按钮](docs/demos/push_buttons_3.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/push_buttons_3.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/push_buttons_3/) &nbsp; · &nbsp; [JSON](docs/demos/push_buttons_3.json)
+
+### 把瓶子放进冰箱
+
+双臂配合开门，将绿色瓶子放入冰箱。
+
+![把瓶子放进冰箱](docs/demos/bimanual_put_bottle_in_fridge.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/bimanual_put_bottle_in_fridge.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/bimanual_put_bottle_in_fridge/) &nbsp; · &nbsp; [JSON](docs/demos/bimanual_put_bottle_in_fridge.json)
+
+<details>
+<summary><b>展开另外七组恢复演示</b></summary>
+
+### 双臂交接物体
+
+双臂交接绿色方块。
+
+![双臂交接物体](docs/demos/handover_item.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/handover_item.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/handover_item/) &nbsp; · &nbsp; [JSON](docs/demos/handover_item.json)
+
+### 方环套柱
+
+抓起蓝色方环并套到目标柱上。
+
+![方环套柱](docs/demos/insert_square_peg.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/insert_square_peg.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/insert_square_peg/) &nbsp; · &nbsp; [JSON](docs/demos/insert_square_peg.json)
+
+### 叠放杯子
+
+将三个杯子依次叠放。
+
+![叠放杯子](docs/demos/stack_cups.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/stack_cups.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/media/stack_cups/) &nbsp; · &nbsp; [JSON](docs/demos/stack_cups.json)
+
+### 取下两个杯子
+
+场景变化后，将两个杯子从杯架取下。
+
+![取下两个杯子](docs/demos/remove_cups_2.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/remove_cups_2.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/remove_cups_2/) &nbsp; · &nbsp; [JSON](docs/demos/remove_cups_2.json)
+
+### 将碎屑扫入簸箕
+
+恢复扫把抓取，将碎屑扫入簸箕。
+
+![将碎屑扫入簸箕](docs/demos/sweep_to_dustpan_recovery.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/sweep_to_dustpan_recovery.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/sweep_to_dustpan_recovery/) &nbsp; · &nbsp; [JSON](docs/demos/sweep_to_dustpan_recovery.json)
+
+### 双臂配合清扫
+
+恢复扫把抓取，将碎屑扫入簸箕。
+
+![双臂配合清扫](docs/demos/bimanual_sweep_to_dustpan.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/bimanual_sweep_to_dustpan.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/bimanual_sweep_to_dustpan/) &nbsp; · &nbsp; [JSON](docs/demos/bimanual_sweep_to_dustpan.json)
+
+### 打开抽屉
+
+接触丢失后，重新拉动抽屉至目标位置。
+
+![打开抽屉](docs/demos/open_drawer.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/open_drawer.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/open_drawer/) &nbsp; · &nbsp; [JSON](docs/demos/open_drawer.json)
+
+</details>
+
+<a id="how-it-works"></a>
+
+## LiteTwin 如何工作
+
+<table>
+<tr><td width="33%" valign="top"><b>跟踪任务状态</b><br><br>从观测中估计任务进度和接触关系。</td><td width="33%" valign="top"><b>检查实际交互</b><br><br>预期交互尚未建立时，保持运动参考。</td><td width="33%" valign="top"><b>恢复后继续执行</b><br><br>重新建立接触，从受支持的状态重入任务。</td></tr>
+</table>
 
 <a id="quickstart"></a>
 
-## 快速开始
+## 本地复现
 
-本机装有 Git 和 Python 3 即可浏览全部 13 组配对录像。
+安装策略环境，使用内附的五条开抽屉演示轨迹构建任务模型。
 
 ```bash
 git clone https://github.com/Yukun-Zheng/LiteTwin.git
 cd LiteTwin
-python3 -m http.server 8000 --directory docs
+conda env create -f demo/environment-policy.yml
+conda activate litetwin-policy
+python -m pip install -e ./code
+bash demo/run_offline.sh
 ```
 
-打开 `http://localhost:8000`。要从演示轨迹构建模型，并在 RLBench 中运行新的开抽屉回合，请继续阅读下方步骤。本次发布附带的可复现任务为打开抽屉。
+<details>
+<summary><b>快速开始 · Open Drawer / RLBench</b></summary>
 
 <a id="run-open-drawer"></a>
 
@@ -76,42 +185,53 @@ bash demo/run_online.sh open_drawer
 
 一次复跑中，第 **72** 个控制周期发生接触丢失，第 **78** 个周期开始恢复，第 **121** 个周期重新进入受支持的任务状态，**135** 个周期后仿真器报告成功。上方曲线是指令给出的任务状态参考，中间色带是控制器模式，下方色带是观测到的物理接触。水平线表示进度保持。横轴以控制周期计，视频以播放时间计。[逐周期数据](docs/figures/open-drawer-trace.csv)
 
-## 任务库
-
-<details><summary>展开全部 12 项任务、13 组配对录像</summary>
-
-演示库也保留了双方都完成、双方都未完成的回合。打开抽屉有两组录像，扰动不同。下方可复跑的示例对应接触丢失的那一组。
-
-<table>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="打开抽屉" width="260"><br>打开抽屉</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="方环套柱" width="260"><br>方环套柱</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="双臂交接物体" width="260"><br>双臂交接物体</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="叠放杯子" width="260"><br>叠放杯子</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="盖上罐盖" width="260"><br>盖上罐盖</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="挂起三个杯子" width="260"><br>挂起三个杯子</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="取下两个杯子" width="260"><br>取下两个杯子</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="按下两个按钮" width="260"><br>按下两个按钮</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="单臂清扫" width="260"><br>单臂清扫</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="双臂抬托盘" width="260"><br>双臂抬托盘</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="把瓶子放进冰箱" width="260"><br>把瓶子放进冰箱</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hans#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="双臂配合清扫" width="260"><br>双臂配合清扫</a></td>
-  </tr>
-</table>
-
-播放器内可单独打开全部 [26 段原视角录像](docs/media/)。在仓库根目录运行 `python -m http.server 8000 --directory docs`，然后打开 `http://localhost:8000`。
-
 </details>
+
+<a id="code"></a>
 
 ## 代码结构
 
-[任务模型](code/litetwin/policy/feedback/model/) 从演示中提取技能边界、物体关系和场景约束。[推断](code/litetwin/policy/feedback/inference/) 更新进度与关系估计，[控制](code/litetwin/policy/feedback/control/) 决定保持、推进或跨越技能边界，[恢复](code/litetwin/policy/feedback/recovery/) 负责验证接触、重新获取物体和选择重入状态。[RLBench 适配层](code/integrations/rlbench/rlbench_litetwin/) 连接观测、扰动和仿真器动作。底层动作参考由冻结的 DynaMAC 运动策略提供。
+- [任务模型](code/litetwin/policy/feedback/model/)
+- [状态推断](code/litetwin/policy/feedback/inference/)
+- [执行控制](code/litetwin/policy/feedback/control/)
+- [交互恢复](code/litetwin/policy/feedback/recovery/)
+- [RLBench 适配层](code/integrations/rlbench/rlbench_litetwin/)
+
+[策略 API](code/litetwin/policy/feedback/README.md) · [DynaMAC](code/litetwin/policy/dynamac.py)
+
+<details>
+<summary>录像身份与结果记录</summary>
+
+每个任务的 JSON 文件记录原视频哈希、帧数、展示结果及播放副本哈希。全部动作帧保持原有顺序，结尾的局部画面裁切自记录终帧。
+
+[JSON](docs/demos/)
+
+</details>
+
+<details>
+<summary>其他记录回合</summary>
+
+原始记录中还保留了双方都完成的双按钮回合，以及双方都未完成的另一次单臂清扫回合，可结合精选演示一并查看。
+
+### 按下两个按钮
+
+依次按下两个按钮。
+
+![按下两个按钮](docs/demos/push_buttons_2.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/push_buttons_2.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/push_buttons_2/) &nbsp; · &nbsp; [JSON](docs/demos/push_buttons_2.json)
+
+### 单臂清扫
+
+将碎屑扫入簸箕。
+
+![单臂清扫](docs/demos/sweep_to_dustpan.zh-Hans.webp)
+
+[**完整 MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/sweep_to_dustpan.zh-Hans.mp4) &nbsp; · &nbsp; [原始录像](docs/recordings/sweep_to_dustpan/) &nbsp; · &nbsp; [JSON](docs/demos/sweep_to_dustpan.json)
+
+</details>
+
+<a id="license"></a>
 
 ## 许可证
 

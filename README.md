@@ -1,46 +1,155 @@
-# LiteTwin
+<p align="center"><b>English</b> &nbsp; · &nbsp; <a href="README.zh-Hans.md">简体中文</a> &nbsp; · &nbsp; <a href="README.zh-Hant.md">繁體中文</a></p>
 
-**English** · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md)
+<p align="center"><img src="docs/figures/masthead.en.jpg" alt="LiteTwin — Task-state feedback for robot manipulation" width="100%"></p>
 
-**Task-state feedback for robot manipulation**
+<p align="center"><a href="#demos">Demos</a> &nbsp; · &nbsp; <a href="#how-it-works">How it works</a> &nbsp; · &nbsp; <a href="#quickstart">Quick start</a> &nbsp; · &nbsp; <a href="#code">Code</a> &nbsp; · &nbsp; <a href="#license">License</a></p>
 
-LiteTwin adds task progress and gripper–object contact to a frozen motion policy. When the motion reference moves ahead but the object stays behind, the controller can pause, recover contact and resume the task.
+LiteTwin tracks task progress and gripper–object contact alongside a frozen motion policy. When contact breaks, it can hold the motion reference, recover the interaction and resume execution.
 
-[Interactive demos](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Quick start](#quickstart) · [Policy API](code/litetwin/policy/feedback/README.md) · [MIT license](LICENSE)
+<a id="demos"></a>
 
-<a id="film"></a>
+## See the object reach its goal
 
-## Project film · 40 seconds
+Selected RLBench simulation episodes. Each pair shares its initial scene and disturbance. Outcome labels use the simulator’s task condition for the displayed episode.
 
-[![A short preview of three recorded RLBench comparisons. The film follows the tray, drawer and jar lid through the same disturbance on both sides.](docs/film/en.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#film)
+### Lift Tray Together
 
-A short preview of three recorded RLBench comparisons. The film follows the tray, drawer and jar lid through the same disturbance on both sides.
+Lift the tray with the cube aboard.
 
-[**Play the full film →**](https://yukun-zheng.github.io/LiteTwin/?lang=en#film) · [Open MP4](https://yukun-zheng.github.io/LiteTwin/film/en.mp4)
+![Lift Tray Together](docs/demos/bimanual_lift_tray.en.webp)
 
-| Chapter | Follow the object |
-| --- | --- |
-| [0:00 · Tray](https://yukun-zheng.github.io/LiteTwin/?lang=en#film-tray) | One arm lifts first. Watch whether the cube rises with the tray. |
-| [0:12 · Drawer](https://yukun-zheng.github.io/LiteTwin/?lang=en#film-drawer) | As the arm moves away, does the top drawer move with it? |
-| [0:22 · Jar lid](https://yukun-zheng.github.io/LiteTwin/?lang=en#film-jar) | After the missed pickup, follow the gray lid to the red jar. |
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/bimanual_lift_tray.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/bimanual_lift_tray/) &nbsp; · &nbsp; [JSON](docs/demos/bimanual_lift_tray.json)
 
-On the interactive site, each chapter opens its full two-camera comparison. The shorter side holds its last frame.
+### Open Drawer · Delayed Action
 
-[View the three outcomes side by side](docs/figures/rollout-comparison.jpg) · [Task library](https://yukun-zheng.github.io/LiteTwin/?lang=en#library)
+Open the top drawer despite the actuation delay.
+
+![Open Drawer · Delayed Action](docs/demos/open_drawer_delay.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/open_drawer_delay.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/open_drawer_delay/) &nbsp; · &nbsp; [JSON](docs/demos/open_drawer_delay.json)
+
+### Recover the Jar Lid
+
+Bring the gray lid to the red jar opening.
+
+![Close Jar](docs/demos/close_jar.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/close_jar.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/close_jar/) &nbsp; · &nbsp; [JSON](docs/demos/close_jar.json)
+
+Each animation follows the complete recorded action sequence and ends with a three-second detail of the recorded final frame. A shorter side holds its final frame. The full MP4 retains the source frame rate.
+
+## More multi-step tasks
+
+### Hang Three Cups
+
+Hang three cups on the rack.
+
+![Hang Three Cups](docs/demos/place_cups_3.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/place_cups_3.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/place_cups_3/) &nbsp; · &nbsp; [JSON](docs/demos/place_cups_3.json)
+
+### Press Three Buttons
+
+Press all three buttons in order.
+
+![Press Three Buttons](docs/demos/push_buttons_3.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/push_buttons_3.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/push_buttons_3/) &nbsp; · &nbsp; [JSON](docs/demos/push_buttons_3.json)
+
+### Put Bottle in Fridge
+
+Open the fridge and place the green bottle inside.
+
+![Put Bottle in Fridge](docs/demos/bimanual_put_bottle_in_fridge.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/bimanual_put_bottle_in_fridge.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/bimanual_put_bottle_in_fridge/) &nbsp; · &nbsp; [JSON](docs/demos/bimanual_put_bottle_in_fridge.json)
+
+<details>
+<summary><b>Explore seven more recovery demonstrations</b></summary>
+
+### Handover Item
+
+Transfer the green cube between the two grippers.
+
+![Handover Item](docs/demos/handover_item.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/handover_item.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/handover_item/) &nbsp; · &nbsp; [JSON](docs/demos/handover_item.json)
+
+### Fit Ring onto Peg
+
+Fit the blue square ring onto the target peg.
+
+![Fit Ring onto Peg](docs/demos/insert_square_peg.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/insert_square_peg.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/insert_square_peg/) &nbsp; · &nbsp; [JSON](docs/demos/insert_square_peg.json)
+
+### Stack Cups
+
+Stack all three cups.
+
+![Stack Cups](docs/demos/stack_cups.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/stack_cups.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/media/stack_cups/) &nbsp; · &nbsp; [JSON](docs/demos/stack_cups.json)
+
+### Remove Two Cups
+
+Remove two cups after the scene changes.
+
+![Remove Two Cups](docs/demos/remove_cups_2.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/remove_cups_2.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/remove_cups_2/) &nbsp; · &nbsp; [JSON](docs/demos/remove_cups_2.json)
+
+### Sweep into Dustpan
+
+Sweep the debris into the dustpan.
+
+![Sweep into Dustpan](docs/demos/sweep_to_dustpan_recovery.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/sweep_to_dustpan_recovery.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/sweep_to_dustpan_recovery/) &nbsp; · &nbsp; [JSON](docs/demos/sweep_to_dustpan_recovery.json)
+
+### Sweep with Two Arms
+
+Sweep the debris into the dustpan.
+
+![Sweep with Two Arms](docs/demos/bimanual_sweep_to_dustpan.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/bimanual_sweep_to_dustpan.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/bimanual_sweep_to_dustpan/) &nbsp; · &nbsp; [JSON](docs/demos/bimanual_sweep_to_dustpan.json)
+
+### Open Drawer
+
+Recover contact and pull the drawer to its goal.
+
+![Open Drawer](docs/demos/open_drawer.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/open_drawer.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/open_drawer/) &nbsp; · &nbsp; [JSON](docs/demos/open_drawer.json)
+
+</details>
+
+<a id="how-it-works"></a>
+
+## How LiteTwin works
+
+<table>
+<tr><td width="33%" valign="top"><b>Track the task</b><br><br>Estimate progress and contact relations from observations.</td><td width="33%" valign="top"><b>Check the interaction</b><br><br>Hold the motion reference when the expected interaction is unsupported.</td><td width="33%" valign="top"><b>Recover and resume</b><br><br>Re-establish contact and re-enter a supported task state.</td></tr>
+</table>
 
 <a id="quickstart"></a>
 
-## Quick start
+## Run it yourself
 
-With Git and Python 3, serve all 13 recorded comparisons from a local checkout.
+Install the policy environment and build a task model from the five included Open Drawer demonstrations.
 
 ```bash
 git clone https://github.com/Yukun-Zheng/LiteTwin.git
 cd LiteTwin
-python3 -m http.server 8000 --directory docs
+conda env create -f demo/environment-policy.yml
+conda activate litetwin-policy
+python -m pip install -e ./code
+bash demo/run_offline.sh
 ```
 
-Open `http://localhost:8000`. To build a policy on CPU and run a new Open Drawer episode in RLBench, continue below. Open Drawer is the runnable task included in this release.
+<details>
+<summary><b>Quick start · Open Drawer / RLBench</b></summary>
 
 ## Run Open Drawer
 
@@ -76,50 +185,53 @@ This trace comes from a fresh run of the packaged demo. Contact loss occurred at
 
 Read downward at the same control cycle. The line gives the **commanded task-state reference**, the middle strip gives the **controller mode**, and the lower strip records the **physical relation**. At re-entry the controller can deliberately return to an earlier supported state. The horizontal axis counts control cycles. The videos use elapsed playback time.
 
-## Task gallery
+</details>
 
-<details><summary>Explore all 12 tasks and 13 recorded pairs</summary>
+<a id="code"></a>
 
-The gallery also includes episodes where both controllers finish or both fall short. Open Drawer has two recordings with different disturbances. The runnable example below uses the contact-loss episode.
+## Code structure
 
-<table>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer"><img src="docs/media/open_drawer/preview.jpg" alt="Open Drawer" width="260"><br>Open Drawer</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#insert_square_peg"><img src="docs/media/insert_square_peg/preview.jpg" alt="Fit Ring onto Peg" width="260"><br>Fit Ring onto Peg</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#handover_item"><img src="docs/media/handover_item/preview.jpg" alt="Handover Item" width="260"><br>Handover Item</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#stack_cups"><img src="docs/media/stack_cups/preview.jpg" alt="Stack Cups" width="260"><br>Stack Cups</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar"><img src="docs/media/close_jar/preview.jpg" alt="Close Jar" width="260"><br>Close Jar</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#place_cups_3"><img src="docs/media/place_cups_3/preview.jpg" alt="Hang Three Cups" width="260"><br>Hang Three Cups</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#remove_cups_2"><img src="docs/media/remove_cups_2/preview.jpg" alt="Remove Two Cups" width="260"><br>Remove Two Cups</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#push_buttons_2"><img src="docs/media/push_buttons_2/preview.jpg" alt="Press Two Buttons" width="260"><br>Press Two Buttons</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#sweep_to_dustpan"><img src="docs/media/sweep_to_dustpan/preview.jpg" alt="Sweep into Dustpan" width="260"><br>Sweep into Dustpan</a></td>
-  </tr>
-  <tr>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray"><img src="docs/media/bimanual_lift_tray/preview.jpg" alt="Lift Tray Together" width="260"><br>Lift Tray Together</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_put_bottle_in_fridge"><img src="docs/media/bimanual_put_bottle_in_fridge/preview.jpg" alt="Put Bottle in Fridge" width="260"><br>Put Bottle in Fridge</a></td>
-    <td width="33%" align="center"><a href="https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_sweep_to_dustpan"><img src="docs/media/bimanual_sweep_to_dustpan/preview.jpg" alt="Sweep with Two Arms" width="260"><br>Sweep with Two Arms</a></td>
-  </tr>
-</table>
+- [Task model](code/litetwin/policy/feedback/model/)
+- [State inference](code/litetwin/policy/feedback/inference/)
+- [Execution control](code/litetwin/policy/feedback/control/)
+- [Recovery](code/litetwin/policy/feedback/recovery/)
+- [RLBench integration](code/integrations/rlbench/rlbench_litetwin/)
 
-Open any of the [26 individual recordings](docs/media/) from the player. To run the gallery locally, use `python -m http.server 8000 --directory docs` and open `http://localhost:8000`.
+[Policy API](code/litetwin/policy/feedback/README.md) · [DynaMAC](code/litetwin/policy/dynamac.py)
+
+<details>
+<summary>Recording identities and outcomes</summary>
+
+Per-task JSON files list the original-video hashes, frame counts, displayed outcomes and playback-copy hashes. All action frames remain in order. The final detail is cropped from the recorded terminal frame.
+
+[JSON](docs/demos/)
 
 </details>
 
-## Implementation
+<details>
+<summary>Additional recorded outcomes</summary>
 
-| Component | Role |
-| --- | --- |
-| [Task model](code/litetwin/policy/feedback/model/) | Align demonstrated skills and extract progress-indexed motion, relation and scene support. |
-| [Inference](code/litetwin/policy/feedback/inference/) | Update the relation and progress estimates from observations and executed actions. |
-| [Control](code/litetwin/policy/feedback/control/) | Decide when to hold, advance or cross a skill boundary. |
-| [Recovery](code/litetwin/policy/feedback/recovery/) | Verify contact, repair a mismatch and choose a supported re-entry state. |
-| [RLBench integration](code/integrations/rlbench/rlbench_litetwin/) | Connect the policy to observations, perturbations and simulator actions. |
+The retained recordings include a two-button episode that both methods complete and a separate single-arm sweep that neither method completes. These provide additional context for the selected examples.
 
-The action backbone is a frozen object-centric DynaMAC implementation. LiteTwin supplies task-state feedback around that backbone. The [core API](code/litetwin/policy/feedback/README.md) describes the policy lifecycle and interfaces.
+### Press Two Buttons
+
+Press both buttons in order.
+
+![Press Two Buttons](docs/demos/push_buttons_2.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/push_buttons_2.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/push_buttons_2/) &nbsp; · &nbsp; [JSON](docs/demos/push_buttons_2.json)
+
+### Sweep into Dustpan
+
+Sweep the debris into the dustpan.
+
+![Sweep into Dustpan](docs/demos/sweep_to_dustpan.en.webp)
+
+[**Full MP4 ↗**](https://yukun-zheng.github.io/LiteTwin/demos/sweep_to_dustpan.en.mp4) &nbsp; · &nbsp; [Original recordings](docs/recordings/sweep_to_dustpan/) &nbsp; · &nbsp; [JSON](docs/demos/sweep_to_dustpan.json)
+
+</details>
+
+<a id="license"></a>
 
 ## License
 

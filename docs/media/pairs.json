@@ -339,6 +339,28 @@
       "capture_profile": "control",
       "open_loop_outcome": "failure",
       "litetwin_outcome": "success"
+    },
+    {
+      "task": "sweep_to_dustpan_recovery",
+      "task_family": "sweep_to_dustpan",
+      "capture_profile": "control",
+      "open_loop_outcome": "failure",
+      "episode": 1,
+      "seed": 2750500001,
+      "disturbance": "missed_interaction",
+      "variation": 0,
+      "litetwin_outcome": "success"
+    },
+    {
+      "task": "push_buttons_3",
+      "task_family": "push_buttons_3",
+      "capture_profile": "control",
+      "open_loop_outcome": "failure",
+      "episode": 0,
+      "seed": 2764700000,
+      "disturbance": "actuation_delay",
+      "variation": 0,
+      "litetwin_outcome": "success"
     }
   ],
   "capture_profiles": {

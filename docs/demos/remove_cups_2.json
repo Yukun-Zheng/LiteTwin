@@ -1,0 +1,146 @@
+[
+  {
+    "task": "remove_cups_2",
+    "episode": 67,
+    "language": "en",
+    "fps": 20.0,
+    "duration": 60.9,
+    "source": {
+      "open_loop": {
+        "path": "../recordings/remove_cups_2/open_loop.mp4",
+        "sha256": "eb306db1785c0c8951f4badbc47575223d8db9a769cb7b179fa00bb9acc03665",
+        "frames": 1158,
+        "outcome": "failure"
+      },
+      "litetwin": {
+        "path": "../recordings/remove_cups_2/litetwin.mp4",
+        "sha256": "cd9c2b6a5e4091fff273604de4e125699d12a8543c2257da63e80587d83e4c99",
+        "frames": 820,
+        "outcome": "success"
+      }
+    },
+    "presentation": {
+      "all_source_frames_in_order": true,
+      "side_alignment": "shared playback time",
+      "high_resolution_physics_capture": true,
+      "shorter_side": "terminal frame held",
+      "result_hold_seconds": 3,
+      "result_view": "crop of recorded terminal frame with alternate camera inset"
+    },
+    "files": {
+      "remove_cups_2.en.mp4": "63df703f1e7346cd6b36b741a0d8e7ff24cc4196d00700ea293183df2c55b5e4",
+      "remove_cups_2.en.webp": "689cc00e1a73f449470179206e7228de27fdcbc26c17a670082145739f8bf105",
+      "remove_cups_2.en.jpg": "788bb40998f36d6db6f83074699b883fec5169bbf8f5a3278880b841a7bee31c"
+    },
+    "preview": {
+      "movie_sha256": "63df703f1e7346cd6b36b741a0d8e7ff24cc4196d00700ea293183df2c55b5e4",
+      "preview_sha256": "689cc00e1a73f449470179206e7228de27fdcbc26c17a670082145739f8bf105",
+      "fps": 12,
+      "frames": 731,
+      "duration_ms": 60917,
+      "width": 720,
+      "height": 486
+    },
+    "recording_kind": "verified_high_resolution_capture",
+    "native_resolution_per_camera": [
+      640,
+      480
+    ]
+  },
+  {
+    "task": "remove_cups_2",
+    "episode": 67,
+    "language": "zh-Hans",
+    "fps": 20.0,
+    "duration": 60.9,
+    "source": {
+      "open_loop": {
+        "path": "../recordings/remove_cups_2/open_loop.mp4",
+        "sha256": "eb306db1785c0c8951f4badbc47575223d8db9a769cb7b179fa00bb9acc03665",
+        "frames": 1158,
+        "outcome": "failure"
+      },
+      "litetwin": {
+        "path": "../recordings/remove_cups_2/litetwin.mp4",
+        "sha256": "cd9c2b6a5e4091fff273604de4e125699d12a8543c2257da63e80587d83e4c99",
+        "frames": 820,
+        "outcome": "success"
+      }
+    },
+    "presentation": {
+      "all_source_frames_in_order": true,
+      "side_alignment": "shared playback time",
+      "high_resolution_physics_capture": true,
+      "shorter_side": "terminal frame held",
+      "result_hold_seconds": 3,
+      "result_view": "crop of recorded terminal frame with alternate camera inset"
+    },
+    "files": {
+      "remove_cups_2.zh-Hans.mp4": "c7942a2a7b86f5dc7c44d2658a2f3c38d0dad6451c84b7ec20bb89108eb79c04",
+      "remove_cups_2.zh-Hans.webp": "02db2532efb3b89822f768363d505552d3b0f90eff36e3edc27d54cf15f47971",
+      "remove_cups_2.zh-Hans.jpg": "5b91bea060983bfd09aeb5544069cd5120d45eae87060cdfe859c697bb4b33df"
+    },
+    "preview": {
+      "movie_sha256": "c7942a2a7b86f5dc7c44d2658a2f3c38d0dad6451c84b7ec20bb89108eb79c04",
+      "preview_sha256": "02db2532efb3b89822f768363d505552d3b0f90eff36e3edc27d54cf15f47971",
+      "fps": 12,
+      "frames": 731,
+      "duration_ms": 60917,
+      "width": 720,
+      "height": 486
+    },
+    "recording_kind": "verified_high_resolution_capture",
+    "native_resolution_per_camera": [
+      640,
+      480
+    ]
+  },
+  {
+    "task": "remove_cups_2",
+    "episode": 67,
+    "language": "zh-Hant",
+    "fps": 20.0,
+    "duration": 60.9,
+    "source": {
+      "open_loop": {
+        "path": "../recordings/remove_cups_2/open_loop.mp4",
+        "sha256": "eb306db1785c0c8951f4badbc47575223d8db9a769cb7b179fa00bb9acc03665",
+        "frames": 1158,
+        "outcome": "failure"
+      },
+      "litetwin": {
+        "path": "../recordings/remove_cups_2/litetwin.mp4",
+        "sha256": "cd9c2b6a5e4091fff273604de4e125699d12a8543c2257da63e80587d83e4c99",
+        "frames": 820,
+        "outcome": "success"
+      }
+    },
+    "presentation": {
+      "all_source_frames_in_order": true,
+      "side_alignment": "shared playback time",
+      "high_resolution_physics_capture": true,
+      "shorter_side": "terminal frame held",
+      "result_hold_seconds": 3,
+      "result_view": "crop of recorded terminal frame with alternate camera inset"
+    },
+    "files": {
+      "remove_cups_2.zh-Hant.mp4": "5836939b9bb270eae9597db96b3c50ce4268c0beeabaa50fe5670250c8a8457a",
+      "remove_cups_2.zh-Hant.webp": "3acd5c42d61b96bde68aa687e1a4ad6b5b0d98a6b970c39eeedc057692b79647",
+      "remove_cups_2.zh-Hant.jpg": "13b4b6b358e2f37b7426a07769ce9d393604249063053ae882ea3a290c780144"
+    },
+    "preview": {
+      "movie_sha256": "5836939b9bb270eae9597db96b3c50ce4268c0beeabaa50fe5670250c8a8457a",
+      "preview_sha256": "3acd5c42d61b96bde68aa687e1a4ad6b5b0d98a6b970c39eeedc057692b79647",
+      "fps": 12,
+      "frames": 731,
+      "duration_ms": 60917,
+      "width": 720,
+      "height": 486
+    },
+    "recording_kind": "verified_high_resolution_capture",
+    "native_resolution_per_camera": [
+      640,
+      480
+    ]
+  }
+]

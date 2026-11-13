@@ -31,7 +31,7 @@ const translations = {
     "physics": "Front and overhead views · physics-step capture at 2× speed. The shorter recording holds its final frame.",
     "control": "Front and overhead views · control-step replay at 12 fps. The shorter recording holds its final frame.",
     "explore": "Explore the tasks",
-    "count": "12 tasks · 13 recorded pairs",
+    "count": "13 tasks · 15 recorded pairs",
     "traceTitle": "Recovering the drawer handle",
     "traceBody": "During a fresh Open Drawer run, LiteTwin checks contact with the handle before advancing the pull. The trace follows the controller cycle by cycle until the simulator reports success at cycle 135.",
     "traceLink": "Open the trace",
@@ -94,6 +94,14 @@ const translations = {
       "open_drawer_delay": {
         "name": "Open Drawer · Delayed Action",
         "description": "Watch the top drawer as the grippers pull away from the cabinet."
+      },
+      "sweep_to_dustpan_recovery": {
+        "name": "Sweep into Dustpan",
+        "description": "Watch whether the object reaches its goal after the disturbance."
+      },
+      "push_buttons_3": {
+        "name": "Press Three Buttons",
+        "description": "Watch whether the object reaches its goal after the disturbance."
       }
     },
     "featured": "Featured comparisons",
@@ -206,7 +214,7 @@ const translations = {
     "physics": "正面与俯视双视角 · 按物理仿真步采样，以 2 倍速播放。较短的录像结束后停在最后一帧。",
     "control": "正面与俯视双视角 · 按控制步记录，以每秒 12 帧回放。较短的录像结束后停在最后一帧。",
     "explore": "浏览全部任务",
-    "count": "12 个任务 · 13 组配对录像",
+    "count": "13 项任务 · 15 组配对录像",
     "traceTitle": "夹爪怎样重新抓住把手？",
     "traceBody": "在一次开抽屉复跑中，LiteTwin 检查夹爪是否仍与把手接触，再决定何时继续拉动。时间线按控制周期记录了这次恢复，仿真器在第 135 个周期判定任务完成。",
     "traceLink": "查看完整时间线",
@@ -269,6 +277,14 @@ const translations = {
       "open_drawer_delay": {
         "name": "打开抽屉 · 动作延迟",
         "description": "观察夹爪移开时，最上层抽屉有没有跟着移动。"
+      },
+      "sweep_to_dustpan_recovery": {
+        "name": "将碎屑扫入簸箕",
+        "description": "观察扰动后，物体是否到达任务目标。"
+      },
+      "push_buttons_3": {
+        "name": "依次按下三个按钮",
+        "description": "观察扰动后，物体是否到达任务目标。"
       }
     },
     "featured": "精选对照",
@@ -381,7 +397,7 @@ const translations = {
     "physics": "正面與俯視雙視角 · 按物理模擬步取樣，以 2 倍速播放。較短的影片結束後停在最後一格。",
     "control": "正面與俯視雙視角 · 按控制步記錄，以每秒 12 格重播。較短的影片結束後停在最後一格。",
     "explore": "瀏覽全部任務",
-    "count": "12 個任務 · 13 組配對影片",
+    "count": "13 項任務 · 15 組配對錄影",
     "traceTitle": "夾爪如何重新抓住把手？",
     "traceBody": "在一次開抽屜的重跑中，LiteTwin 檢查夾爪是否仍與把手接觸，再決定何時繼續拉動。時間線依控制週期記錄這次恢復，模擬器在第 135 個週期判定任務完成。",
     "traceLink": "查看完整時間線",
@@ -444,6 +460,14 @@ const translations = {
       "open_drawer_delay": {
         "name": "打開抽屜 · 動作延遲",
         "description": "觀察夾爪移開時，最上層抽屜有沒有跟著移動。"
+      },
+      "sweep_to_dustpan_recovery": {
+        "name": "將碎屑掃入畚箕",
+        "description": "觀察擾動後，物體是否到達任務目標。"
+      },
+      "push_buttons_3": {
+        "name": "依序按下三個按鈕",
+        "description": "觀察擾動後，物體是否到達任務目標。"
       }
     },
     "featured": "精選對照",
