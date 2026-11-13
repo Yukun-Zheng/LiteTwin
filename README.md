@@ -8,17 +8,25 @@ LiteTwin adds task progress and gripper–object contact to a frozen motion poli
 
 [Interactive demos](https://yukun-zheng.github.io/LiteTwin/?lang=en) · [Quick start](#quickstart) · [Policy API](code/litetwin/policy/feedback/README.md) · [MIT license](LICENSE)
 
-[![Three matched simulation replays. The motion policy is shown above and the same policy with LiteTwin below.](docs/figures/rollout-comparison.jpg)](docs/figures/rollout-comparison.jpg)
+<a id="film"></a>
 
-The top row shows the motion policy. The bottom row shows the same policy with LiteTwin. Each column shows the same scene, seed, disturbance and playback time for both controllers. The shorter recording holds its final frame. These are selected episodes.
+## Project film · 40 seconds
 
-| Replay | What to watch |
+[![A short preview of three recorded RLBench comparisons. The film follows the tray, drawer and jar lid through the same disturbance on both sides.](docs/film/en.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=en#film)
+
+A short preview of three recorded RLBench comparisons. The film follows the tray, drawer and jar lid through the same disturbance on both sides.
+
+[**Play the full film →**](https://yukun-zheng.github.io/LiteTwin/?lang=en#film) · [Open MP4](https://yukun-zheng.github.io/LiteTwin/film/en.mp4)
+
+| Chapter | Follow the object |
 | --- | --- |
-| [Lift a loaded tray](https://yukun-zheng.github.io/LiteTwin/?lang=en#bimanual_lift_tray) | At 8–10 s, follow the cube as the arms lift. [Annotated MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.en.mp4) |
-| [Open a drawer](https://yukun-zheng.github.io/LiteTwin/?lang=en#open_drawer_delay) | At 6–8 s, watch whether the top drawer follows the gripper. [Annotated MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.en.mp4) |
-| [Close a jar](https://yukun-zheng.github.io/LiteTwin/?lang=en#close_jar) | At 7–16 s, follow the gray lid after the missed pickup. [Annotated MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.en.mp4) |
+| [0:00 · Tray](https://yukun-zheng.github.io/LiteTwin/?lang=en#film-tray) | One arm lifts first. Watch whether the cube rises with the tray. |
+| [0:12 · Drawer](https://yukun-zheng.github.io/LiteTwin/?lang=en#film-drawer) | As the arm moves away, does the top drawer move with it? |
+| [0:22 · Jar lid](https://yukun-zheng.github.io/LiteTwin/?lang=en#film-jar) | After the missed pickup, follow the gray lid to the red jar. |
 
-[Animated tray comparison](docs/figures/tray-comparison.gif) · [Task gallery](https://yukun-zheng.github.io/LiteTwin/?lang=en#library)
+On the interactive site, each chapter opens its full two-camera comparison. The shorter side holds its last frame.
+
+[View the three outcomes side by side](docs/figures/rollout-comparison.jpg) · [Task library](https://yukun-zheng.github.io/LiteTwin/?lang=en#library)
 
 <a id="quickstart"></a>
 

@@ -8,17 +8,25 @@ LiteTwin 在凍結的運動策略上追蹤任務進度，以及夾爪與物體�
 
 [互動示範](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant) · [快速開始](#quickstart) · [策略 API](code/litetwin/policy/feedback/README.md) · [MIT 授權條款](LICENSE)
 
-[![三組相同條件下的模擬對照。上排為運動策略，下排為同一策略加入 LiteTwin。](docs/figures/rollout-comparison.zh-Hant.jpg)](docs/figures/rollout-comparison.zh-Hant.jpg)
+<a id="film"></a>
 
-上排為原運動策略，下排為同一策略加入 LiteTwin。每一欄的上下兩幅畫面取自相同起始場景、隨機種子與擾動下的同一播放時刻。較短的影片結束後保留最後一格。這裡展示的是選定回合。
+## 專案短片 · 40 秒
 
-| 配對回放 | 觀察重點 |
+[![這段預覽節錄自三組 RLBench 模擬影片。完整短片中，兩側經歷相同的擾動，依序觀察托盤、抽屜與罐蓋。](docs/film/zh-Hant.gif)](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#film)
+
+這段預覽節錄自三組 RLBench 模擬影片。完整短片中，兩側經歷相同的擾動，依序觀察托盤、抽屜與罐蓋。
+
+[**播放完整短片 →**](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#film) · [單獨開啟 MP4](https://yukun-zheng.github.io/LiteTwin/film/zh-Hant.mp4)
+
+| 章節 | 觀察重點 |
 | --- | --- |
-| [雙臂抬托盤](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#bimanual_lift_tray) | 第 8–10 秒，觀察方塊是否隨托盤一起升起。 [附註解 MP4](https://yukun-zheng.github.io/LiteTwin/highlights/bimanual_lift_tray.zh-Hant.mp4) |
-| [打開抽屜](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#open_drawer_delay) | 第 6–8 秒，觀察最上層抽屜是否隨夾爪移動。 [附註解 MP4](https://yukun-zheng.github.io/LiteTwin/highlights/open_drawer_delay.zh-Hant.mp4) |
-| [蓋上罐蓋](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#close_jar) | 第 7–16 秒，跟著灰色罐蓋看首次抓取落空之後的動作。 [附註解 MP4](https://yukun-zheng.github.io/LiteTwin/highlights/close_jar.zh-Hant.mp4) |
+| [0:00 · 抬托盤](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#film-tray) | 一隻機械臂先抬起，觀察方塊是否隨托盤升高。 |
+| [0:12 · 開抽屜](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#film-drawer) | 夾爪移開時，最上層抽屜有沒有跟著移動？ |
+| [0:22 · 蓋罐蓋](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#film-jar) | 首次抓取落空後，跟著灰蓋看它是否抵達紅色罐口。 |
 
-[托盤對照動圖](docs/figures/tray-comparison.zh-Hant.gif) · [任務庫](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#library)
+點選時間碼即可進入網站的對應章節，再點「查看本章完整雙側回放」即可檢視原影片與俯視鏡頭。較短的一側結束後停在最後一格。
+
+[並排查看三組結果圖](docs/figures/rollout-comparison.zh-Hant.jpg) · [任務庫](https://yukun-zheng.github.io/LiteTwin/?lang=zh-Hant#library)
 
 <a id="quickstart"></a>
 

@@ -107,7 +107,7 @@ const translations = {
     "navMethod": "Method",
     "heroKicker": "RLBench simulation",
     "heroSecond": "Task-state feedback for robot manipulation",
-    "watch": "Play the full comparison",
+    "watch": "Play the 40-second film",
     "browse": "Browse tasks",
     "navigation": "Navigation",
     "menuOpen": "Open navigation",
@@ -136,18 +136,6 @@ const translations = {
       "open_drawer_delay": "Open the drawer",
       "close_jar": "Close the jar"
     },
-    "heroCapture": "Simulation replay",
-    "studyName": "Lifting the loaded tray",
-    "studyCamera": "Front camera",
-    "studyStep": "Choose a moment",
-    "stageApproach": "Approach",
-    "stageLift": "Lift",
-    "stageResult": "Result",
-    "studyNotes": [
-      "The grippers approach opposite ends of the same tray.",
-      "The tray tilts on the left. On the right, both handles stay level.",
-      "The left tray tips. On the right, the cube rises with the tray."
-    ],
     "bothCameraLabel": "Front and overhead views",
     "traceLoss": "Contact lost",
     "traceRecover": "Recovery begins",
@@ -173,7 +161,18 @@ const translations = {
     "modelSource": "How was the drawer model built?",
     "modelEvidence": "Five demonstrations vary in length but share three ordered skills. Aligning their boundaries yields 59, 15 and 27 states per skill. During execution the controller tracks progress through these 101 task states.",
     "modelCode": "Model construction code",
-    "modelAlt": "Skill boundaries across five Open Drawer demonstrations"
+    "modelAlt": "Skill boundaries across five Open Drawer demonstrations",
+    "filmTitle": "Three manipulation tasks",
+    "filmChapters": "Film chapters",
+    "filmTray": "Tray",
+    "filmDrawer": "Drawer",
+    "filmJar": "Jar lid",
+    "filmPair": "Inspect this comparison",
+    "filmFile": "Open film as MP4",
+    "filmReady": "Ready · 0:40",
+    "filmBuffer": "Buffering…",
+    "filmError": "Film unavailable · open the MP4",
+    "filmGuide": "Read on GitHub"
   },
   "zh-Hans": {
     "title": "LiteTwin · 机器人操作演示",
@@ -283,7 +282,7 @@ const translations = {
     "navMethod": "方法",
     "heroKicker": "RLBench 仿真",
     "heroSecond": "机器人操作的任务状态反馈",
-    "watch": "播放完整对照",
+    "watch": "播放 40 秒短片",
     "browse": "浏览任务库",
     "navigation": "页面导航",
     "menuOpen": "打开导航",
@@ -312,18 +311,6 @@ const translations = {
       "open_drawer_delay": "打开抽屉",
       "close_jar": "盖上罐盖"
     },
-    "heroCapture": "仿真回放",
-    "studyName": "双臂抬起载物托盘",
-    "studyCamera": "正面视角",
-    "studyStep": "选择观察时刻",
-    "stageApproach": "接近",
-    "stageLift": "起升",
-    "stageResult": "结果",
-    "studyNotes": [
-      "两侧夹爪分别向托盘两端靠近。",
-      "左侧托盘一端先抬起。右侧两个把手保持水平。",
-      "左侧托盘翻倒。右侧托盘平稳抬起，方块仍在上面。"
-    ],
     "bothCameraLabel": "正面与俯视双视角",
     "traceLoss": "接触丢失",
     "traceRecover": "开始恢复",
@@ -349,7 +336,18 @@ const translations = {
     "modelSource": "抽屉任务模型是怎样构建的？",
     "modelEvidence": "五条开抽屉示范轨迹长度不同，但都包含三个顺序相同的技能。对齐技能边界后，三个技能分别得到 59、15、27 个状态。执行时，控制器在这 101 个任务状态中跟踪进度。",
     "modelCode": "查看模型构建代码",
-    "modelAlt": "五条开抽屉示范轨迹的技能分段图"
+    "modelAlt": "五条开抽屉示范轨迹的技能分段图",
+    "filmTitle": "三个机器人操作任务",
+    "filmChapters": "短片章节",
+    "filmTray": "托盘",
+    "filmDrawer": "抽屉",
+    "filmJar": "罐盖",
+    "filmPair": "查看本章完整双侧回放",
+    "filmFile": "单独打开短片 MP4",
+    "filmReady": "就绪 · 0:40",
+    "filmBuffer": "缓冲中…",
+    "filmError": "加载失败，可单独打开 MP4",
+    "filmGuide": "回到仓库说明"
   },
   "zh-Hant": {
     "title": "LiteTwin · 機器人操作示範",
@@ -459,7 +457,7 @@ const translations = {
     "navMethod": "方法",
     "heroKicker": "RLBench 模擬",
     "heroSecond": "機器人操作的任務狀態回饋",
-    "watch": "播放完整對照",
+    "watch": "播放 40 秒短片",
     "browse": "瀏覽任務庫",
     "navigation": "頁面導覽",
     "menuOpen": "開啟導覽",
@@ -488,18 +486,6 @@ const translations = {
       "open_drawer_delay": "打開抽屜",
       "close_jar": "蓋上罐蓋"
     },
-    "heroCapture": "模擬回放",
-    "studyName": "雙臂抬起載物托盤",
-    "studyCamera": "正面視角",
-    "studyStep": "選擇觀察時刻",
-    "stageApproach": "接近",
-    "stageLift": "抬升",
-    "stageResult": "結果",
-    "studyNotes": [
-      "兩側夾爪分別向托盤兩端靠近。",
-      "左側托盤一端先抬起。右側兩個把手保持水平。",
-      "左側托盤翻倒。右側托盤平穩抬起，方塊仍在上面。"
-    ],
     "bothCameraLabel": "正面與俯視雙視角",
     "traceLoss": "接觸中斷",
     "traceRecover": "開始恢復",
@@ -525,6 +511,17 @@ const translations = {
     "modelSource": "抽屜任務模型是如何建立的？",
     "modelEvidence": "五條開抽屜示範軌跡長度不同，但都包含三項順序相同的技能。對齊技能邊界後，三項技能分別得到 59、15、27 個狀態。執行時，控制器在這 101 個任務狀態中追蹤進度。",
     "modelCode": "檢視模型建立程式碼",
-    "modelAlt": "五條開抽屜示範軌跡的技能分段圖"
+    "modelAlt": "五條開抽屜示範軌跡的技能分段圖",
+    "filmTitle": "三個機器人操作任務",
+    "filmChapters": "短片章節",
+    "filmTray": "托盤",
+    "filmDrawer": "抽屜",
+    "filmJar": "罐蓋",
+    "filmPair": "查看本章完整雙側回放",
+    "filmFile": "單獨開啟短片 MP4",
+    "filmReady": "就緒 · 0:40",
+    "filmBuffer": "緩衝中…",
+    "filmError": "載入失敗，可單獨開啟 MP4",
+    "filmGuide": "回到倉庫說明"
   }
 };

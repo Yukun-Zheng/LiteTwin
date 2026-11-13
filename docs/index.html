@@ -10,9 +10,9 @@
     />
     <title>LiteTwin · Robot manipulation demos</title>
     <link rel="icon" href="figures/litetwin-mark.png" />
-    <link rel="stylesheet" href="style.css?v=project2" />
-    <script defer src="translations.js?v=project2"></script
-    ><script defer src="gallery.js?v=project2"></script>
+    <link rel="stylesheet" href="style.css?v=film1" />
+    <script defer src="translations.js?v=film1"></script
+    ><script defer src="gallery.js?v=film1"></script>
   </head>
   <body id="top">
     <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -164,50 +164,58 @@
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="wrap hero-grid">
-          <figure class="hero-art" aria-labelledby="study-name">
-            <div class="study-head"
-              ><span class="study-id"
-                ><i></i
-                ><span data-text="heroCapture">Simulation replay</span></span
-              ><span class="study-clock"
-                ><svg class="icon" aria-hidden="true">
-                  <use href="#i-clock" /></svg
-                ><span id="study-time">00:09.50</span></span
+          <figure
+            id="film"
+            class="hero-art film-card"
+            aria-labelledby="film-title"
+          >
+            <figcaption class="film-caption"
+              ><strong id="film-title" data-text="filmTitle"
+                >Three manipulation tasks</strong
+              ><span id="film-state" role="status">Loading…</span></figcaption
+            >
+            <video
+              id="overview-film"
+              width="1152"
+              height="688"
+              controls
+              playsinline
+              muted
+              preload="metadata"
+              aria-labelledby="film-title"
+              poster="film/en.jpg"
+            ></video>
+            <nav
+              class="film-chapters"
+              data-label="filmChapters"
+              aria-label="Film chapters"
+            >
+              <a href="#film-tray" data-film="tray"
+                ><time>0:00</time><span data-text="filmTray">Tray</span></a
+              >
+              <a href="#film-drawer" data-film="drawer"
+                ><time>0:12</time><span data-text="filmDrawer">Drawer</span></a
+              >
+              <a href="#film-jar" data-film="jar"
+                ><time>0:22</time><span data-text="filmJar">Jar lid</span></a
+              >
+            </nav>
+            <div class="film-links"
+              ><a id="film-pair" href="#bimanual_lift_tray"
+                ><span data-text="filmPair">Inspect this comparison</span> →</a
+              >
+              <a
+                id="film-file"
+                href="film/en.mp4"
+                target="_blank"
+                rel="noopener"
+                ><span data-text="filmFile">Open film as MP4</span> ↗</a
+              ><a
+                id="film-guide"
+                href="https://github.com/Yukun-Zheng/LiteTwin#film"
+                ><span data-text="filmGuide">Read on GitHub</span> ↗</a
               ></div
             >
-            <figcaption
-              ><strong id="study-name" data-text="studyName"
-                >Lifting the loaded tray</strong
-              ><span data-text="studyCamera">Front camera</span></figcaption
-            >
-            <div class="study-frames"
-              ><div
-                ><span data-text="motion">Motion policy</span
-                ><img
-                  id="study-left"
-                  src="figures/tray-sequence/open_loop-2.jpg"
-                  width="320"
-                  height="240"
-                  alt="" /></div
-              ><div
-                ><span>+ LiteTwin</span
-                ><img
-                  id="study-right"
-                  src="figures/tray-sequence/litetwin-2.jpg"
-                  width="320"
-                  height="240"
-                  alt="" /></div
-            ></div>
-            <div id="study-steps" role="group" data-label="studyStep"
-              ><button type="button" data-stage="0" aria-pressed="false"
-                ><i></i><span data-text="stageApproach">Approach</span></button
-              ><button type="button" data-stage="1" aria-pressed="false"
-                ><i></i><span data-text="stageLift">Lift</span></button
-              ><button type="button" data-stage="2" aria-pressed="true"
-                ><i></i><span data-text="stageResult">Result</span></button
-              ></div
-            >
-            <p id="study-note" aria-live="polite"></p>
           </figure>
           <div class="hero-copy"
             ><p class="eyebrow hero-kicker"
@@ -225,10 +233,10 @@
               continue the task.</p
             >
             <div class="hero-actions"
-              ><a id="watch" class="btn primary" href="#bimanual_lift_tray"
+              ><a id="watch" class="btn primary" href="#film"
                 ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                   <use href="#i-play" /></svg
-                ><span data-text="watch">Watch the comparison</span></a
+                ><span data-text="watch">Play the 40-second film</span></a
               ><a class="hero-secondary" href="#quickstart"
                 ><span data-text="quickTitle">Quick start</span
                 ><svg class="icon" aria-hidden="true" viewBox="0 0 24 24">

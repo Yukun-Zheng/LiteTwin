@@ -1,6 +1,6 @@
 "use strict";
 
-const videos = Array.from(document.querySelectorAll("video"));
+const videos = Array.from(document.querySelectorAll("#screens video"));
 const labels = Array.from(document.querySelectorAll(".status"));
 const playButton = document.querySelector("#play");
 const seek = document.querySelector("#seek");
@@ -26,8 +26,15 @@ const filterNames = [
 ];
 let filter = "all";
 let frontOnly = true;
-let startWhenReady = false;
-let studyStage = 2;
+let startWhenReady = null;
+const film = document.getElementById("overview-film");
+const filmChapters = [
+  { id: "tray", start: 0, task: "bimanual_lift_tray" },
+  { id: "drawer", start: 12, task: "open_drawer_delay" },
+  { id: "jar", start: 22, task: "close_jar" },
+];
+let filmRestore = null;
+let filmStalled = false;
 let pairs = [];
 let current;
 let playing = false;
@@ -108,10 +115,10 @@ function refreshPlayer() {
   if (
     loaded &&
     startWhenReady &&
-    current?.task === "bimanual_lift_tray" &&
+    current?.task === startWhenReady &&
     videos.every((v) => v.dataset.loadedTask === current.task)
   ) {
-    startWhenReady = false;
+    startWhenReady = null;
     playPair();
   }
   seek.max = total || 1;
@@ -264,6 +271,7 @@ function refreshLanguage() {
   document.querySelector("#guide").href =
     "https://github.com/Yukun-Zheng/LiteTwin" + guide + "#run-open-drawer";
   const repository = "https://github.com/Yukun-Zheng/LiteTwin";
+  document.getElementById("film-guide").href = repository + guide + "#film";
   document.querySelector("#panel-offline .guide-more").href =
     repository + guide + "#run-open-drawer";
   document.querySelector("#panel-online .guide-more").href =
@@ -280,7 +288,7 @@ function refreshLanguage() {
     card.querySelector("strong").textContent = name;
     card.querySelector(".task-fault").textContent = t[pair.disturbance];
   });
-  refreshStudy();
+  loadFilmLanguage();
   search.placeholder = t.search;
   menu.setAttribute("aria-label", mobileNav.hidden ? t.menuOpen : t.menuClose);
   refreshExpanded();
@@ -305,6 +313,8 @@ function pausePair() {
   refreshPlayer();
 }
 async function playPair() {
+  film.pause();
+  if (filmRestore) filmRestore.play = false;
   const ticket = generation;
   const live = videos.filter((v) => v.currentTime < v.duration - 0.025);
   if (!live.length) return;
@@ -360,8 +370,8 @@ function showPair() {
   if (!pair || current === pair) return;
   current = pair;
   frontOnly = Boolean(pair.highlight);
-  if (startWhenReady && pair.task !== "bimanual_lift_tray")
-    startWhenReady = false;
+  if (startWhenReady && pair.task !== startWhenReady) startWhenReady = null;
+  if (matched) film.pause();
   if (matched) viewer.scrollIntoView({ block: "start" });
   const ticket = ++generation;
   requests.abort();
@@ -442,43 +452,123 @@ document.querySelector("#camera").addEventListener("click", () => {
   frontOnly = !frontOnly;
   refreshCamera();
 });
-function refreshStudy() {
-  for (const [selector, method] of [
-    ["#study-left", "open_loop"],
-    ["#study-right", "litetwin"],
-  ]) {
-    const src = "figures/tray-sequence/" + method + "-" + studyStage + ".jpg";
-    const img = document.querySelector(selector);
-    if (img.getAttribute("src") !== src) img.src = src;
+function currentChapter(position) {
+  return (
+    filmChapters.findLast((chapter) => chapter.start <= position) ||
+    filmChapters[0]
+  );
+}
+function refreshFilm() {
+  const chapter = currentChapter(filmRestore?.time ?? film.currentTime);
+  document.querySelectorAll("[data-film]").forEach((link) => {
+    if (link.dataset.film === chapter.id)
+      link.setAttribute("aria-current", "true");
+    else link.removeAttribute("aria-current");
+  });
+  document.getElementById("film-pair").href = "#" + chapter.task;
+  const state = film.error
+    ? t.filmError
+    : film.readyState < 1
+      ? t.loading
+      : filmStalled
+        ? t.filmBuffer
+        : film.ended
+          ? t.finished
+          : !film.paused
+            ? t.playing
+            : film.currentTime > 0
+              ? t.paused
+              : t.filmReady;
+  const label = document.getElementById("film-state");
+  if (label.textContent !== state) label.textContent = state;
+}
+function playFilm() {
+  if (playing) pausePair();
+  if (film.ended) film.currentTime = 0;
+  film.play().catch(() => refreshFilm());
+}
+function loadFilmLanguage() {
+  const src = "film/" + language + ".mp4";
+  if (film.getAttribute("src") !== src) {
+    const route = filmChapters.find((c) => location.hash === "#film-" + c.id);
+    filmRestore = filmRestore || {
+      time: film.hasAttribute("src") ? film.currentTime : route?.start || 0,
+      play: !film.paused,
+    };
+    filmStalled = false;
+    film.poster = "film/" + language + ".jpg";
+    document.getElementById("film-file").href = src;
+    film.src = src;
+    film.load();
   }
-  document.querySelector("#study-time").textContent = [
-    "00:03.00",
-    "00:08.00",
-    "00:09.50",
-  ][studyStage];
-  document.querySelector("#study-note").textContent = t.studyNotes[studyStage];
-  document.querySelectorAll("#study-steps button").forEach((button) => {
-    button.setAttribute(
-      "aria-pressed",
-      String(Number(button.dataset.stage) === studyStage),
-    );
+  refreshFilm();
+}
+film.addEventListener("loadedmetadata", () => {
+  if (!filmRestore || film.readyState < 1) return;
+  const { time, play } = filmRestore;
+  filmRestore = null;
+  if (time > 0) film.currentTime = Math.min(time, film.duration);
+  if (play) playFilm();
+  refreshFilm();
+});
+film.addEventListener("play", () => {
+  if (playing) pausePair();
+});
+for (const event of [
+  "canplay",
+  "playing",
+  "ended",
+  "pause",
+  "error",
+  "timeupdate",
+  "seeked",
+]) {
+  film.addEventListener(event, () => {
+    if (event !== "timeupdate") filmStalled = false;
+    refreshFilm();
   });
 }
-document.querySelector("#study-steps").addEventListener("click", (event) => {
-  const button = event.target.closest("button");
-  if (button) {
-    studyStage = Number(button.dataset.stage);
-    refreshStudy();
-  }
+film.addEventListener("waiting", () => {
+  filmStalled = true;
+  refreshFilm();
 });
-document.querySelector("#watch").addEventListener("click", () => {
+function seekChapter(chapter, play) {
+  if (film.readyState < 1 || filmRestore)
+    filmRestore = { time: chapter.start, play };
+  else {
+    film.currentTime = chapter.start;
+    if (play) playFilm();
+  }
+  refreshFilm();
+}
+function followFilmRoute() {
+  const chapter = filmChapters.find((c) => location.hash === "#film-" + c.id);
+  if (!chapter) return;
+  seekChapter(chapter, false);
+  document.getElementById("film").scrollIntoView({ block: "start" });
+}
+document.querySelectorAll("[data-film]").forEach((link) =>
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    const chapter = filmChapters.find((c) => c.id === link.dataset.film);
+    if (location.hash !== link.hash) history.pushState(null, "", link.href);
+    seekChapter(chapter, true);
+  }),
+);
+window.addEventListener("hashchange", followFilmRoute);
+document.getElementById("watch").addEventListener("click", () => {
+  if (filmRestore) filmRestore.play = true;
+  playFilm();
+});
+document.getElementById("film-pair").addEventListener("click", (event) => {
+  const link = event.currentTarget;
+  film.pause();
+  if (filmRestore) filmRestore.play = false;
   viewer.focus({ preventScroll: true });
   viewer.scrollIntoView({ block: "start" });
-  if (current?.task !== "bimanual_lift_tray" || playButton.disabled) {
-    startWhenReady = true;
-    return;
-  }
-  if (!playing) playButton.click();
+  if (current?.task === link.hash.slice(1) && !playButton.disabled) {
+    if (!playing) playButton.click();
+  } else startWhenReady = link.hash.slice(1);
 });
 
 function setMenu(open) {
@@ -606,6 +696,7 @@ document.addEventListener("scroll", updateNavigation, { passive: true });
 window.addEventListener("resize", updateNavigation);
 updateNavigation();
 refreshLanguage();
+followFilmRoute();
 fetch("media/pairs.json")
   .then((response) => {
     if (!response.ok) throw new Error("Cannot load pairs");
@@ -666,6 +757,6 @@ fetch("media/pairs.json")
   })
   .catch(() => {
     catalogFailed = true;
-    startWhenReady = false;
+    startWhenReady = null;
     refreshPlayer();
   });
