@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Execute and visualize one online task-state feedback episode.
+# Execute and visualize one online execution monitoring and recovery episode.
 set -euo pipefail
 
 DEMO_NAME="${1:-open_drawer}"

@@ -1,6 +1,6 @@
 <p align="center"><b>English</b> &nbsp; · &nbsp; <a href="README.zh-Hans.md">简体中文</a> &nbsp; · &nbsp; <a href="README.zh-Hant.md">繁體中文</a></p>
 
-<p align="center"><img src="docs/figures/masthead.en.jpg" alt="LiteTwin — Task-state feedback for robot manipulation" width="100%"></p>
+<p align="center"><img src="docs/figures/masthead.en.jpg" alt="LiteTwin — Execution monitoring and recovery for robot manipulation" width="100%"></p>
 
 <p align="center"><a href="#demos">Demos</a> &nbsp; · &nbsp; <a href="#how-it-works">How it works</a> &nbsp; · &nbsp; <a href="#quickstart">Quick start</a> &nbsp; · &nbsp; <a href="#code">Code</a> &nbsp; · &nbsp; <a href="#license">License</a></p>
 

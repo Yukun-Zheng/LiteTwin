@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "litetwin"
 version = "0.1.0"
 license = {text = "MIT"}
-description = "Closed-loop task-state feedback for robot manipulation"
+description = "Closed-loop execution monitoring and recovery for robot manipulation"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24", "scipy>=1.10"]

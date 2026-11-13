@@ -1,6 +1,6 @@
 <p align="center"><a href="README.md">English</a> &nbsp; · &nbsp; <a href="README.zh-Hans.md">简体中文</a> &nbsp; · &nbsp; <b>繁體中文</b></p>
 
-<p align="center"><img src="docs/figures/masthead.zh-Hant.jpg" alt="LiteTwin — 面向機器人操作的任務狀態回饋" width="100%"></p>
+<p align="center"><img src="docs/figures/masthead.zh-Hant.jpg" alt="LiteTwin — 面向機器人操作的執行監控與恢復" width="100%"></p>
 
 <p align="center"><a href="#demos">觀看演示</a> &nbsp; · &nbsp; <a href="#how-it-works">運作原理</a> &nbsp; · &nbsp; <a href="#quickstart">快速開始</a> &nbsp; · &nbsp; <a href="#code">程式碼</a> &nbsp; · &nbsp; <a href="#license">授權條款</a></p>
 

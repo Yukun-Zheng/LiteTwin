@@ -689,7 +689,7 @@ z
    </g>
   </g>
   <g id="text_29">
-   <text style="font-weight: 700; font-size: 13px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #17324d" x="65.307031" y="16.663594" transform="rotate(-0 65.307031 16.663594)">Online task-state feedback during one perturbed rollout</text>
+   <text style="font-weight: 700; font-size: 13px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #17324d" x="65.307031" y="16.663594" transform="rotate(-0 65.307031 16.663594)">Online execution monitoring and recovery during one perturbed rollout</text>
   </g>
   <g id="text_30">
    <text style="font-size: 9.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #425466" x="65.307031" y="27.288" transform="rotate(-0 65.307031 27.288)">Task-state reference, controller mode, and audited physical relation.</text>

@@ -145,7 +145,7 @@ def render(records_root: Path, model_summary: Path, output_stem: Path) -> None:
     ax_relation = fig.add_subplot(grid[2], sharex=ax)
 
     fig.suptitle(
-        "Online task-state feedback during one perturbed rollout",
+        "Online execution monitoring and recovery during one perturbed rollout",
         x=0.15,
         y=0.955,
         ha="left",

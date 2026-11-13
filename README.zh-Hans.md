@@ -1,6 +1,6 @@
 <p align="center"><a href="README.md">English</a> &nbsp; · &nbsp; <b>简体中文</b> &nbsp; · &nbsp; <a href="README.zh-Hant.md">繁體中文</a></p>
 
-<p align="center"><img src="docs/figures/masthead.zh-Hans.jpg" alt="LiteTwin — 面向机器人操作的任务状态反馈" width="100%"></p>
+<p align="center"><img src="docs/figures/masthead.zh-Hans.jpg" alt="LiteTwin — 面向机器人操作的执行监控与恢复" width="100%"></p>
 
 <p align="center"><a href="#demos">观看演示</a> &nbsp; · &nbsp; <a href="#how-it-works">工作原理</a> &nbsp; · &nbsp; <a href="#quickstart">快速开始</a> &nbsp; · &nbsp; <a href="#code">代码</a> &nbsp; · &nbsp; <a href="#license">许可证</a></p>
 

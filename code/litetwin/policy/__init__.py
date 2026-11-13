@@ -1,4 +1,4 @@
-"""Object-centric motion and task-state feedback policies."""
+"""Object-centric motion and execution monitoring and recovery policies."""
 
 from .feedback import (
     ArmCommand,

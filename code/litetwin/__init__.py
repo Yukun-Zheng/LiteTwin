@@ -1,4 +1,4 @@
-"""Object-centric motion and task-state feedback implementations."""
+"""Object-centric motion and execution monitoring and recovery implementations."""
 
 from .policy import (
     BimanualDynaMAC,

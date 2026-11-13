@@ -57,7 +57,7 @@ Array = np.ndarray
 
 class LiteTwinMultiStreamPolicy:
 
-    name = "task_state_feedback"
+    name = "litetwin"
 
     def __init__(
         self,

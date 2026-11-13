@@ -689,7 +689,7 @@ z
    </g>
   </g>
   <g id="text_29">
-   <text style="font-weight: 700; font-size: 13px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #17324d" x="65.307031" y="16.663594" transform="rotate(-0 65.307031 16.663594)">一次扰动回合中的在线任务状态反馈</text>
+   <text style="font-weight: 700; font-size: 13px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #17324d" x="65.307031" y="16.663594" transform="rotate(-0 65.307031 16.663594)">一次扰动回合中的在线执行监控与恢复</text>
   </g>
   <g id="text_30">
    <text style="font-size: 9.2px; font-family: 'Arial', 'Helvetica', 'DejaVu Sans', sans-serif; text-anchor: start; fill: #425466" x="65.307031" y="27.288" transform="rotate(-0 65.307031 27.288)">任务状态参考、控制器模式与观测到的物理接触。</text>
